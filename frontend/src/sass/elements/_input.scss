@@ -1,0 +1,109 @@
+@import '../variables';
+
+
+.noNumberBtns {
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.successBorder {
+    border-color: $success !important;
+}
+
+.failBorder {
+    border-color: $danger !important;
+}
+
+.inputC1 {
+    background-color: $dark-5;
+    border: 0;
+    border-bottom: 1px solid $blue-4;
+    color: $light-2;
+    font-size: 0.8em;
+    padding-left: 32px;
+    width: 40%;
+
+    &:focus {
+        outline: 0;
+        border-color: $blue-5;
+    }
+}
+
+.inputGroupC1,
+.inputGroupC2,
+.inputGroupC3,
+.inputGroupC4 {
+    input {
+        background-color: $dark-5;
+        border: 0;
+        border-bottom: 1px solid $blue-4;
+        color: $light-2;
+        font-size: 0.8em;
+        padding-left: 10px;
+        width: 40%;
+    
+        &:focus {
+            outline: 0;
+            border-color: $blue-5;
+            background-color: $dark-4;
+        }
+    }
+
+    label {
+        color: $light-2;
+        font-style: italic;
+        margin-bottom: 0px;
+        font-size: 0.85em;
+        width: 40%;
+        margin-left: 15px;
+    }
+}
+
+.inputGroupC2,
+.inputGroupC4 {
+    margin-top: 10px;
+}
+
+.inputGroupC3 {
+    input {
+        width: 50%;
+    }
+
+    label {
+        width: 30%;
+    }
+}
+
+.inputGroupC4 {
+    input {
+        width: 50%;
+
+        &:invalid::-webkit-datetime-edit {
+            color: $light-4;
+        }
+        &::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    }
+
+    label {
+        width: 30%;
+    }
+}
+
+.subDetailsC1 {
+    background-color: $dark-5;
+    color: $light-3;
+    font-size: 0.6em;
+    margin-left: 152px;
+    margin-top: 5px;
+
+    p { 
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,274 @@
+@import '../variables';
+
+.leaflet-control-attribution {
+    font-size: 0.8em !important;
+    max-width: 400px;
+    background-color: #ffffff70 !important;
+}
+
+#map-wrapper {
+    height: calc(100vh - 60px);
+    width: 100%;
+
+    .showPanel {
+        display: inline-block;
+    }
+
+    .hidePanel {
+        display: none;
+    }
+
+    .fullMap {
+        width: 100%;
+    }
+
+    .mapWithFilter {
+        width: calc(100% - 400px);
+    }
+
+    #map-area {
+        position: relative;
+        height: 100%;
+        min-height: 555px;
+        float: right;
+
+        #map-layers {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+
+        #filter-toggle {
+            height: 40px;
+            width: 40px;
+            background-color: $dark-5;
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            cursor: pointer;
+
+            span {
+                color: $light-4;
+                font-size: 1.5em;
+                font-weight: 100;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                &:hover {
+                    color: $light-1;
+                }
+            }
+        }
+    }
+
+    #panel {
+        position: relative;
+        background-color: $dark-5;
+        padding: 5px 15px;
+        height: 100%;
+        min-height: 555px;
+        width: 400px;
+        float: left;
+        cursor: pointer;
+    
+        hr {
+            background-color: $light-4;
+        }
+    
+        #panel-header {
+            position: relative;
+            height: 30px;
+            display: grid;
+            grid-template-columns: 75% 25%;
+                
+            h1 {
+                margin: 8px 0 0 0;
+                font-size: 1.5em;
+                font-weight: 400;
+                color: $light-2;
+            }
+
+            div {
+                position: absolute;
+                right: 0;
+            }
+        
+            button {
+                margin-top: 5px;
+                margin-left: 5px;
+                width: 80px;
+                height: 30px;
+            }
+        
+        }
+    
+        #filterArea {
+            position: relative;
+            height: calc(100% - 155px);
+            width: 100%;
+        
+            #filter-groups {
+                position: relative;
+                height: calc(100% - 80px);
+                max-height: 310px;
+                width: 100%;
+            }
+        }
+    
+        #ctrlBar {
+            margin: 10px 0 15px 0;
+            width: 100%;
+            position: relative;
+    
+            div {
+                margin: 10px 0;
+
+                label {
+                    background-color: $dark-3;
+                }
+            }
+    
+        }
+    
+        .filterGroupArea {
+            position: relative;
+            float: left;
+            width: 95%;
+            height: calc(100% - 80px);
+
+            .filterGroupBtn {
+                height: 28px !important;
+                font-size: 0.9em;
+                border-bottom-width: 2px;
+
+                label {
+                    margin-left: 30px !important;
+                }
+            }
+        
+            .filterSubGroupArea {
+                position: relative;
+                width: 100%;
+                margin-top: -5px;
+                padding: 0 3px 0 10px;
+                max-height: 230px;
+                overflow-y: auto;
+
+                .checkboxFilter {
+                    margin: 5px 0;
+                    width: 60%;
+                }
+            }   
+        }
+        
+    
+        #panelFooter {
+            position: relative;
+            margin-top: 10px;
+            height: 80px;
+            width: 100%;
+    
+            label {
+                color: $light-4;
+                margin-left: 10px;
+                cursor: pointer;
+
+                &:hover {
+                    color: $light-2;
+                }
+            }
+
+            input {
+                cursor: pointer;
+            }
+    
+            #filterSubmitBtn {
+                float: right;
+            }
+    
+            button {
+                float: left;
+                margin: 5px 20px 0 0;
+                height: 35px;
+                width: 120px;
+            }
+        }
+    
+    }
+}
+
+
+
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+
+
+.filterSubArea {
+    margin-left: 10px;
+}
+
+
+#drawSubArea {
+
+    button {
+        margin: 10px 10px 0 0;
+        padding: 3px 10px;
+        font-size: 0.8em;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+
+    h3 {
+        color: $light-2;
+        margin: 10px 0 5px 0;
+    }
+
+    // .filterTextbox {
+    //     margin-bottom: 5px;
+
+    //     label {
+    //         color: $light-2;
+    //         font-style: italic;
+    //         margin-bottom: 0px;
+    //         font-size: 0.85em;
+    //         width: 30%;
+    //         margin-left: 15px;
+    //     }
+    
+    //     input {
+    //         width: 50%;
+    
+    //         &:focus {
+    //             background-color: $dark-4;
+    //         }
+    //     }
+    // }
+}
+
+
+
+.filterGroupBtn {
+    height: 32px !important;
+    width: calc(100% - 2px);
+
+    label {
+        margin-left: 20px;
+    }
+
+    span {
+        font-size: 1em;
+        font-weight: 600;
+        float: right;
+        margin-right: 10px;
+    }
+
+}

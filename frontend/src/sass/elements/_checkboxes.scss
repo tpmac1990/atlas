@@ -1,0 +1,17 @@
+@import '../variables';
+
+.filterCheckbox {
+    color: $light-3;
+    width: 100%;
+    font-size: 0.8em;
+    margin-bottom: 4px;
+
+    &:hover {
+        color: $light-1;
+    }
+
+    input {
+        margin: 2px 20px 0 0;
+    }
+
+}

@@ -1,0 +1,37 @@
+@import 'map/markers';
+@import 'filter/relateddatacomp';
+@import 'variables';
+@import 'elements/buttons';
+@import 'elements/messageBar';
+@import 'elements/checkboxes';
+@import 'map/leafletdraw';
+@import 'elements/radioBar';
+@import 'elements/input';
+@import 'header/header';
+@import 'map/map';
+@import 'map/popup';
+@import 'attribution/attribution';
+
+
+
+body {
+    font-size: 1em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+.hideEle {
+    display: none;
+}
+
+.showEle {
+    display: block;
+}
+
+.showEleGrid {
+    display: grid;
+}
+
+@import "~bootstrap/scss/bootstrap";

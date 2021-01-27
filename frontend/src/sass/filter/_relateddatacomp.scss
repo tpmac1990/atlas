@@ -1,0 +1,33 @@
+@import '../variables';
+
+#relatedDataComp {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $dark-5;
+    z-index: 1;
+    padding-left: 10px;
+
+    div{
+        position: relative;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1.2em;
+        color: $light-2;
+    }
+
+    hr {
+        margin-top: 6px;
+        background-color: $light-4;
+        border: 0;
+        height: 0.6px;
+    }
+
+    .filterGroupBtn {
+        height: 35px;
+        width: calc(100% - 2px);
+    }
+
+}

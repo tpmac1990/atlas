@@ -1,0 +1,72 @@
+@import '../variables';
+
+#attribution {
+    padding: 40px 15%;
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+
+    #attributionMapLink {
+        float: right;
+        color: $dark-3;
+
+        &:hover {
+            color: blue;
+        }
+    }
+
+    table {
+        width: 100%;
+        th {
+            padding: 12px 0 12px 12px;
+            text-align: left;
+            background-color: $dark-5;
+            color: $light-2;
+            font-weight: 500;
+            border: 1px solid $dark-4;
+        }
+
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+
+        td {
+            border: 1px solid $dark-4;
+            padding: 5px;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+
+            &:hover {
+                color: blue;
+            }
+        }
+    }
+
+    #stateLogos {
+        position: relative;
+
+        img {
+            margin: 15px 25px;
+            width: 100px;
+            height: auto;
+        }
+
+        #vic-logo {
+            width: 150px;
+        }
+        #nt-logo {
+            width: 180px;
+        }
+        #qld-logo {
+            width: 300px;
+        }
+        #sa-logo {
+            width: 230px;
+        }
+        #ga-logo {
+            width: 140px;
+        }
+    }
+}

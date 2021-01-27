@@ -1,0 +1,87 @@
+@import '../variables';
+
+.btn-c1,
+.btn-c4 {
+    background-color: $dark-3;
+    border: 1px solid $blue-3;
+    color: $light-2;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: $blue-3;
+        box-shadow: 0 0 4px $blue-1;
+        border-bottom: 3px solid $light-2;
+        color: $light-1;
+        top: 2px;
+    }
+
+    &:active {
+        background-color: $blue-3;
+    }
+
+    &:focus {
+        outline:0;
+    }
+}
+
+.btn-c4 {
+    border-bottom-width: 2px;
+    &:hover {
+        border-bottom: 2px solid $light-2;
+    }
+}
+
+.btn-c2,
+.btn-c3 {
+    background-color: $blue-3;
+    border: 1px solid $blue-3;
+    border-bottom: 3px solid $blue-3;
+    color: $light-2;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    text-align: left;
+
+    &:hover {
+        border-bottom: 3px solid $light-2;
+        color: $light-1;
+        box-shadow: 0 0 3px $blue-1;
+    }
+
+    &:active {
+        background-color: $blue-4;
+    }
+
+    &:focus {
+        outline:0;
+    }
+
+}
+
+.btn-c3 {
+    background-color: $blue-4;
+    margin-bottom: 8px;
+}
+
+
+
+
+
+
+
+// the 'x' close button at the top right corner of forms
+
+.closeLinkc1 {
+    position: absolute;
+    margin-top: -14px;
+    float: right;
+
+    a {
+        color: $light-4;
+        font-size: 1.4em;
+
+        &:hover {
+            color: $light-1;
+            text-decoration: none;
+        }      
+    }
+}

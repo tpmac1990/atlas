@@ -1,0 +1,250 @@
+{
+    "data_root": "C:/Django_Projects/03_geodjango/Atlas/datasets/Raw_datasets/output/",
+    "mapping":{
+        "tenement":{
+            "fields":{
+                "ind": "TENID",
+                "typ": {"id": "TYP"},
+                "status": {"id": "STATUS"},
+                "state": {"code": "STATE"},
+                "shore": {"code": "SHORE"},
+                "lodgedate": "LODGEDATE",
+                "startdate": "STARTDATE",
+                "enddate": "ENDDATE",
+                "poly": "MULTIPOLYGON"
+            },
+            "filePath": "tenement/Tenement.shp",
+            "model": "Tenement"
+        }, 
+        "occurrence":{
+            "fields": {
+                "ind": "OCCID",
+                "status": {"id": "STATUS"},
+                "size": {"code": "SIZE"},
+                "state": {"code": "STATE"},
+                "localgov": {"id": "LOCALGOV"},
+                "govregion": {"id": "GOVREGION"},
+                "pnt": "POINT"
+            },
+            "filePath": "occurrence/Occurrence.shp",
+            "model": "Occurrence"
+        }
+    },
+    "tables":[
+        {
+            "Name": "Material", 
+            "columns": { "CODE": "code", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "MaterialCategory", 
+            "columns": { "_ID": "id", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "material_category", 
+            "columns": { "_ID": "id", "MATERIAL": "material_id", "CATEGORY": "materialcategory_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenStatusSimp", 
+            "columns": { "_ID": "id", "SIMPLE": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenStatus", 
+            "columns": { "_ID": "id", "ORIGINAL": "original", "SIMPLE": "simple_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenTypeSimp", 
+            "columns": { "_ID": "id", "SIMPLE": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenAct", 
+            "columns": { "CODE": "code", "NAME": "name", "STATE": "state", "LINK": "link" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenType", 
+            "columns": { "_ID": "id", "FNAME": "fname", "ORIGINAL": "original", "ACT": "act_id", "SIMPLE": "simple_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccStatusSimp", 
+            "columns": { "_ID": "id", "SIMPLE": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccStatus", 
+            "columns": { "_ID": "id", "ORIGINAL": "original", "SIMPLE": "simple_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccTypeSimp", 
+            "columns": { "_ID": "id", "SIMPLE": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccType", 
+            "columns": { "_ID": "id", "ORIGINAL": "original", "SIMPLE": "simple_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "Exchange", 
+            "columns": { "CODE": "code", "NAME": "name", "CITY": "city", "COUNTRY": "country" },
+            "order": "PRE"
+        },
+        {
+            "Name": "GeologicalProvince", 
+            "columns": { "_ID": "id", "NAME": "name", "TYPE": "ptype", "RANK": "rank" },
+            "order": "PRE"
+        },
+        {
+            "Name": "GovernmentRegion", 
+            "columns": { "_ID": "id", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "LocalGovernment", 
+            "columns": { "_ID": "id", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "HolderType", 
+            "columns": { "_ID": "id", "ORIGINAL": "original", "CODE": "code" },
+            "order": "PRE"
+        },
+        {
+            "Name": "Holder", 
+            "columns": { "_ID": "id", "NAME": "name", "TYP": "typ_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "HolderPosition", 
+            "columns": { "_ID": "id", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "Parent", 
+            "columns": { "_ID": "id", "PARENT": "name_id", "HOLDER": "child_id", "PERCOWN": "percown" },
+            "order": "PRE"
+        },
+        {
+            "Name": "Listed", 
+            "columns": { "_ID": "id", "TICKER": "ticker", "EXCHANGE": "exchange_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "holder_listed", 
+            "columns": { "_ID": "id", "HOLDER_ID": "holder_id", "listed_ID": "listed_id" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccName", 
+            "columns": { "_ID": "id", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccOriginalID", 
+            "columns": { "CODE": "code" },
+            "order": "PRE"
+        },
+        {
+            "Name": "OccSize", 
+            "columns": { "CODE": "code", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "Shore", 
+            "columns": { "CODE": "code", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "State", 
+            "columns": { "CODE": "code", "NAME": "name" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenOriginalID", 
+            "columns": { "CODE": "code" },
+            "order": "PRE"
+        },
+        {
+            "Name": "TenHolder", 
+            "columns": { "_ID": "id", "PERCOWN": "percown", "NAME": "name_id", "POSITION": "position_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "occurrence_geoprovince", 
+            "columns": { "_ID": "id", "OCC_ID": "occurrence_id", "GPROV_ID": "geologicalprovince_id" },
+            "order": "POST"
+        },	
+        {
+            "Name": "occurrence_majmat", 
+            "columns": { "_ID": "id", "OCCID": "occurrence_id", "MATERIAL": "material_id" },
+            "order": "POST"
+        }, 
+        {
+            "Name": "occurrence_minmat", 
+            "columns": { "_ID": "id", "OCCID": "occurrence_id", "MATERIAL": "material_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "occurrence_name", 
+            "columns": { "_ID": "id", "OCCID": "occurrence_id", "NAME": "occname_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "occurrence_oid", 
+            "columns": { "_ID": "id", "OCCID": "occurrence_id", "RELATEDID": "occoriginalid_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "occurrence_typ", 
+            "columns": { "_ID": "id", "OCCID": "occurrence_id", "TYPE": "occtype_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "tenement_geoprovince", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "GPROV_ID": "geologicalprovince_id" },
+            "order": "POST"
+        },    
+        {
+            "Name": "tenement_govregion", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "GREG_ID": "governmentregion_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "tenement_holder", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "HOLDER_ID": "tenholder_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "tenement_localgov", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "LGOV_ID": "localgovernment_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "tenement_majmat", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "CODE": "material_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "tenement_minmat", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "CODE": "material_id" },
+            "order": "POST"
+        },
+        {
+            "Name": "tenement_occurrence", 
+            "columns": { "_ID": "id", "TEN_ID": "tenement_id", "OCC_ID": "occurrence_id" },
+            "order": "POST"
+        }, 
+        {
+            "Name": "tenement_oid", 
+            "columns": { "_ID": "id", "TENID": "tenement_id", "RELATEDID": "tenoriginalid_id" },
+            "order": "POST"
+        }
+    ]
+}

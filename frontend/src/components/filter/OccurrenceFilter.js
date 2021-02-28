@@ -5,6 +5,8 @@ import StatusGroup from './groups/StatusGroup'
 import IDGroup from './groups/IDGroup'
 import MaterialGroup from './groups/MaterialGroup'
 import NameGroup from './groups/NameGroup'
+import UpdateGroup from './groups/UpdateGroup'
+import ChangeUpdateGroup from './groups/ChangeUpdateGroup'
 
 
 function OccurrenceFilter () {
@@ -16,6 +18,8 @@ function OccurrenceFilter () {
             <MaterialGroup />
             <NameGroup />
             <IDGroup />
+            <UpdateGroup name='addition' />
+            <ChangeUpdateGroup />
         </div>
     )
 }

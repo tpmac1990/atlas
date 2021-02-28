@@ -34,6 +34,30 @@
     }
 }
 
+.input-c2,
+.input-c3 {
+    border: 0;
+    border-bottom: 1px solid $light-2;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+
+    &:focus {
+        outline: 0;
+        border-color: $blue-5;
+    }
+}
+
+.input-c3 {
+    border: 0;
+    border-bottom: 1px solid $blue-5;
+    background-color: $blue-6;
+
+    &:focus {
+        background-color: $light-5;
+    }
+}
+
+
 .inputGroupC1,
 .inputGroupC2,
 .inputGroupC3,

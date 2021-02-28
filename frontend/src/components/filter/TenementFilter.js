@@ -6,6 +6,8 @@ import DateGroup from './groups/DateGroup'
 import IDGroup from './groups/IDGroup'
 import MaterialGroup from './groups/MaterialGroup'
 import HolderGroup from './groups/HolderGroup'
+import UpdateGroup from './groups/UpdateGroup'
+import ChangeUpdateGroup from './groups/ChangeUpdateGroup'
 
 
 function TenementFilter () {
@@ -18,6 +20,9 @@ function TenementFilter () {
             <HolderGroup />
             <DateGroup />
             <IDGroup />
+            <UpdateGroup name='addition' />
+            <UpdateGroup name='inactive' />
+            <ChangeUpdateGroup />
         </Fragment>
     )
 }

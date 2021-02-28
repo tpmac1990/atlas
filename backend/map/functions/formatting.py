@@ -14,11 +14,12 @@ def serializeToGeoJSON(dataset,geomField,fields):
 
 
 def serializeAndCombine(p,datasets):
-    primarySerializer = serializeToGeoJSON(datasets['priDataset'],p['priGeomField'],p['fields'])
-    relatedSerializer = serializeToGeoJSON(datasets['relDataset'],p['relGeomField'],p['fields'])
+    primarySerializer = serializeToGeoJSON(datasets['priDataset'],p['geomField'],p['fields'])
+    relatedSerializer = serializeToGeoJSON(datasets['relDataset'],p['geomField'],p['fields'])
     serializer = {
         "primarySerializer": primarySerializer,
         "relatedSerializer": relatedSerializer,
+        "extent": datasets['extent']
     }
     serializedData = json.dumps(serializer)
     return serializedData

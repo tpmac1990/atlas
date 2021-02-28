@@ -12,11 +12,6 @@ const filterDirectionReducer = ( state = initialState, action ) => {
                 ...state,
                 filterDataset: action.payload
             }
-        // case SET_FILTER_DIRECTION: 
-        //     return {
-        //         ...state,
-        //         filterDirection: action.payload
-        //     }
         case RESET_FILTER_CONTROL:
             return initialState
 

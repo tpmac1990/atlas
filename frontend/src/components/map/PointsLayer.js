@@ -1,11 +1,13 @@
-import React, { createRef, useRef } from 'react';
-import { useSelector } from 'react-redux'
+import React, { createRef, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import {Marker, LayerGroup } from 'react-leaflet';
 import { divIcon } from 'leaflet'
 import axios from 'axios'
 
 
 function PointsLayer() {
+
+    const dispatch = useDispatch()
 
     const siteIcon = divIcon({
         className: '',
@@ -19,6 +21,17 @@ function PointsLayer() {
     const markerRefs = useRef([]);
     markerRefs.current = [];
 
+    // // store the occs ind values in the popupTable state to create the table if required
+    // useEffect(() => {
+    //     if ( occs.features.length != 0 ) {
+    //         const arr = occs.features.map(row => {
+    //             return row.properties.pk
+    //         })
+    //         dispatch(setFilterValues({ind_lst: arr, datagroup: 'sites'}))
+    //     }
+    // },[occs])
+
+    // slices the text in the popups so no line exceeds the width of the popup box.
     function slicePopupInfo(item) {
         const jitem = typeof item === 'object' ? item.join(', ') : item
         return jitem.length > 30 ? jitem.slice(0,33) + '...' : jitem
@@ -55,18 +68,13 @@ function PointsLayer() {
             .catch(err => console.log(err));
     }
 
+
     const addToRefs = (el) =>{
         if (el && !markerRefs.current.includes(el)) {
             markerRefs.current.push(el)
         }
     }
 
-    // console.log(occs.features)
-    // console.log(occs.features.length)
-
-    // if (occs.features.length == 0){
-    //     return <LayerGroup ref={occLayerRef}></LayerGroup>
-    // } else {
     return (
         <LayerGroup ref={occLayerRef}>
             { occs.features.map((occ, index) => 
@@ -74,17 +82,6 @@ function PointsLayer() {
             )}
         </LayerGroup>
     )
-    // }
-
-    // return (
-    //     occs.features.length != 0 &&
-    //     <LayerGroup ref={occLayerRef}>
-    //         { occs.features.map((occ, index) => 
-    //             ( <Marker key={occ.properties.pk} index={index} pk={occ.properties.pk} ref={addToRefs} position={[occ.geometry.coordinates[1],occ.geometry.coordinates[0]]} icon={siteIcon} onclick={popUpFunction} /> )
-    //         )}
-    //     </LayerGroup>
-    // )   
-
 }
 
 export default PointsLayer;

@@ -1,15 +1,21 @@
 from map.models import Tenement, Occurrence
 
 def setParams(data,spatialQuery):
+    # print(data['offset'])
     dic = {
         'name': data['name'],
         'filterSelectionDic': data['input']['input'],
         'includeRelatedData': data['input']['includeRelated'],
         'relatedFilterOpen': data['input']['relatedOpen'],
         'priDatasetName': data['dataset'],
-        # 'filterType': data['direction'],
+        'geomField': 'geom',
+        'IDFieldName': 'ind',
+        'geomQuery': 'geom__intersects',
         'fields': ('pk',),
         'isSpatialQuery': spatialQuery,
+        'offset': data['offset'],
+        'limit': data['limit'],
+        'filter': data['filter']
     }
     if dic['priDatasetName'] == 'Tenement':
         dic['priDataset'] = Tenement.objects.all()
@@ -19,10 +25,5 @@ def setParams(data,spatialQuery):
         dic['priDataset'] = Occurrence.objects.all()
         dic['relDataset'] = Tenement.objects.all()
         dic['relDatasetName'] = 'Tenement'
-    dic['priGeomField'] = 'geom'
-    dic['relGeomField'] = 'geom'
-    dic['priIDFieldName'] = 'ind'
-    dic['priGeomQuery'] = '%s__intersects' %(dic['priGeomField'])
-    dic['relGeomQuery'] = '%s__intersects' %(dic['relGeomField'])
 
     return(dic)

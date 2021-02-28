@@ -60,7 +60,7 @@
         "dataset": ["Tenement"]
     },
     "enddate": {
-        "query": "enddate__gte",
+        "query": "enddate__lte",
         "use": ["primary","related"],
         "dataset": ["Tenement"]
     },
@@ -133,5 +133,40 @@
         "query": "holder__name__in",
         "use": ["primary","related"],
         "dataset": ["Tenement"]
+    },
+    "changefromdate": {
+        "query": "ind_change__date__gte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "changetodate": {
+        "query": "ind_change__date__lte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "additionfromdate": {
+        "query": "ind_addition__date__gte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "additiontodate": {
+        "query": "ind_addition__date__lte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "inactivefromdate": {
+        "query": "ind_inactive__date__gte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "inactivetodate": {
+        "query": "ind_inactive__date__lte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "changegroup": {
+        "query": "ind_change__field__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
     }
 }

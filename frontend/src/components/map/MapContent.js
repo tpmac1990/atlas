@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import React, { useEffect, useRef, useLayoutEffect } from 'react'
 import { Map } from 'react-leaflet'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMap, toggleFilterPanel } from './../../redux'
@@ -18,10 +18,16 @@ function MapContent() {
   ]
   const center = [-27, 132]
 
-  const { map, filteropen, tensref, tens } = useSelector(state => state.spatialData)
+  const { map, filteropen, extent } = useSelector(state => state.spatialData)
 
-  tensref && tensref.getBounds()._southWest && map.fitBounds(tensref.getBounds(), {padding: [10, 10]})
-
+  // zoom map to the bounds of the filtered data. 
+  if (extent != null){
+    var southWest = new L.LatLng(extent['SWLat'], extent['SWLng']),
+        northEast = new L.LatLng(extent['NELat'], extent['NELng']),
+        bounds = new L.LatLngBounds(southWest, northEast);
+        map.fitBounds(bounds, {padding: [10, 10]})
+  }
+  
   const mapWidthStyle = filteropen ? 'mapWithFilter' : 'fullMap'
   const toggleIcon = filteropen ? <span className="material-icons">radio_button_checked</span> : <span className="material-icons">radio_button_unchecked</span>
 

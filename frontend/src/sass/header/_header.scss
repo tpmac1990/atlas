@@ -12,13 +12,14 @@
         position: relative;
         display: inline-block;
         top: 24px;
-        // margin-bottom: 0;
+        padding-left: 20px;
+        padding-right: 20px;
 
         li {
             display: inline;
             border: 0;
             border-bottom: 2px solid $dark-3;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
 
             &:hover {
                 border-color: $light-2;
@@ -26,12 +27,17 @@
 
             a {
                 color: $light-3;
+                padding: 0 10px;
 
                 &:hover {
                     color: $light-1;
                     text-decoration: none;
                 }
             }
+        }
+
+        &:last-of-type{
+            float: right;
         }
     }
 

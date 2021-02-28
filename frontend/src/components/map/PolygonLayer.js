@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { storeSpatialRefs } from '../../redux'
+import { storeSpatialRefs, setFilterValues } from '../../redux'
 import { GeoJSON } from 'react-leaflet';
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -9,25 +9,41 @@ function PolygonLayer () {
 
     const dispatch = useDispatch()
 
+    // Tenement geospatial features
     const { tens } = useSelector(state => state.spatialData)
 
-    const tenRef = useRef();
+    // ref to the tenements layer. 
+    const tenRef = useRef(); 
 
+    // // store the tens ind values in the popupTable state to create the table if required
+    // useEffect(() => {
+    //     if ( tens.features.length != 0 ) {
+    //         const arr = tens.features.map(row => {
+    //             return row.properties.pk
+    //         })
+    //         dispatch(setFilterValues({ind_lst: arr, datagroup: 'titles'}))
+    //     }
+    // },[tens])
+
+    // store the tenements layer ref to state. I was using this to set the bounds, but moved that job to django
     useEffect(() => {
         const { current = {} } = tenRef;
-        const { leafletElement: ten } = current;
-        dispatch(storeSpatialRefs({name: 'tensref', ref: ten}))
-    }, [tens])
+        const { leafletElement: ten } = current; // deconstruct the leafletelement from the current
+        dispatch(storeSpatialRefs({name: 'tensref', ref: ten})) // store this ref in the state
+    }, [tens]) // only update the ref when the tens features change
 
+    // clear the tenement layers and re-add them when ever the tens features change. Required as leaflet will not replace the data, but add the new data aswell.
     useEffect(() => {
         tenRef.current && tenRef.current.leafletElement.clearLayers().addData(tens)
     }, [tens])
 
+    // slice lines that exceed the width of the popup box.
     function slicePopupInfo(item) {
         const jitem = typeof item === 'object' ? item.join(', ') : item
         return jitem.length > 30 ? jitem.slice(0,33) + '...' : jitem
     }
 
+    // dates with a year of 2999 are irrelevant.
     function formatDate(date) {
         const sDate = date.split('-')
         return sDate[0] == '2999' ? '' : `${sDate[2]}-${sDate[1]}-${sDate[0]}`

@@ -1,0 +1,32 @@
+@import '../variables';
+
+.labelC1 {
+    // background-color: $dark-5;
+    color: $light-3;
+    font-size: 0.8em;
+    padding-left: 20px;
+
+    &:first-of-type {
+        margin-top: 10px;
+    }
+
+    &:hover {
+        color: $light-1;
+    }
+}
+
+
+// .inputC1 {
+//     background-color: $dark-5;
+//     border: 0;
+//     border-bottom: 1px solid $blue-4;
+//     color: $light-2;
+//     font-size: 0.8em;
+//     padding-left: 32px;
+//     width: 40%;
+
+//     &:focus {
+//         outline: 0;
+//         border-color: $blue-5;
+//     }
+// }

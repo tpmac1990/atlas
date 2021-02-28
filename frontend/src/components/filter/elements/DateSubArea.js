@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import DateBox from './DateBox'
 
 function DateSubArea(props) {
@@ -27,22 +27,3 @@ function DateSubArea(props) {
 
 export default DateSubArea
 
-
-
-// function DrawSubArea (props) {
-
-//     return (
-//         <div id="drawSubArea" className={areaStyle}>
-//             <button className='btn-c1' onClick={drawRectangleHandler}>Click Me</button>
-//             <button className='btn-c1' onClick={deleteRectangleHandler}>Clear Rectangle</button>
-//             <h3>North East</h3>
-//             <LatLngTextbox name={'NELat'}/>
-//             <LatLngTextbox name={'NELng'}/>
-//             <h3>South West</h3>
-//             <LatLngTextbox name={'SWLat'}/>
-//             <LatLngTextbox name={'SWLng'}/>
-//         </div>
-//     )
-// }
-
-// export default DrawSubArea

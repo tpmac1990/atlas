@@ -8,6 +8,7 @@ const initialState = {
     tensref: null,
     map: {},
     filteropen: true,
+    extent: null,
 }
 
 // Reducer function
@@ -17,11 +18,13 @@ const spatialDataReducer = ( state = initialState, action ) => {
             var { name, data } = action.payload
             const primaryData = JSON.parse(data['primarySerializer'])
             const relatedData = JSON.parse(data['relatedSerializer'])
+            const extent = data['extent']
             const rname = name == 'tens' ? 'occs' : 'tens'
             return {
                 ... state,  
                 [name]: primaryData,
                 [rname]: relatedData,
+                extent: extent,
             }
         case SPATIAL_DATA_REF: 
             var { name, ref } = action.payload

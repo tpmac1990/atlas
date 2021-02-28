@@ -21,6 +21,10 @@ function createGroups() {
         {group: 'material', categorya: 'Material', categoryb: [['materialcategory', 'Category'], ['materialname', 'Name']]},
         {group: 'materialrelated', categorya: 'Material', categoryb: [['materialcategoryrelated', 'Category'], ['materialnamerelated', 'Name']]},
         {group: 'holder', categorya: 'Holder', categoryb: [['holdertype', 'Type'], ['holderposition', 'Position'], ['holdername', 'Name']]},
+        {group: 'additionupdate', categorya: 'Addition Update', categoryb: [['additiondate', 'Dates']]},
+        {group: 'inactiveupdate', categorya: 'Inactive Update', categoryb: [['inactivedate', 'Dates']]},
+        {group: 'changeupdate', categorya: 'Change Update', categoryb: [['changedate', 'Dates'], ['changegroup', 'Change Groups']]},
+        // {group: 'changeupdate', categorya: 'Change Update', categoryb: [['updatedate', 'Dates'], ['updatetype', 'Type'], ['changegroup', 'Change Groups']]},
     ]
 
     // this builds the dictionary

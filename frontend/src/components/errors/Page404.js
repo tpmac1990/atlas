@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function SuspenseFallback() {
+export default function Page404() {
     return (
         <div>
-            <h1>hello</h1>
+            <h1>404 - Page Not Found</h1>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { ITEM_SELECTED, ITEM_UNSELECTED, SET_RECTANGLE_LATLNGS, MANUAL_LATLNGS_CHANGE, SET_DATE_CHANGE, 
     SET_BUFFER_ID, SET_BUFFER_DISTANCE, INCLUDE_RELATED_DATA, TOGGLE_RELATED_FILTER, RESET_FILTER_SELECTION, 
-    VALID_BUFFER_ID, CLEAR_RECTANGLE_LATLNGS, SET_ID_CENTROID, IS_BUFFER_RADIUS_VALID } from './filterSelectionType'
+    VALID_BUFFER_ID, CLEAR_RECTANGLE_LATLNGS, SET_ID_CENTROID, IS_BUFFER_RADIUS_VALID, SET_UPDATE_TYPE } from './filterSelectionType'
 
 const initialState = {
     input: {
@@ -31,6 +31,13 @@ const initialState = {
         occurrencename: [],
         newids: [],
         givenids: [],
+        additionfromdate: '',
+        additiontodate: '',
+        inactivefromdate: '',
+        inactivetodate: '',
+        changefromdate: '',
+        changetodate: '',
+        changegroup: [],
     },
     includeRelated: false,
     relatedOpen: false,
@@ -144,6 +151,13 @@ const filterSelectionReducer = ( state = initialState, action ) => {
                         Lng: action.payload.lng, 
                         valid: (action.payload.success && state.input.buffer.radius != "") ? true : false
                     }
+                }
+            }
+        case SET_UPDATE_TYPE:
+            return {
+                ... state,
+                input: { ...state.input,
+                    updatetype: action.payload,
                 }
             }
         default: return state

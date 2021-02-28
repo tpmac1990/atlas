@@ -7,7 +7,7 @@ import RelatedFilterHeader from './RelatedFilterHeader'
 export default function RelatedOccurrences() {
     return (
         <Fragment>
-            <RelatedFilterHeader header='Related Occurrences' />
+            <RelatedFilterHeader header='Related Sites' />
             <TypeGroup />
             <StatusGroup />
             <MaterialGroup />

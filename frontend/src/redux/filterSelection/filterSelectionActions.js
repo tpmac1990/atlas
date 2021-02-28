@@ -1,6 +1,6 @@
 import { ITEM_SELECTED, ITEM_UNSELECTED, SET_RECTANGLE_LATLNGS, MANUAL_LATLNGS_CHANGE, SET_DATE_CHANGE, 
         SET_BUFFER_ID, SET_BUFFER_DISTANCE, INCLUDE_RELATED_DATA, TOGGLE_RELATED_FILTER, RESET_FILTER_SELECTION, 
-        VALID_BUFFER_ID, CLEAR_RECTANGLE_LATLNGS, SET_ID_CENTROID
+        VALID_BUFFER_ID, CLEAR_RECTANGLE_LATLNGS, SET_ID_CENTROID, SET_UPDATE_TYPE
         } from './filterSelectionType'
 import axios from 'axios'
 
@@ -95,6 +95,13 @@ export const invalidBufferID = () => {
     return {
         type: VALID_BUFFER_ID,
         payload: false
+    }
+}
+
+export const setUpdateType = value => {
+    return {
+        type: SET_UPDATE_TYPE,
+        payload: value
     }
 }
 

@@ -174,6 +174,7 @@ class HolderType(models.Model):
     original = models.CharField(max_length=30, blank=False, null=False)
     code = models.CharField(max_length=10, blank=True, null=True)
 
+
 class HolderPosition(models.Model):
     name = models.CharField(max_length=20, blank=False, null=False)
 
@@ -182,6 +183,7 @@ class Holder(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     typ = models.ForeignKey(HolderType, on_delete=models.SET_NULL, related_name="typ_holder", blank=True, null=True)
     listed = models.ManyToManyField(Listed, related_name="listed_holder", blank=True)
+
 
 class Parent(models.Model):
     name = models.ForeignKey(Holder, on_delete=models.SET_NULL, related_name="name_holderrelation", blank=True, null=True)
@@ -231,3 +233,53 @@ class Tenement(models.Model):
 
     def __str__(self):
         return self.ind
+
+
+
+
+# change and update models
+class TenementChange(models.Model):
+    ind = models.ForeignKey(Tenement, on_delete=models.CASCADE, related_name="ind_change", blank=False, null=False)
+    action = models.CharField(max_length=6, blank=False, null=False)
+    field = models.CharField(max_length=30, blank=False, null=False)
+    typeval = models.ForeignKey(TenType, on_delete=models.SET_NULL, related_name="typeval_tenement", blank=True, null=True)
+    statusval = models.ForeignKey(TenStatus, on_delete=models.SET_NULL, related_name="statusval_tenement", blank=True, null=True)
+    lodgedateval = models.DateField(blank=True, null=True)
+    startdateval = models.DateField(blank=True, null=True)
+    enddateval = models.DateField(blank=True, null=True)
+    oidval = models.ForeignKey(TenOriginalID, on_delete=models.SET_NULL, related_name="oidval_tenement", blank=True, null=True)
+    holderval = models.ForeignKey(TenHolder, on_delete=models.SET_NULL, related_name="holderval_tenement", blank=True, null=True)
+    majmatval = models.ForeignKey(Material, on_delete=models.SET_NULL, related_name="majmatval_tenement", blank=True, null=True)
+    minmatval = models.ForeignKey(Material, on_delete=models.SET_NULL, related_name="minmatval_tenement", blank=True, null=True)
+    date = models.DateField(blank=False, null=False)
+
+class TenementAddition(models.Model):
+    ind = models.ForeignKey(Tenement, on_delete=models.CASCADE, related_name="ind_addition", blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+
+class TenementRemoval(models.Model):
+    ind = models.ForeignKey(Tenement, on_delete=models.CASCADE, related_name="ind_inactive", blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+
+
+
+class OccurrenceChange(models.Model):
+    ind = models.ForeignKey(Occurrence, on_delete=models.CASCADE, related_name="ind_change", blank=False, null=False)
+    action = models.CharField(max_length=6, blank=False, null=False)
+    field = models.CharField(max_length=30, blank=False, null=False)
+    typeval = models.ForeignKey(OccType, on_delete=models.SET_NULL, related_name="typeval_occurrence", blank=True, null=True)
+    statusval = models.ForeignKey(OccStatus, on_delete=models.SET_NULL, related_name="statusval_occurrence", blank=True, null=True)
+    oidval = models.ForeignKey(OccOriginalID, on_delete=models.SET_NULL, related_name="oidval_occurrence", blank=True, null=True)
+    nameval = models.ForeignKey(OccName, on_delete=models.SET_NULL, related_name="holderval_occurrence", blank=True, null=True)
+    majmatval = models.ForeignKey(Material, on_delete=models.SET_NULL, related_name="majmatval_occurrence", blank=True, null=True)
+    minmatval = models.ForeignKey(Material, on_delete=models.SET_NULL, related_name="minmatval_occurrence", blank=True, null=True)
+    date = models.DateField(blank=False, null=False)
+
+class OccurrenceAddition(models.Model):
+    ind = models.ForeignKey(Occurrence, on_delete=models.CASCADE, related_name="ind_addition", blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+
+class OccurrenceRemoval(models.Model):
+    ind = models.ForeignKey(Occurrence, on_delete=models.CASCADE, related_name="ind_inactive", blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+

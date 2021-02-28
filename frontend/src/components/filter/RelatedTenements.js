@@ -8,7 +8,7 @@ import RelatedFilterHeader from './RelatedFilterHeader'
 export default function RelatedTenements() {
     return (
         <Fragment>
-            <RelatedFilterHeader header='Related Tenements' />
+            <RelatedFilterHeader header='Related Titles' />
             <TypeGroup />
             <StatusGroup />
             <MaterialGroup />

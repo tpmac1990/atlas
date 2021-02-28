@@ -8,6 +8,15 @@
     }
 }
 
+.error-c2 {
+    background-color: $danger-4;
+    font-size: 0.8em;
+    float: left;
+    margin-top: 6px;
+    padding: 4px 10px;
+    border-radius: 15px;
+}
+
 .success-c1 {
     border: 1px solid $dangert;
 
@@ -70,3 +79,6 @@
         }
     }
 }
+
+
+

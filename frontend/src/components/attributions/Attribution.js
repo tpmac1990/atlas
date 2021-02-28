@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from "react-router-dom"
 import creative_commons from '../../assets/images/attribution/creative-commons-logo.jpg'
 import nsw_logo from '../../assets/images/attribution/nsw_logo.png'
 import nt_logo from '../../assets/images/attribution/nt_logo.png'
@@ -14,7 +13,6 @@ import ga_logo from '../../assets/images/attribution/ga_logo.jpg'
 export default function Attribution() {
     return (
         <div id='attribution'>
-            <Link id='attributionMapLink' to="/">Back To Map</Link>
             <h1>Copyright</h1><br/>
             <p>Data used in this application is governed by the copyright of the data owner. Requests and enquiries concerning reproduction and usage rights for data not licenced under CC-BY should be addressed to the copyright owners.</p>
             <p>Copyright attribution by data owner.</p>

@@ -1,12 +1,9 @@
 from map.models import Tenement, Occurrence
 import json
 
+# tests if the gplore id entered on the frontend is a valid id from either the Tenement or Occurrence dataset.
 def validID(key,datasetName):
     dataset = Tenement if datasetName == 'Tenement' else Occurrence
-    # if datasetName == 'Tenement':
-    #     dataset = Tenement
-    # else:
-    #     dataset = Occurrence
 
     try:
         ds = dataset.objects.get(**{'ind': key})

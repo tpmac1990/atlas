@@ -114,9 +114,10 @@
         
             #filter-groups {
                 position: relative;
-                height: calc(100% - 80px);
-                max-height: 310px;
+                height: calc(100% - 40px);
+                max-height: 350px;
                 width: 100%;
+                overflow-y: auto;
             }
         }
     
@@ -229,29 +230,10 @@
 
     h3 {
         color: $light-2;
+        font-size: 0.9em;
         margin: 10px 0 5px 0;
     }
 
-    // .filterTextbox {
-    //     margin-bottom: 5px;
-
-    //     label {
-    //         color: $light-2;
-    //         font-style: italic;
-    //         margin-bottom: 0px;
-    //         font-size: 0.85em;
-    //         width: 30%;
-    //         margin-left: 15px;
-    //     }
-    
-    //     input {
-    //         width: 50%;
-    
-    //         &:focus {
-    //             background-color: $dark-4;
-    //         }
-    //     }
-    // }
 }
 
 

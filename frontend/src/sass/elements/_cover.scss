@@ -1,0 +1,16 @@
+@import '../variables';
+
+// used to cover the background of a popup so the user can't interact with it.
+
+// cover the full screen
+.cover-c1 {
+    height: 100%;
+    width: 100%;
+    background-color: $transp-1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+

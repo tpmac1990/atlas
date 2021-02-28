@@ -5,7 +5,7 @@ import { unselectItem, selectItem } from '../../../redux'
 
 function FilterCheckbox(props) {
     var { groupName, row } = props
-    const { pk, name } = row
+    const [ pk, name ] = row
 
     const dispatch = useDispatch()
 

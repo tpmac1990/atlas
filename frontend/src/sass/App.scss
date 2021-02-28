@@ -5,12 +5,17 @@
 @import 'elements/messageBar';
 @import 'elements/checkboxes';
 @import 'map/leafletdraw';
-@import 'elements/radioBar';
+@import 'elements/radioButtons';
 @import 'elements/input';
 @import 'header/header';
 @import 'map/map';
 @import 'map/popup';
 @import 'attribution/attribution';
+@import 'elements/labels';
+@import 'detail/detail';
+@import 'tables/table';
+@import 'elements/cover';
+@import 'elements/links';
 
 
 
@@ -33,5 +38,14 @@ h3 {
 .showEleGrid {
     display: grid;
 }
+
+.inactive-pg {
+    position: absolute;
+    z-index: 9;
+    background-color: #00000080;
+    height: 100vh;
+    width: 100%;
+}
+
 
 @import "~bootstrap/scss/bootstrap";

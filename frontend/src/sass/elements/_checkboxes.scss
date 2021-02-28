@@ -15,3 +15,48 @@
     }
 
 }
+
+// input wrapped within label. checkbox hidden, label changes colour when checked
+.checkbox-c1,
+.checkbox-c2,
+.checkbox-c3 {
+
+    input {
+        display: none;
+    }
+
+    label {
+        margin-right: 10px !important;
+        padding: 2px 10px;
+        border-radius: 10px;
+        background-color: $light-2;
+    }
+
+    input:checked + label {
+        background-color: $blue-9;
+    }
+
+}
+
+.checkbox-c2,
+.checkbox-c3 {
+    margin-right: 60px;
+    float: right;
+
+    label {
+        margin: 0;
+        background-color: $blue-9;
+    }
+
+    input:checked + label {
+        background-color: $light-2;
+    }
+
+}
+
+.checkbox-c3 {
+    float: none;
+    width: 200px;
+    margin: 0 0 2px 0;
+    display: inline-block;
+}

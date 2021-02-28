@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { divIcon } from 'leaflet'
 
 class Header extends Component {
     render() {

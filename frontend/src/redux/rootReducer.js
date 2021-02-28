@@ -5,6 +5,9 @@ import filterDirectionReducer from './filterDirection/filterDirectionReducer'
 import leafletDrawReducer from './leafletDraw/leafletDrawReducer'
 import spatialDataReducer from './spatialData/spatialDataReducer'
 import messageHandlerReducer from './messageHandler/messageHandlerReducer'
+import detailSelectionReducer from './detailSelection/detailSelectionReducer'
+import popupTableReducer from './popupTable/popupTableReducer'
+import inactiveCoverReducer from './inactiveCover/inactiveCoverReducer'
 
 const rootReducer = combineReducers({
     filterGroup: filterGroupReducer,
@@ -13,6 +16,9 @@ const rootReducer = combineReducers({
     leafletDraw: leafletDrawReducer,
     spatialData: spatialDataReducer,
     messageHandler: messageHandlerReducer,
+    detailSelection: detailSelectionReducer,
+    popupTable: popupTableReducer,
+    inactiveCover: inactiveCoverReducer,
 })
 
 export default rootReducer

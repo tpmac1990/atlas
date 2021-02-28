@@ -17,6 +17,3 @@ function InputBox(props) {
 
 export default InputBox
 
-
-
-

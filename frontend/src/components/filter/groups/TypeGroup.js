@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import GroupButton from '../elements/GroupButton'
 import { useSelector } from 'react-redux'
 import CheckboxList from '../elements/CheckboxList'
@@ -12,11 +12,9 @@ function TypeGroup (props) {
 
     if ( relatedOpen ) {
         var checkboxGroupList = ['typesimplerelated','typedetailrelated']
-        // var style = items.typerelated.areaStyle
         var name = 'typerelated'
     } else {
         var checkboxGroupList = ['typesimple','typedetail']
-        // var style = items.type.areaStyle
         var name = 'type'
     }
 

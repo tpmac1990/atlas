@@ -55,9 +55,9 @@
             "order_by": "pk"
         },
         "newids": {
-            "model": "lambda qs: qs.values('ind').distinct().order_by('ind')",
-            "query": "",
-            "values": "",
+            "model": "Tenement",
+            "query": "ind__in",
+            "values": ["ind"],
             "order_by": "ind"
         },
         "materialcategory": {
@@ -89,6 +89,12 @@
             "query": "name_tenholder__holder_tenement__in",
             "values": ["pk","name"],
             "order_by": "name"
+        },
+        "changegroup": {
+            "model": "TenementChange",
+            "query": "ind__in",
+            "values": ["field"],
+            "order_by": "field"
         }
     },
     "Occurrence": {
@@ -117,39 +123,39 @@
             "order_by": "name"
         },
         "typesimple": {
-            "model": "TenTypeSimp",
+            "model": "OccTypeSimp",
             "query": "simple_occtype__typ_occurrence__in",
             "values": ["pk", "name"],
             "order_by": "name"
         },
         "typedetail": {
-            "model": "TenType",
+            "model": "OccType",
             "query": "typ_occurrence__in",
             "values": ["pk", "fname"],
             "order_by": "fname"
         },
         "statussimple": {
-            "model": "TenStatusSimp",
-            "query": "simple_tenstatus__status_occurrence__in",
+            "model": "OccStatusSimp",
+            "query": "simple_occstatus__status_occurrence__in",
             "values": ["pk", "name"],
             "order_by": "name"
         },
         "statusdetail": {
-            "model": "TenStatus",
+            "model": "OccStatus",
             "query": "status_occurrence__in",
             "values": ["pk", "original"],
             "order_by": "original"
         },
         "givenids": {
-            "model": "TenOriginalID",
+            "model": "OccOriginalID",
             "query": "oid_occurrence__in",
             "values": ["pk"],
             "order_by": "pk"
         },
         "newids": {
-            "model": "lambda qs: qs.values('ind').distinct().order_by('ind')",
-            "query": "",
-            "values": "",
+            "model": "Occurrence",
+            "query": "ind__in",
+            "values": ["ind"],
             "order_by": "ind"
         },
         "materialcategory": {
@@ -169,6 +175,12 @@
             "query": "name_occurrence__in",
             "values": ["pk","name"],
             "order_by": "name"
+        },
+        "changegroup": {
+            "model": "OccurrenceChange",
+            "query": "ind__in",
+            "values": ["field"],
+            "order_by": "field"
         }
     }
 }

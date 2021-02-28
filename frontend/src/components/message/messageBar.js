@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 export default function ErrorBar() {
 
-    const { message, type, trigger } = useSelector(state => state.messageHandler)
+    const { message, type, trigger } = useSelector(state => state.messageHandler.map_page)
 
     const [ visibility, setVisibilty ] = useState('hideEle')
 

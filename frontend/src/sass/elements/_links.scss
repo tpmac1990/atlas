@@ -1,0 +1,29 @@
+@import '../variables';
+
+
+.search-link-c1 {
+    width: 100px;
+    float:left;
+    height: 100%;
+    position: relative;
+    margin-right: 20px;
+
+    a {
+        position: absolute;
+        padding: 6px 25px;
+        border-radius: 4px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        border: 1px solid #3ab4ff;
+        background-color: #3ab4ff;
+        color: white;
+
+        &:hover {
+            text-decoration: none;
+            border-color: #14a5ff;
+            background-color: #14a5ff;
+            color: white;
+        }
+    }
+}

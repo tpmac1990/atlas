@@ -1,0 +1,171 @@
+@import '../variables';
+
+
+.sort-none-c1,
+.sort-up-c1,
+.sort-down-c1 {
+    border-top: 2px solid $blue-6 !important;
+    border-bottom: 2px solid $blue-6 !important;
+    padding: 5px 0 0 0;
+    
+
+    div {
+
+        &:first-of-type {
+            padding: 0 0 8px 10px;
+        }
+    
+        &:last-of-type {
+            padding-bottom: 5px;
+        }
+    }
+}
+
+.sort-up-c1 {
+    border-top: 2px solid $blue-5 !important;
+}
+
+.sort-down-c1 {
+    border-bottom: 2px solid $blue-5 !important;
+}
+
+
+.popup-table-c1 {
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+    // background-color: $light-5;
+    background-color: $light-1;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    border-radius: 5px;
+    padding: 15px 20px;
+    font-size: 0.7em;
+    box-shadow: 0 1px 4px $light-3;
+
+    a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2px 10px 0 0;
+        font-size: 1em;
+        color: $dark-5;
+        letter-spacing: 0.05em;
+        
+        &:hover {
+            color: $danger-3;
+        }
+    }
+
+    .greater-table-area-c1 {
+        height: calc(100% - 30px);
+
+        label {
+            // margin-bottom: 4px;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+
+        input {
+            margin-left: 10px;
+        }
+
+        .column-filter-btn {
+            background-color: red;
+            margin-left: 100px;
+            border: none;
+        }
+
+        .table-content-area-c1 {
+            border-bottom: 1px solid $light-2;
+            border-top: 1px solid $light-2;
+            height: 65px;
+            padding: 5px 0;
+            margin-bottom: 10px;
+
+            div {
+                display: inline;
+                padding: 0 10px;
+            }
+        }
+
+        .table-height-sm {
+            height: calc(100% - 167px);
+        }
+
+        .table-height-lg {
+            height: calc(100% - 72px);
+        }
+
+        .table-area-c1 {
+            overflow-y: auto;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-top: 5px;
+
+            th {
+                position: sticky;
+                top: 0;
+                padding: 0;
+                background-color: $light-1;
+                border-bottom: 1px solid $light-2;
+                border-top: 1px solid $light-2;
+                min-width: 150px;
+                background-color: $blue-6;
+            }
+
+            td {
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
+
+            tr {
+
+                &:nth-child(odd) {
+                    background-color: $blue-7;
+                }
+                &:nth-child(even) {
+                    background-color: $blue-8;
+                }
+            }
+        }
+        
+        .pagination-ctrl {
+            height: 72px;
+            padding-top: 10px;
+            position: relative;
+            // border: 1px solid black;
+
+            .pagination-btns,
+            .pagination-pages {
+                height: 30px;
+                position: relative;
+
+                div {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+
+                    button {
+                        border: none;
+                        font-size: 1.3em;
+                        border-bottom: 2px solid white;
+                        background-color: white;
+
+                        &:hover:enabled {
+                            border-bottom: 2px solid $blue-9;
+                        }
+
+                        &:active:enabled {
+                            border-bottom: 2px solid $blue-10;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+}

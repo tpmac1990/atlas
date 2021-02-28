@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { toggleRelatedFilter } from '../../redux'
 
@@ -15,8 +15,7 @@ export default function RelatedFilterHeader(props) {
             <div className='closeLinkc1'>
                 <a href="#" onClick={RelationHandler}>x</a>
             </div>
-            {/* <button onClick={RelationHandler}><span>x</span></button> */}
-            <h2>{props.header}</h2><hr/>
+            <h2 className='headerC1'>{props.header}</h2><hr className='hrC1'/>
         </div>
     )
 }

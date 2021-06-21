@@ -27,3 +27,17 @@
         }
     }
 }
+
+.link-c2 {
+    background-color: $light-2;
+    font-style: italic;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: $dark-3;
+
+    &:hover {
+        text-decoration: none;
+        color: $dark-3;
+        background-color: $blue-13;
+    }
+}

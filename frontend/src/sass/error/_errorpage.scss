@@ -1,0 +1,16 @@
+@import '../variables';
+
+.error-page {
+    position: relative;
+    background-color: $light-2;
+    height: calc(100vh - 60px);
+
+    div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+    }
+
+}

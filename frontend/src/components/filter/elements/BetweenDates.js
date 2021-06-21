@@ -4,24 +4,15 @@ import DateBox from './DateBox'
 
 function BetweenDates(props) {
 
-    const { name } = props
+    const { name, title } = props
     const subgroup = `${name}date`
-
+    const dic = {name: name, display: `${title}:`}
 
     const { areaStyle } = useSelector(state => state.filterGroup.groups[subgroup])
 
-    const dateTypes = [
-        {name: `${name}fromdate`, display: 'From Date:'}, 
-        {name: `${name}todate`, display: 'To Date:'},
-        ]
-
-    const dateGroups = dateTypes.map(dic => {
-        return <DateBox key={ dic.name } dic={dic}/>
-    })
-
     return (
         <div className={areaStyle}>
-            { dateGroups }
+            <DateBox key={name} dic={dic}/>
         </div>
     )
 }

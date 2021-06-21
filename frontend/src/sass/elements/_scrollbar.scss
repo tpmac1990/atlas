@@ -1,0 +1,28 @@
+@import '../variables';
+
+
+.scrollbar-c1 {
+    /* width */
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    /* Track */
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 4px $light-6; 
+        border-radius: 10px;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 2px $light-5;
+        background: $dark-7; 
+        border-radius: 10px;
+    }
+    
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        box-shadow: inset 0 0 2px $light-3;
+        // background: $light-3; 
+    }
+}

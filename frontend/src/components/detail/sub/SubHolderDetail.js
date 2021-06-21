@@ -5,6 +5,7 @@ import { getHolderData, setFilterValues, triggerElement } from '../../../redux';
 import DetailTableC1 from './DetailTableC1';
 import SingleColumnTableC1 from './SingleColumnTableC1';
 import Loading from '../../loading/Loading';
+import { TitleComponent } from './TitleComponent';
 
 
 function SubHolderDetail({ match }){
@@ -21,6 +22,7 @@ function SubHolderDetail({ match }){
 
     useEffect(() => {
         if (value) {
+            // console.log(value.title_count)
             dispatch(setFilterValues({ind_lst: value.title_count, datagroup: 'titles'}))
             dispatch(setFilterValues({ind_lst: value.site_count, datagroup: 'sites'}))
         }
@@ -33,7 +35,7 @@ function SubHolderDetail({ match }){
         lookup: "subsidiaries",
         header: "Subsidiaries",
         table_headers: ["Name","Percent Owned","Type","Listed"],
-        table_data: [["holder_name"],["percown"],["typ"],["listed"]]
+        table_data: [["name"],["percown"],["typ"],["listed"]]
     };
 
     const OwnersDict = {
@@ -42,7 +44,7 @@ function SubHolderDetail({ match }){
         lookup: "parent_company",
         header: "Parent Companies",
         table_headers: ["Name","Percent Owned","Type","Listed"],
-        table_data: [["holder_name"],["percown"],["typ"],["listed"]]
+        table_data: [["name"],["percown"],["typ"],["listed"]]
     };
 
     const TickerDict = {
@@ -74,7 +76,7 @@ function SubHolderDetail({ match }){
     } else {
         return (
             <div className="detail-info-c1">
-                <h2>{ value.holder_name }</h2>
+                <TitleComponent group='holder' title={value.holder_name} index={id} />
                 <div className='list-table-btn-group'>{['titles','sites'].map(item => {
                     return <button key={item} className='btn-c5' onClick={() => dispatch(triggerElement(item))} >{item.charAt(0).toUpperCase() + item.slice(1)} List Table</button>
                 })}</div>

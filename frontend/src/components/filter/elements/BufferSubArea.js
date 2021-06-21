@@ -17,7 +17,7 @@ function DrawSubArea (props) {
     function changeHandler(e) {
         const val = e.target.value
         // sets the gplore id to state
-        dispatch(setBufferID(val)) 
+        dispatch(setBufferID(val))
         // If the id is 7 values long (all ids are 7 long) then check to see if it exists in the db.
         val.length == 7 ? dispatch(getBufferIDCentroid({filterDataset: filterDataset, id: val})) : dispatch(invalidBufferID())
     }

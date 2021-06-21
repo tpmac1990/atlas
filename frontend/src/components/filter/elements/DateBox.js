@@ -9,16 +9,30 @@ function DateBox(props) {
 
     const dispatch = useDispatch()
 
-    const date = useSelector(state => state.filterSelection.input[name])
+    // the name passed as a prop is only the core piece of the string. Add 'fromdate' & 'todate' suffix to manage the two values in state
+    const fromDateName = `${name}fromdate`
+    const toDateName = `${name}todate`
+    const { input } = useSelector(state => state.filterSelection)
+    const fromDate = input[fromDateName]
+    const toDate = input[toDateName]
 
-    function changeHandler(e) {
-        dispatch(setFilterDates({name: name, date: e.target.value}))
+
+    const fromHandler = e => {
+        dispatch(setFilterDates({name: fromDateName, date: e.target.value}))
     }
 
-    return (
-        <div className='inputGroupC4'>
-            <label>{display}</label>
-            <input type='date' required name={name} value={date} onChange={changeHandler} />
+    const toHandler = e => {
+        dispatch(setFilterDates({name: toDateName, date: e.target.value}))
+    }
+
+    return (  
+        <div className='input-group-c5'>
+            <label className='title'>{display}</label>
+            <div>
+                <input type='date' required value={fromDate} onChange={fromHandler} />
+                <span>-</span>
+                <input type='date' required value={toDate} onChange={toHandler} />
+            </div>
         </div>     
     )
 }

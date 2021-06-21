@@ -10,6 +10,7 @@ function DrawSubArea (props) {
     const { name } = props
 
     const { areaStyle } = useSelector(state => state.filterGroup.groups[name])
+    const { map } = useSelector(state => state.filterSelection.map_data)
 
     const { editHandlers } = useSelector(state => state.leafletDraw)
 
@@ -29,10 +30,10 @@ function DrawSubArea (props) {
     }
 
     return (
-        <div id="drawSubArea" className={areaStyle}>
-            <button className='btn-c4' onClick={drawRectangleHandler}>Draw Rectangle</button>
-            <button className='btn-c4' onClick={clearRectangleHandler}>Clear Rectangle</button>
-            <button className='btn-c4' onClick={clearFieldsHandler}>Clear Fields</button>
+        <div id="draw-sub-area" className={areaStyle}>
+            <button className='btn-c4' onClick={drawRectangleHandler}>Select Area on Map</button>
+            {/* <button className='btn-c4' onClick={clearRectangleHandler}>Clear Rectangle</button> */}
+            <button className='btn-c4' onClick={clearFieldsHandler}>Clear Selection</button>
             <h3>North East</h3>
             <LatLngTextbox name={'NELat'}/>
             <LatLngTextbox name={'NELng'}/>

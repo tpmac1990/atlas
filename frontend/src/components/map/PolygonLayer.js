@@ -1,29 +1,29 @@
-import React, { useRef, useEffect } from 'react';
-import { storeSpatialRefs, setFilterValues } from '../../redux'
-import { GeoJSON } from 'react-leaflet';
+import React, { useRef, useEffect, useState } from 'react';
+import { storeSpatialRefs, getPopupData, setPopupTarget } from '../../redux'
+import { GeoJSON, Marker } from 'react-leaflet';
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
+import { slicePopupInfo, formatDate } from '../formatting/formatting'
+
+// import useClickEventListener from '../reusable/hooks/useClickEventListener'
+// import { useHistory } from "react-router-dom";
+// import { Route, Link, useRouteMatch } from "react-router-dom";
 
 
 function PolygonLayer () {
 
     const dispatch = useDispatch()
 
-    // Tenement geospatial features
-    const { tens } = useSelector(state => state.spatialData)
+    // const viewportWidth = useClickEventListener();
+    // console.log(viewportWidth)
+
+    const { filterSelection, mapPopup } = useSelector(state => state)
+    const { data, target, dataset } = mapPopup
+    const { tens } = filterSelection.map_data
 
     // ref to the tenements layer. 
     const tenRef = useRef(); 
 
-    // // store the tens ind values in the popupTable state to create the table if required
-    // useEffect(() => {
-    //     if ( tens.features.length != 0 ) {
-    //         const arr = tens.features.map(row => {
-    //             return row.properties.pk
-    //         })
-    //         dispatch(setFilterValues({ind_lst: arr, datagroup: 'titles'}))
-    //     }
-    // },[tens])
+    const [ firstRender, setFirstRender ] = useState(true)
 
     // store the tenements layer ref to state. I was using this to set the bounds, but moved that job to django
     useEffect(() => {
@@ -37,66 +37,70 @@ function PolygonLayer () {
         tenRef.current && tenRef.current.leafletElement.clearLayers().addData(tens)
     }, [tens])
 
-    // slice lines that exceed the width of the popup box.
-    function slicePopupInfo(item) {
-        const jitem = typeof item === 'object' ? item.join(', ') : item
-        return jitem.length > 30 ? jitem.slice(0,33) + '...' : jitem
-    }
-
-    // dates with a year of 2999 are irrelevant.
-    function formatDate(date) {
-        const sDate = date.split('-')
-        return sDate[0] == '2999' ? '' : `${sDate[2]}-${sDate[1]}-${sDate[0]}`
-    }
 
     function popUpFunctionT(e){
         const { target } = e
-        const { pk } = target.feature.properties
-        axios
-            .post("/popup-query/", {type: 'Tenement', pk: pk})
-            .then(res => { 
-                const { typ, status, lodgedate, startdate, enddate, oid, holder, majmat } = res.data.fields
-                const fmajmat = slicePopupInfo(majmat)
-                const fholder = slicePopupInfo(holder)
-                const foid = slicePopupInfo(oid)
-                const ftyp = slicePopupInfo(typ)
-                const fstatus = slicePopupInfo(status)
-                const flodgedate = formatDate(lodgedate)
-                const fstartdate = formatDate(startdate)
-                const fenddate = formatDate(enddate) 
-                target.bindPopup(
-                    `<div class='polyPopup'>
-                        <h4>${pk}</h4>
-                        <hr/>
-                        <div>
-                            <table>
-                                <tr><td>Type</td><td>${ftyp}</td></tr>
-                                <tr><td>Status</td><td>${fstatus}</td></tr>
-                                <tr><td>Lodge Date</td><td>${flodgedate}</td></tr>
-                                <tr><td>Start Date</td><td>${fstartdate}</td></tr>
-                                <tr><td>End Date</td><td>${fenddate}</td></tr>
-                                <tr><td>Other IDs</td><td>${foid}</td></tr>
-                                <tr><td>Holder</td><td>${fholder}</td></tr>
-                                <tr><td>Major Materials</td><td>${fmajmat}</td></tr>
-                            </table>
-                        </div>
-                    </div>`
-                ).openPopup()
-            })
-            .catch(err => console.log(err));
+        dispatch(setPopupTarget(target))
+        dispatch(getPopupData({pk: e.target.feature.properties.pk, dataset: 'Tenement'}))
     }
 
 
+    useEffect(() => {
+        if ( !firstRender && dataset === 'Tenement' ){
+            const { typ, status, lodgedate, startdate, enddate, oid, holder, majmat, ind } = data
+            // const polygonCenter = target.getBounds().getCenter();
+            // const label = new L.marker(polygonCenter).bindLabel(ind, { noHide: true })
+            // target.bindLabel('MultiPolygon dynamic label').addTo(tenRef.current.leafletElement);
+            // console.log(label)
+            // .bindLabel(feature.properties['NAME'], { noHide: true })
+            // .addTo(map);
+            // console.log(polygonCenter)
+            // target.getBounds().getCenter().bindLabel(ind, { noHide: true })
+            // target.bindLabel(ind, { noHide: true })
+            target.bindPopup(
+                `<div class='polyPopup'>
+                    <div class='popup-header'>
+                        <h4>${ind}</h4>
+                        <button id='popup-click-event' value='title/${ind}' class=''>More Detail >></button>
+                    </div>
+                    <hr/>
+                    <div class='popup-body'>
+                        <table>
+                            <tr><td>Type</td><td>${typ}</td></tr>
+                            <tr><td>Status</td><td>${status}</td></tr>
+                            <tr><td>Lodge Date</td><td>${formatDate(lodgedate)}</td></tr>
+                            <tr><td>Start Date</td><td>${formatDate(startdate)}</td></tr>
+                            <tr><td>End Date</td><td>${formatDate(enddate)}</td></tr>
+                            <tr><td>Other IDs</td><td>${oid}</td></tr>
+                            <tr><td>Holder</td><td>${holder}</td></tr>
+                            <tr><td>Major Materials</td><td>${majmat}</td></tr>
+                        </table>
+                    </div>
+                </div>`
+            ).openPopup()
+        }
+    },[data])
+
+    // binds the tooltip that holds the title id, and the popup that contains a summary of the title
     function onEachFeature (feature, layer) {
-        if (feature.properties && feature.properties.pk) {
+        if (feature.properties && feature.properties.pk){
             layer.on("click",popUpFunctionT);
+            layer.bindTooltip(feature.properties.pk, {className: 'id-tooltip'});
+        }
+            // direction: 'centre'
+            // permanent: true,
+
             // layer.setStyle({
             //     color: 'green',
             //     fillColor: 'yellow',
             // })
-        }
+        // }
     }
 
+    useEffect(() => {
+        setFirstRender(false)
+    },[])
+    
     return <GeoJSON key={tens} 
                     data={tens} 
                     ref={tenRef}

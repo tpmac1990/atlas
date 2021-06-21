@@ -11,7 +11,7 @@ module.exports = merge(common, {
     },
     output: {
         filename: "[name].[hash].js",
-        path: path.resolve(__dirname, "../backend/map/static"),
+        path: path.resolve(__dirname, "../backend/gp/static"),
         // publicPath: 'http://localhost:8000/static/',
         publicPath: '/static/',
     },
@@ -23,7 +23,7 @@ module.exports = merge(common, {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.resolve(__dirname,'./src/template_dev.html'), to: path.resolve(__dirname,'../backend/map/static/index.html') }
+                { from: path.resolve(__dirname,'./src/template_dev.html'), to: path.resolve(__dirname,'../backend/gp/static/index.html') }
             ]
         })
     ],

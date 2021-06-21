@@ -1,114 +1,88 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios';
 import FilterCheckbox from './FilterCheckbox'
-import { oversizeListRequest } from '../../../redux'
+import { getFilterCheckboxData, setCheckBoxListIsLoading, 
+        setCheckboxSearch, filterCheckBoxListClientSide, resetCheckBoxListOffset } from '../../../redux'
 
-function CheckboxList (props) {
 
-    const [data, setData] = useState({loaded: false, data: []}) // all data returned from request
-    const [filterData, setFilterData] = useState([]) // data that equates to the filter value
-    const [filterVal, setFilterVal] = useState('') // the value being filtered for
-    const [firstRender, setFirstRender] = useState(true) 
-    const [ssFilterToggle, setSsFilterToggle] = useState(true) // changes when the ssfilter is run
-
-    // required for infinity scroll
-    // const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false) // is the infinity scroll loading more components
-    const [hasMore, setHasMore] = useState(true) // are there more rows to load from the db
-    const [offset, setOffset] = useState(0) // the start index to get the next lot of data
-    const [requiresInfinityScroll, setRequiresInfinityScroll] = useState(null) // is the infinity scroll component required
-    const limit = 20 // the number of rows to load each time a request is made
-    
-    const { name: groupName } = props
-
-    const { areaStyle, open } = useSelector(state => state.filterGroup.groups[groupName])
-    const { filterSelection } = useSelector(state => state)
-    const { filterDataset, filterDirection } = useSelector(state => state.filterDirection)
+const CheckboxList = props => {
 
     const dispatch = useDispatch()
 
-    // Fetch the first lot of data when first opened
+    const [firstRender, setFirstRender] = useState(true)
+
+    const { name, dict } = props
+    const { checkBoxList, filterGroup, filterSelection, filterDirection } = useSelector(state => state)
+    const { all_data, filter_data, search, is_serverside, loading, offset, limit, loaded, has_more} = checkBoxList[name]
+    const { last_group_changed } = filterSelection
+
+    const { areaStyle, open } = filterGroup.groups[name]
+    const { filterDataset } = filterDirection
+
+    const [ dataRows, setDataRows ] = useState(null)
+
+    // if the group hasn't been loaded then load the original set of data, if it has, but last_group_changed is different
+    // meaning that changes have occurred in another checkbox list, then reset the offset, which will reload the data
     useEffect(() => {
-        if ( open ) {
-            fetchData()
-        } else {
-            setData({loaded: false, data: []})
+        if ( open && !loaded ){
+            dispatch(setCheckBoxListIsLoading(name))
+        } else if ( open && last_group_changed != name ){
+            dispatch(resetCheckBoxListOffset(name))
         }
+        // open && !loaded && dispatch(setCheckBoxListIsLoading(name))
     }, [open])
 
 
-    const fetchData = () => {
-        setLoading(true)
-        axios
-            .post("/filter-data/", { 
-                                    name: groupName,
-                                    dataset: filterDataset,
-                                    direction: filterDirection,
-                                    input: filterSelection,
-                                    filter: filterVal,
-                                    offset: offset,
-                                    limit: limit
-                })
-            .then(res => {
-                setData({loaded: true, data: [...data.data, ...res.data.data]})
-                setFilterData([...data.data, ...res.data.data])
-                setHasMore(res.data.has_more)
-                // if the requiresInfinityScroll is null then it is the first data load and if hasMore is false then there is no more data to load, 
-                //      hence can filter on the client side. otherwise, filter on the server side.
-                requiresInfinityScroll == null && setRequiresInfinityScroll(hasMore) // only trigger on the first request or on ssfilter
-                setOffset(offset + limit)
-                setLoading(false)
-                })
-            .catch(err => {
-                    dispatch(oversizeListRequest())
-                    setLoading(false)
-                })
-    }
+    // fetch the data to display as the checkbox options
+    useEffect(() => {
+        if ( loading  ) {
+            const { input, related } = filterSelection
+            dispatch(getFilterCheckboxData({name: name, dataset: filterDataset, input: input, related: related, search: search, offset: offset, limit: limit}))
+        }
+    },[loading])
+
+    // If there is a dic included in the props to convert the display values to something else, then this will do the conversion
+    useEffect(() => {
+        if ( dict != undefined ) {
+            setDataRows(filter_data.map(row => {
+                return [row[0],dict[row[1]]]
+            }))
+        } else {
+            setDataRows(filter_data)
+        }
+    },[filter_data])
+
 
     // if there is more data available then load more when the user has scrolled to the bottom of the div.
     const handleScroll = (e) => {
-        if ( hasMore && !loading ) {
+        if ( has_more && !loading ) {
             const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
-            if (scrollHeight - scrollTop === clientHeight) {
-                fetchData()
-            }
+            if (scrollHeight - scrollTop === clientHeight) dispatch(setCheckBoxListIsLoading(name))
         }
     }
 
-    // use debouncing in the filter
+    // update the seach on change
+    const SearchHandler = e => {
+        dispatch(setCheckboxSearch({search: e.target.value, name: name}))
+    }
+
+    // filter list on search, delayed by 400ms.
     useEffect(() => {
         if (!firstRender) {
             const timer = setTimeout(() => {
-                requiresInfinityScroll ? ssFilter() : setFilterData(csFilter())
+                is_serverside 
+                ? dispatch(resetCheckBoxListOffset(name)) // reset offset to trigger serverside data fetch
+                : dispatch(filterCheckBoxListClientSide(name)) // all data has already been collected, so filter data on the clientside
             }, 400);
-        
             return () => clearTimeout(timer);
         }
-    }, [filterVal]);
+    },[search])
 
-    // client side filter if all the rows are returned in the first request
-    const csFilter = () => {
-        const csfilter = data.data.filter(state => {
-            return state[1].toLowerCase().includes(filterVal.toLowerCase());
-        });
-        return csfilter
-    }
-
-    // server side filter if all rows are not returned in the first request
-    const ssFilter = async () => {
-        setOffset(0)
-        setData({loaded: false, data: []})
-        setFilterData([])
-        setSsFilterToggle(!ssFilterToggle)
-    }
-
-    // fetch the data only when ssfiltertoggle has changed. This makes sure the data has been updated before fetching more data.
+    // if the offset is reset back to 0, which is the case of the search changing, and is_serverside then fetch data
     useEffect(() => {
-        if (!firstRender) {
-            fetchData()
-        }
-    },[ssFilterToggle])
+        // !firstRender && is_serverside && offset === 0 && !loading && dispatch(setCheckBoxListIsLoading(name))
+        if ( !firstRender && offset === 0 && !loading ) dispatch(setCheckBoxListIsLoading(name))
+    },[offset])
 
 
     useEffect(() => {
@@ -116,48 +90,43 @@ function CheckboxList (props) {
     },[])
 
     return (
-        <div className={areaStyle} onScroll={handleScroll}>
-            <input className='inputC1 checkboxFilter' type='text' onChange={e => setFilterVal(e.target.value)} value={filterVal} placeholder='Filter' />
-            {data.loaded 
-            ? filterData.map(row => {
-                    return <FilterCheckbox key={row[0]} groupName={groupName} row={row}/>
+        dataRows
+        ? (<div className={`${areaStyle} scrollbar-c1`} onScroll={handleScroll}>
+            <input className='inputC1 checkboxFilter' type='text' onChange={SearchHandler} value={search} placeholder='Filter' />
+            {loaded 
+            ? dataRows.map(row => {
+                    return <FilterCheckbox key={row[0]} groupName={name} row={row}/>
             })
             : <p>Loading...</p> }
-        </div>
+        </div>)
+        : null
     )
-
 }
 
 export default CheckboxList
 
 
+// const CheckboxListInvalid = props => {
+
+//     const dispatch = useDispatch()
+//     const { name } = props
+
+//     dispatch(createCheckListState(name))
+
+//     return null
+// }
 
 
-// function formatFilterData(data){
-//     // const nData = []
-//     // data.forEach(row => {
-//     //     var { pk, name, fname, original, ind } = row
-//     //     if (pk != null){
-//     //         if (fname != null){
-//     //             var name = fname
-//     //         } else if (original != null){
-//     //             var name = original
-//     //         } else if (name == null){
-//     //             var name = pk
-//     //         }
-//     //     } else {
-//     //         if (ind != null){
-//     //             var pk = ind
-//     //             var name = ind
-//     //         } else if (ind != null){
-//     //             var pk = ind
-//     //             var name = ind
-//     //         }
-//     //     }
-//     //     nData.push({pk:pk, name: name})
-//     // })
-//     // setData({loaded: true, data: nData})
-//     // setFilterData(nData)
-//     setData({loaded: true, data: data})
-//     setFilterData(data)
+// function CheckboxList (props) {
+
+//     const { name } = props
+//     const { checkBoxList } = useSelector(state => state)
+//     const check_list_state = checkBoxList[name]
+
+//     // either undefined or last check was not the same 'name'. this will reload it
+//     return (
+//         check_list_state === undefined
+//         ? <CheckboxListInvalid {...props}/>
+//         : <CheckboxListValid {...props}/>
+//     )
 // }

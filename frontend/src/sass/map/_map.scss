@@ -39,13 +39,13 @@
             z-index: 1;
         }
 
-        #filter-toggle {
+        .open-filter-toggle {
             height: 40px;
             width: 40px;
             background-color: $dark-5;
             position: absolute;
             z-index: 2;
-            top: 50%;
+            top: 100px;
             border-top-right-radius: 50%;
             border-bottom-right-radius: 50%;
             cursor: pointer;
@@ -81,28 +81,107 @@
         }
     
         #panel-header {
+            user-select: none;
             position: relative;
             height: 30px;
             display: grid;
-            grid-template-columns: 75% 25%;
+            grid-template-columns: 25% 50% 25%;
                 
-            h1 {
+            .panel-title {
                 margin: 8px 0 0 0;
-                font-size: 1.5em;
-                font-weight: 400;
                 color: $light-2;
+                border-radius: 3px;
+                height: 30px;
+                padding: 3px 15px;
+                margin-top: 6px;
+
+                h1 {
+                    font-size: 1em;
+                    font-weight: 400;
+                    position: absolute;
+                    top: 11px;
+                    left: 50%;
+                    transform: translate(-50%,0);
+                }
             }
 
-            div {
+
+            .filter-toggle {
+                transform: scale(-1, 1);
+                width: 60px;
+                background-color: $dark-7;
+                margin-top: 6px;
+                border-radius: 3px;
+                color: $light-4;
+                padding: 0px 18px;
+                font-weight: bold;
+                font-size: 1.2em;
+                position: relative;
+                border: 1px solid $dark-7;
+
+                span {
+                    position: absolute;
+                    top: 2px;
+                }
+
+                &:hover {
+                    color: $light-2;
+                    border: 1px solid $dark-6;
+                }
+            }
+
+            .header-icons {
                 position: absolute;
                 right: 0;
-            }
-        
-            button {
-                margin-top: 5px;
-                margin-left: 5px;
-                width: 80px;
-                height: 30px;
+
+                div {
+                    position: relative;
+                    display: inline-block;
+
+                    span {
+                        color: $light-3;
+                        font-size: 1.3em;
+                        margin-left: 12px;
+                        margin-top: 6px;
+                        background-color: $dark-7;
+                        padding: 3px;
+                        border: 1px solid $dark-7;
+                        border-radius: 3px;
+                        
+                        &:hover {
+                            color: $light-2;
+                            border: 1px solid $dark-6;
+                        }
+                    }
+    
+                    div {
+                        position: absolute;
+                        width: 150px;
+                        top: 36px;
+                        left: 5px;
+                        z-index: 10;
+
+                        div:first-of-type {
+                            height: 0;
+                            width: 0;
+                            margin-left: 5px;
+                            border: 10px solid $light-2;
+                            border-top: none;
+                            border-left-color: transparent;
+                            border-right-color: transparent;
+                            top: 0;
+                        }
+
+                        div:last-of-type {
+                            top: 10px;
+                            width: auto;
+                            background-color: $light-2;
+                            border-radius: 3px;
+                            padding: 5px 10px;
+                            font-size: 0.8em;
+                        }
+                    }
+                }
             }
         
         }
@@ -141,23 +220,13 @@
             float: left;
             width: 95%;
             height: calc(100% - 80px);
-
-            .filterGroupBtn {
-                height: 28px !important;
-                font-size: 0.9em;
-                border-bottom-width: 2px;
-
-                label {
-                    margin-left: 30px !important;
-                }
-            }
         
             .filterSubGroupArea {
                 position: relative;
                 width: 100%;
                 margin-top: -5px;
                 padding: 0 3px 0 10px;
-                max-height: 230px;
+                max-height: 270px;
                 overflow-y: auto;
 
                 .checkboxFilter {
@@ -168,25 +237,12 @@
         }
         
     
-        #panelFooter {
+        #panel-footer {
+            user-select: none;
             position: relative;
             margin-top: 10px;
             height: 80px;
             width: 100%;
-    
-            label {
-                color: $light-4;
-                margin-left: 10px;
-                cursor: pointer;
-
-                &:hover {
-                    color: $light-2;
-                }
-            }
-
-            input {
-                cursor: pointer;
-            }
     
             #filterSubmitBtn {
                 float: right;
@@ -195,8 +251,9 @@
             button {
                 float: left;
                 margin: 5px 20px 0 0;
-                height: 35px;
+                height: 30px;
                 width: 120px;
+                font-size: 0.9em;
             }
         }
     
@@ -216,9 +273,10 @@
 }
 
 
-#drawSubArea {
+#draw-sub-area {
 
     button {
+        width: 155px;
         margin: 10px 10px 0 0;
         padding: 3px 10px;
         font-size: 0.8em;
@@ -229,6 +287,7 @@
     }
 
     h3 {
+        user-select: none;
         color: $light-2;
         font-size: 0.9em;
         margin: 10px 0 5px 0;
@@ -237,12 +296,15 @@
 }
 
 
-
-.filterGroupBtn {
-    height: 32px !important;
+// group & sub group buttons in the filter
+.filter-grp-btn-pri,
+.filter-grp-btn-sec {
+    user-select: none;
+    height: 32px;
     width: calc(100% - 2px);
 
     label {
+        font-size: 0.95em;
         margin-left: 20px;
     }
 
@@ -253,4 +315,18 @@
         margin-right: 10px;
     }
 
+}
+
+.filter-grp-btn-sec {
+    height: 28px;
+
+    label {
+        font-size: 0.85em;
+        margin-left: 30px;
+        position: absolute;
+    }
+
+    span {
+        font-size: 0.9em;
+    }
 }

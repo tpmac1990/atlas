@@ -9,9 +9,9 @@ function DateSubArea(props) {
     const { areaStyle, opened, open } = useSelector(state => state.filterGroup.groups[name])
 
     const dateTypes = [
-        {name: 'lodgedate', display: 'Lodge Date:'}, 
-        {name: 'startdate', display: 'Start Date:'},
-        {name: 'enddate', display: 'End Date:'},
+        {name: 'lodge', display: 'Lodge Date:'}, 
+        {name: 'start', display: 'Start Date:'},
+        {name: 'end', display: 'End Date:'},
         ]
 
     const dateGroups = dateTypes.map(dic => {

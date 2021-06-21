@@ -32,7 +32,7 @@ function Control() {
 
     return (
         <div id='ctrlBar'>
-            <div className='radiobarStyle1 radiobarSize1'>
+            <div className='radiobar-c1 radiobar-s1'>
                 { datasets }
             </div>
         </div>

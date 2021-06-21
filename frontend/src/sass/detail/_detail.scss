@@ -2,6 +2,7 @@
 
 
 #detail-header {
+    user-select: none;
     height: 50px;
     background-color: $light-1;
     box-shadow: 0 1px 4px $dark-4;
@@ -19,19 +20,64 @@
             font-weight: 500;
 
             &:hover {
-                border-bottom: 3px solid #14a5ff;
+                border-bottom: 3px solid $blue-12;
             }
         }
     }
 }
 
 #detail-groups {
-    // background-color: lightblue;
     height: calc(100vh - 90px);
     margin: 15px 100px;
     padding-bottom: 50px;
 
+    // this is just the note in the SubHomeDetail component
+    h6 {
+        margin: 30px 20px;
+        color: $dark-4;
+    }
+
+    .add-holder {
+        margin-top: 15px;
+        margin-top: 0;
+
+        div:first-child {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 5px;
+
+            div {
+                width: 300px;
+                float: left;
+                margin-right: 20px;
+    
+                input, select {
+                    width: 100%;
+                    height: 33px;
+                    padding-left: 10px;
+                }
+    
+                label {
+                    margin-bottom: 4px;
+                }
+            }
+        }
+
+        button {
+            height: 35px;
+            width: 100px;
+            margin-right: 20px;
+        }
+
+        a {
+            font-size: 0.9em;
+            top: 9px;
+            position: relative;
+        }
+    }
+
     .header-c1 {
+        user-select: none;
         margin-bottom: 10px;
     }
 
@@ -55,8 +101,33 @@
 
                 &:focus {
                     outline: none;
-                    border-color: #3ab4ff;
+                    border-color: $blue-11;
                 }
+            }
+        }
+
+        // controls the height and width of the child infinity box
+        .holder-infinity,
+        .ind-infinity {
+            width: 500px;
+            height: 38px;
+            float:left;
+        }
+
+        .ind-infinity{
+            width: 300px;
+        }
+
+        .link-add-value {
+            font-size: 0.8em;
+            float: left;
+            bottom: 0;
+            height: 100%;
+            margin-left: 20px;
+
+            a {
+                position: absolute;
+                top: 50%;
             }
         }
 
@@ -72,6 +143,18 @@
         h5 {
             font-style: italic;
             margin: 20px 40px;
+        }
+
+        .detail-title {
+            height: 50px;
+
+            h2 {
+                float: left;
+            }
+
+            div {
+                float: right;
+            }
         }
 
 

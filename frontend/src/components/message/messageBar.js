@@ -1,41 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { resetPopupMessage } from '../../redux'
 
-export default function ErrorBar() {
+export default function MessageBar() {
 
-    const { message, type, trigger } = useSelector(state => state.messageHandler.map_page)
+    const { type, message, style, trigger } = useSelector(state => state.messageHandler)
 
-    const [ visibility, setVisibilty ] = useState('hideEle')
+    const dispatch = useDispatch()
 
-    const firstUpdate = useRef(true);
+    const [ visibility, setVisibilty ] = useState(false)
+
+    // if trigger is true then show the message bar with the message passed in
     useEffect(() => {
-        if (firstUpdate.current) {
-            firstUpdate.current = false;
-            return;
+        if ( trigger ){
+            setVisibilty(true)
+            setTimeout(() => {
+                setVisibilty(false)
+                dispatch(resetPopupMessage())
+            }, 4000)
         }
-        setVisibilty('showEleGrid')
-        setTimeout(() => {
-            setVisibilty('hideEle')
-        }, 4000)
     },[trigger])
 
+    // hide the message bar & reset the state of the message bar so it will work again if the same button is clicked again
     function clickHandler(){
-        setVisibilty('hideEle')
+        setVisibilty(false)
+        dispatch(resetPopupMessage())
     }
 
-    if ( type == 'error' ){
-        var style = `${visibility} error-c1`
-        var icon = 'close'
-    } else {
-        var style = `${visibility} success-c1`
-        var icon = 'check'
+    // determines the icon to use by the type 'error', 'success', 'warning' passed
+    const dic = {
+        error: 'close',
+        success: 'check',
+        warning: 'warning_amber'
     }
 
     return (
-        <div id='messageBar' className={style}>
-            <div><span className="material-icons">{icon}</span></div>
-            <div><label>{message}</label></div>
-            <div><span onClick={clickHandler}>x</span></div>
-        </div>
-    )
+            visibility
+            ? ( <div className={style} >
+                    <div><span className="material-icons">{dic[type]}</span></div>
+                    <div><label>{message}</label></div>
+                    <div className='close-c1' onClick={clickHandler}><span>x</span></div>
+                </div> )
+            : null
+        )
 }

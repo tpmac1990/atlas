@@ -14,14 +14,14 @@ function TenementFilter () {
     return (
         <Fragment>
             <LocationGroup />
-            <TypeGroup />
-            <StatusGroup />
-            <MaterialGroup />
+            <TypeGroup groupList={['typesimple','typedetail']} name={'type'} />
+            <StatusGroup groupList={['statussimple','statusdetail']} name={'status'} />
+            <MaterialGroup groupList={['materialcategory','materialname']} name={'material'} />
             <HolderGroup />
             <DateGroup />
             <IDGroup />
-            <UpdateGroup name='addition' />
-            <UpdateGroup name='inactive' />
+            <UpdateGroup name='addition' title='Title Additions Dates' />
+            {/* <UpdateGroup name='inactive' title='Title deactivation Dates' /> */}
             <ChangeUpdateGroup />
         </Fragment>
     )

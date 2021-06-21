@@ -1,3 +1,6 @@
 export const SET_FILTER_VALUES = 'SET_FILTER_VALUES'
 export const TRIGGER_ELEMENT = 'TRIGGER_ELEMENT'
 export const SET_DATA = 'SET_DATA'
+export const IS_INFINITY_TABLE = 'IS_INFINITY_TABLE'
+export const CLEAR_DATA = 'CLEAR_DATA'
+// export const RESET_OFFSET = 'RESET_OFFSET'

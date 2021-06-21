@@ -8,9 +8,9 @@ export default function RelatedOccurrences() {
     return (
         <Fragment>
             <RelatedFilterHeader header='Related Sites' />
-            <TypeGroup />
-            <StatusGroup />
-            <MaterialGroup />
+            <TypeGroup groupList={['typesimplerelated','typedetailrelated']} name={'typerelated'} />
+            <StatusGroup groupList={['statussimplerelated','statusdetailrelated']} name={'statusrelated'} />
+            <MaterialGroup groupList={['materialcategoryrelated','materialnamerelated']} name={'materialrelated'} />
         </Fragment>
     )
 }

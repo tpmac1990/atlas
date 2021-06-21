@@ -13,12 +13,29 @@ export const getHolderData = id => dispatch => {
                 });
             })
         .catch(err => {
-                dispatch({
-                    type: DETAIL_INCORRECT_COUNT,
-                });
+            console.log(err)
+                // dispatch({
+                //     type: DETAIL_INCORRECT_COUNT,
+                // });
             });
 }
 
+
+// export const getHolderDataSimple = id => dispatch => {
+//     axios
+//         .get(`/detail-holder-simple/${id}/`)
+//         .then(res => {
+//                 dispatch({
+//                     type: SET_HOLDER_DATA,
+//                     payload: res.data
+//                 });
+//             })
+//         .catch(err => {
+//                 dispatch({
+//                     type: DETAIL_INCORRECT_COUNT,
+//                 });
+//             });
+// }
 
 export const getSiteData = id => dispatch => {
     axios
@@ -30,9 +47,10 @@ export const getSiteData = id => dispatch => {
                 });
             })
         .catch(err => {
-                dispatch({
-                    type: DETAIL_INCORRECT_COUNT,
-                });
+            console.log(err)
+                // dispatch({
+                //     type: DETAIL_INCORRECT_COUNT,
+                // });
             });
 }
 
@@ -47,12 +65,10 @@ export const getTitleData = id => dispatch => {
                 });
             })
         .catch(err => {
-                dispatch({
-                    type: DETAIL_INCORRECT_COUNT,
-                });
+            console.log(err)
+                // dispatch({
+                //     type: DETAIL_INCORRECT_COUNT,
+                // });
             });
 }
-
-
-
 

@@ -1,8 +1,8 @@
 @import '../variables';
 
-#relatedDataComp {
+#related-data-comp {
     position: absolute;
-    height: 100%;
+    height: calc(100% + 2px);
     width: 100%;
     background-color: $dark-5;
     z-index: 1;
@@ -13,21 +13,23 @@
     }
 
     h2 {
+        user-select: none;
         margin: 0;
-        font-size: 1.2em;
+        font-size: 1em;
         font-weight: 100;
         color: $light-3;
     }
 
     hr {
-        margin-top: 6px;
-        border-top: 0.5px dashed $dark-4;
+        margin-top: 10px;
+        border-top: 0.5px solid $dark-6;
     }
 
-    .filterGroupBtn {
-        height: 35px;
-        width: calc(100% - 2px);
-    }
+    // .filterGroupBtn {
+    //     font-size: 0.9em;
+    //     height: 35px;
+    //     width: calc(100% - 2px);
+    // }
 
 }
 

@@ -1,5 +1,8 @@
 import { SET_SPATIAL_DATA, SPATIAL_DATA_REF, SET_MAP, TOGGLE_FILTER_PANEL } from './spatialDataType'
 
+
+// moved this all to the filterSelection to make it easier to implement the infinity data load for the geospatial data
+
 const initialState = {
     occs: {features : []},
     // tens: {type:"FeatureCollection",crs:{},features:[]},

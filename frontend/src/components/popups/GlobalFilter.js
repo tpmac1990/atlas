@@ -6,7 +6,7 @@ const GlobalFilter = ({ filter, setFilter }) => {
     const [value, setValue] = useState(filter)
     const onChange = useAsyncDebounce(value => {
         setFilter(value || undefined)
-    }, 1000)
+    }, 500)
     return (
         <input
             className='input-c2'

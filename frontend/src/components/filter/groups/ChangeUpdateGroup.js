@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import CheckboxListEdit from '../elements/CheckboxListEdit'
+import CheckboxList from '../elements/CheckboxList'
 import GroupButton from '../elements/GroupButton'
 import BetweenDates from '../elements/BetweenDates'
 import { useSelector } from 'react-redux'
@@ -10,18 +10,18 @@ export default function UpdateGroup() {
     
     // provides a display name for the change types that are stored in the db. TenementChange and OccurrenceChange are the two relevant tables.
     const dict = {'lodgedateval':'Lodge Date','startdateval':'Start Date','enddateval':'End Date',
-            'holderval_id':'Holder','ind_id':'Index','majmatval_id':'Major Material',
-            'minmatval_id':'Minor Material','oidval_id':'Original ID','statusval_id':'Status','typeval_id':'Type',
-            'nameval_id':'Name'}  
+            'holderval':'Holder','majmatval':'Major Material',
+            'minmatval':'Minor Material','oidval':"Related ID's",'statusval':'Status','typeval':'Type',
+            'nameval':'Name','geoprovinceval':'Geological Province','holderperc':'Holder Percentage','sizeval':'Size'}  
 
     return (
         <Fragment>
             <GroupButton name='changeupdate' />
             <div className={areaStyle}>
                 <GroupButton name='changedate' />
-                <BetweenDates name='change' />
+                <BetweenDates name='change' title='Changes Dates' />
                 <GroupButton name='changegroup' />
-                <CheckboxListEdit name='changegroup' dict={dict} />
+                <CheckboxList name='changegroup' dict={dict} />
             </div>
         </Fragment>
     )

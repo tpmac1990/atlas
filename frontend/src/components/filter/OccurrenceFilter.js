@@ -13,12 +13,12 @@ function OccurrenceFilter () {
     return (
         <div className='full'>
             <LocationGroup />
-            <TypeGroup />
-            <StatusGroup />
-            <MaterialGroup />
+            <TypeGroup groupList={['typesimple','typedetail']} name={'type'} />
+            <StatusGroup groupList={['statussimple','statusdetail']} name={'status'} />
+            <MaterialGroup groupList={['materialcategory','materialname']} name={'material'} />
             <NameGroup />
             <IDGroup />
-            <UpdateGroup name='addition' />
+            <UpdateGroup name='addition' title='Site Additions Dates' />
             <ChangeUpdateGroup />
         </div>
     )

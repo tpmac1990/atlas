@@ -1,61 +1,204 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+
+import { closeAllGroups, storeSpatialData, 
+    toggleRelatedFilter, includeRelatedData, resetFilterControl, 
+    resetFilterSelection, resetFilterGroupState, setFilterValues, 
+    triggerElement, toggleFullScreenInactive, 
+    resetMapDataOffset, setMapIsLoading, toggleFilterPanel, setPopupMessage, setMapNotLoading, setDataLimit,
+    updateActiveFilters } from '../../redux'
+
+import { updateFilterList } from './filterLists'
+
+// import { formatForCheckboxList } from './functions/formatFilterSelection'
 import Control from './Control'
 import RelatedData from './RelatedData'
 import FilterGroups from './FilterGroups'
-import { useDispatch, useSelector } from 'react-redux'
-import { closeAllGroups, controlSelectionError, storeSpatialData, 
-    toggleRelatedFilter, includeRelatedData, resetFilterControl, 
-    resetFilterSelection, resetFilterGroupState, setFilterValues, 
-    triggerElement, callNoDataSelectedError, toggleFullScreenInactive } from '../../redux'
+
+
+const TooltipC1 = props => {
+     return (
+        <div>
+            <div></div>
+            <div>{props.msg}</div>
+        </div>
+     )
+}
+
+// The 'clear filter' & 'display data in table form' icon buttons at the top of the panel and their tooltips
+const IconBtn = props => {
+
+    const { clickHandler, iconStyle, tooltip } = props
+
+    const [ show, setShow ] = useState(false)
+    const [ delayHandler, setDelayHandler ] = useState(null)
+
+    const handleMouseEnter = () => {
+        setDelayHandler(setTimeout(() => {
+            setShow(true)
+        }, 500))
+    }
+
+    const handleMouseLeave = () => {
+        clearTimeout(delayHandler)
+        setShow(false)
+    }
+
+    return (
+        <div>
+            <span className="material-icons" onClick={clickHandler} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >{iconStyle}</span>
+            { show
+            ? <TooltipC1 msg={tooltip} />
+            : null }
+        </div>
+    )
+}
+
+
+const FilterToggle = () => {
+
+    const dispatch = useDispatch()
+
+    const filterToggleHandler = () => {
+        dispatch(toggleFilterPanel())
+    }
+
+    return (
+        <div className='filter-toggle' onClick={filterToggleHandler}>
+            <span className="material-icons">double_arrow</span>
+        </div>
+    )
+}
+
 
 
 function Panel () {
 
-    const { filterSelection, spatialData, leafletDraw } = useSelector(state => state)
+    const { filterSelection, leafletDraw } = useSelector(state => state)
     // const { filterDataset, filterDirection } = useSelector(state => state.filterDirection)
     const { filterDataset } = useSelector(state => state.filterDirection)
-    const { includeRelated, relatedOpen } = filterSelection
-    const { filteropen, occs, tens } = spatialData
+    // const { includeRelated, relatedOpen, filteropen, occs, tens } = filterSelection
+    const { map_data, related, input, map_infinity, last_group_changed, active_filters } = filterSelection
+    const { primary: pri_filters, related: rel_filters } = active_filters
+    const { offset, limit, loading } = map_infinity
+    const { filteropen, occs, tens } = map_data
+    const { include, is_open } = related
+    // const { filteropen, occs, tens } = spatialData
     const { editHandlers } = leafletDraw
-    const { titles, sites } = useSelector(state => state.popupTable)
+    // const { titles, sites } = useSelector(state => state.popupTable)
 
-    const relBtnStyle = includeRelated ? 'btn-c1 showEle' : 'btn-c1 hideEle'
+    const relBtnStyle = include ? 'btn-c1 showEle' : 'btn-c1 hideEle'
     const panelStyle = filteropen ? 'showPanel' : 'hidePanel'
 
     const [tableSelect, setTableSelect] = useState(false)
 
     const dispatch = useDispatch()
 
-    function submitHandler() {
-        if ( filterDataset != '' ) {
-            const name = filterDataset == 'Tenement' ? 'tens' : 'occs'
-            dispatch(storeSpatialData({ name: name, input: filterSelection, dataset: filterDataset}))
-            try {
-                editHandlers.edit._modes.remove.handler.removeAllLayers()
-            } catch(err){}
+    // calculate and set the data limit by determining the dataset and if related data is included
+    // include: true if related data is also part of the search
+    // related_count: the number of related items to filter for
+    useEffect(() => {
+        let new_limit
+        if (filterDataset === 'Tenement'){
+            new_limit = !include 
+                        ? 400 
+                        : rel_filters.length > 0
+                            ? 250
+                            : 100
         } else {
-            dispatch(controlSelectionError())
+            new_limit = include ? 400 : 600 
+        }
+        dispatch(setDataLimit(new_limit))
+    },[filterDataset,include,rel_filters])
+
+
+    // when a filter is added or removed in either the primary or related filter, this method will find what has changed and update the array of filters
+    //      that are currently applied. This is handled in the 'filterLists' file
+    // These filter arrays inform if and how many filters have been applied, which can be used to restrict users accessing the related filter without first 
+    //      applying a primary filter and in the future could be used to give the user a summary of the filters applied
+    useEffect(() => {
+        if ( last_group_changed !== '' ){
+            const filters = last_group_changed.includes('related') ? rel_filters : pri_filters
+            dispatch(updateActiveFilters(updateFilterList(last_group_changed, input, filters)))
+        }
+    },[input])
+
+    function submitHandler() {
+        // only submit if not loading and a Dataset has been selected (titles or sites)
+        if ( !loading ){
+            if ( filterDataset != '' ) {
+                // Reseting the offset will result in a new set of data, not appending onto existing data
+                dispatch(resetMapDataOffset())
+                // set loading which will trigger the useEffect below that will fetch the geospatial data
+                dispatch(setMapIsLoading())
+            } else {
+                // dispatch(controlSelectionError())
+                dispatch(setPopupMessage({message: "Select 'Titles' Or 'Sites' To Begin Filtering", type: 'warning', style: 'warning-map'}))
+            }
         }
     }
+    // dispatch(setPopupMessage({message: `Site ${msg} Updated Successfully`, type: 'success', style: 'success-edit'}))
+
+    useEffect(() => {
+        // when offset is 0 and loading is true then fetch the geospatial data. This will replace all existing data.
+        if ( offset === 0 && loading ){
+            const name = filterDataset == 'Tenement' ? 'tens' : 'occs'
+            // Do a few checks before sending api
+            let filter_error = false
+            const { id, valid, valid_id, radius } = input.buffer
+            // The id is invalid
+            if ( id.length != 0 && !valid_id ){
+                var msg = `The filtering buffer id '${id}' is not valid`
+                filter_error = true
+            // the id is valid but the radius has not been applied
+            } else if ( !valid && valid_id ) {
+                var msg = `No radius has been applied for the buffering id: '${id}'`
+                filter_error = true
+            }
+
+            // Make api call if there were no error found in the filter
+            if (filter_error){
+                dispatch(setPopupMessage({message: msg, type: 'error', style: 'error-map'}))
+                // no longer going to fetch data, so set loading to false
+                dispatch(setMapNotLoading())
+            } else {
+                dispatch(storeSpatialData({name: name, dataset: filterDataset, input: input, related: related, 
+                    offset: offset, limit: limit, current_extent: null}))
+                try {
+                    editHandlers.edit._modes.remove.handler.removeAllLayers()
+                } catch(err){}
+            }
+        }
+    }, [loading])
 
     function RelationHandler() {
-        dispatch(closeAllGroups())
-        dispatch(toggleRelatedFilter())
+        if ( pri_filters.length === 0 ){
+            dispatch(setPopupMessage({message: "Filter the primary data before trying to filter its related data", type: 'error', style: 'error-map'}))
+        } else {
+            dispatch(closeAllGroups())
+            dispatch(toggleRelatedFilter())
+        }
     }
 
     function AddRelatedHandler(e) {
         if (filterDataset != ''){
             dispatch(includeRelatedData(e.target.checked))
-            relatedOpen && dispatch(toggleRelatedFilter())
+            is_open && dispatch(toggleRelatedFilter())
         } else {
-            dispatch(controlSelectionError())
+            // dispatch(controlSelectionError())
+            dispatch(setPopupMessage({message: "Select 'Titles' Or 'Sites' To Begin Filtering", type: 'warning', style: 'warning-map'}))
         }
     }
 
     function clearHandler() {
+        // if the related filter is open, close it
+        is_open && dispatch(toggleRelatedFilter())
+        // if the 'include related data' is active then deactivate it
+        dispatch(includeRelatedData(false))
         dispatch(resetFilterControl())
         dispatch(resetFilterGroupState())
+        // clear the filter selections and the filter arrays
         dispatch(resetFilterSelection())
     }
 
@@ -76,35 +219,48 @@ function Panel () {
         // If there are ind vals for both titles and sites then display popup box to allow the user to select the data to view.
         const btitle = dict.titles
         const bsites = dict.sites
-        if ( !btitle && !bsites ) {
+        if ( !btitle && !bsites ){
             // popup error message when no data has been selected
-            dispatch(callNoDataSelectedError())
-        } else if ( btitle && bsites ) {
+            // dispatch(callNoDataSelectedError())
+            dispatch(setPopupMessage({message: "Your search has return no data to display", type: 'warning', style: 'warning-map'}))
+        } else if ( btitle && bsites ){
             // makes page inactive before activating the table select popup
-            dispatch(toggleFullScreenInactive())
+            dispatch(toggleFullScreenInactive(true))
             setTableSelect(true)
         } else {
-            // if only one dtaagroup is on the map, then activate the incative page layer and show table
+            // if only one datagroup is on the map, then activate the incative page layer and show table
             const datagroup = btitle ? 'titles' : 'sites'
-            dispatch(toggleFullScreenInactive())
+            dispatch(toggleFullScreenInactive(true))
             dispatch(triggerElement(datagroup))
         }
     }
+
+
+    const list_msg = 'Display the map data in table form'
+    const clear_msg = 'Clear the filter'
 
     const tableSelectStyles = tableSelect ? 'list-dropdown showEle' : 'hideEle'
 
     return (
         <div id='panel' className={panelStyle}>
             <div id='panel-header'>
-                <h1>Data Control</h1>
-                <div>
-                    <button className='btn-c1' onClick={listHandler}>List</button>
-                    <button className='btn-c1' onClick={clearHandler}>Clear</button>
+                <FilterToggle />
+                <div className='panel-title'>
+                    <h1>Data Control</h1>
+                </div>
+                {/* <div className='header-icons'> */}
+                <div className='header-icons'>
+                    <IconBtn clickHandler={listHandler} iconStyle='list' tooltip={list_msg} />
+                    <IconBtn clickHandler={clearHandler} iconStyle='delete_sweep' tooltip={clear_msg} />
+                    {/* <span className="material-icons" onClick={listHandler}>list</span>
+                    <span className="material-icons" onClick={clearHandler}>delete_sweep</span> */}
+                    {/* <button className='btn-c1' onClick={listHandler}>List</button>
+                    <button className='btn-c1' onClick={clearHandler}>Clear</button> */}
                 </div>
             </div>
             <div className={ tableSelectStyles }>
                 {/* link to toggle the inactive page cover and close the datagroup table select popup when both datasets are on the map  */}
-                <Link to='#' onClick={() => {setTableSelect(false);dispatch(toggleFullScreenInactive())}}>x</Link>
+                <Link to='#' onClick={() => {setTableSelect(false);dispatch(toggleFullScreenInactive(false))}}>x</Link>
                 <button className='btn-c2' onClick={() => dispatch(triggerElement('sites'))}>Sites Table</button>
                 <button className='btn-c2' onClick={() => dispatch(triggerElement('titles'))}>Titles Table</button>
             </div>
@@ -112,14 +268,14 @@ function Panel () {
             <div id="filterArea">
                 <RelatedData />
                 <Control />
-                <div id='filter-groups'>
+                <div id='filter-groups' className='scrollbar-c1'>
                     <FilterGroups />
                 </div>
             </div>
-            <div id='panelFooter'>
-                <div>
-                    <input checked={includeRelated} type='checkbox' id='selectRelatedData' onChange={AddRelatedHandler} />
-                    <label htmlFor='selectRelatedData'>Add Related Data to Map?</label><br/>
+            <div id='panel-footer'>
+                <div className='checkbox-c4'>
+                    <input checked={include} type='checkbox' id='selectRelatedData' onChange={AddRelatedHandler} />
+                    <label htmlFor='selectRelatedData'>Combine Related Data</label><br/>
                 </div>
                 <button className={relBtnStyle} onClick={RelationHandler}>Relations</button>
                 <button id='filterSubmitBtn' className='btn-c1' onClick={submitHandler}>Submit</button>

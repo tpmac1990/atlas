@@ -2,6 +2,7 @@
 import { SET_FILTER_DATASET, RESET_FILTER_CONTROL } from './filterDirectionType'
 
 
+// sets the dataset to filter for when selecting between titles or sites.
 export const setFilterDataset = choice => {
     return {
         type: SET_FILTER_DATASET,
@@ -16,6 +17,7 @@ export const setFilterDataset = choice => {
 //     }
 // }
 
+// reset the filter
 export const resetFilterControl = () => {
     return {
         type: RESET_FILTER_CONTROL,

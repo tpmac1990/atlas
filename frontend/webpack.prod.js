@@ -14,7 +14,7 @@ module.exports = merge(common, {
     },
     output: {
         filename: "[name].[contentHash].js",
-        path: path.resolve(__dirname, "../backend/map/static"),
+        path: path.resolve(__dirname, "../backend/gp/static"),
         publicPath: '/static/',
     },
 optimization: {
@@ -27,7 +27,7 @@ optimization: {
         new MiniCssExtractPlugin({ filename: "[name].[contentHash].css"}),
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.resolve(__dirname,'./src/template_prod.html'), to: path.resolve(__dirname,'../backend/map/static/index.html') }
+                { from: path.resolve(__dirname,'./src/template_prod.html'), to: path.resolve(__dirname,'../backend/gp/static/index.html') }
             ]
         })
     ],

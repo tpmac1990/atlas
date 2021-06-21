@@ -1,5 +1,6 @@
 import { PRIMARY_GROUP_OPEN, PRIMARY_GROUP_CLOSE, SECONDARY_GROUP_OPEN, SECONDARY_GROUP_CLOSE, RESET_FILTER_GROUP, CLOSE_ALL_GROUPS } from './filterGroupType'
 
+// manages the opening and closing of filter groups on button click
 
 export const openPrimary = name => {
     return {

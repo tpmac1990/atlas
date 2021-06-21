@@ -16,7 +16,7 @@ export default function UpdateGroup(props) {
             <GroupButton name={group} />
             <div className={areaStyle}>
                 <GroupButton name={subgroup} />
-                <BetweenDates name={name} />
+                <BetweenDates {...props} />
             </div>
         </Fragment>
     )

@@ -5,6 +5,7 @@ import { getTitleData } from '../../../redux';
 import DetailTableC1 from './DetailTableC1';
 import SingleColumnTableC1 from './SingleColumnTableC1';
 import Loading from '../../loading/Loading';
+import { TitleComponent } from './TitleComponent';
 
 
 function SubTitleDetail({ match }){
@@ -73,7 +74,15 @@ function SubTitleDetail({ match }){
         value: value,
         header: "Alternate Source ID's",
         table_data: [
-            {th: "ID's", td: ["oid"], multi: "", format: null},
+            {th: "ID's", td: ["oid"], multi: "code", format: null},
+        ]
+    }
+
+    const ParentsDict = {
+        value: value,
+        header: "Title Holders Parent Companies",
+        table_data: [
+            {th: "Names", td: ["parents"], multi: null, format: null},
         ]
     }
 
@@ -87,18 +96,31 @@ function SubTitleDetail({ match }){
     }
 
 
+    const HoldersDict = {
+        value: value,
+        styles: "detail-sub-info-c1",
+        lookup: "holder",
+        header: "Title Holders",
+        table_headers: ["Name","Percentage Ownership"],
+        table_data: [["name"],["percown"]]
+    }
+
+
+
     if (value == null){
         return <Loading />
     } else {
         return (
             <div className="detail-info-c1">
-                <h2>{ value.ind }</h2>
+                <TitleComponent group='title' title={value.ind} index={value.ind} />
                 <SingleColumnTableC1 dict={DateDict} />
                 <SingleColumnTableC1 dict={LocationDict} />
                 <SingleColumnTableC1 dict={TypeDict} />
                 <SingleColumnTableC1 dict={StatusDict} />
                 <SingleColumnTableC1 dict={MaterialsDict} />
                 <SingleColumnTableC1 dict={AlternateSourceDict} />
+                <SingleColumnTableC1 dict={ParentsDict} />
+                <DetailTableC1 dict={HoldersDict} />
                 <DetailTableC1 dict={RelatedSitesDict} />
             </div>
         )

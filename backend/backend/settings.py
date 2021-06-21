@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework',
     'leaflet',
-    'map',
+    'gp',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "map","static")],
+        'DIRS': [os.path.join(BASE_DIR, "gp","static")],
         # 'DIRS': [os.path.join(PROJECT_DIR, "frontend", "dist")],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -84,7 +84,7 @@ WEBPACK_LOADER = {
             'STATS_FILE': os.path.join(PROJECT_DIR, 'frontend', 'webpack-stats.json'),
             "POLL_INTERVAL": 0.1,
             "TIMEOUT": None,
-            "IGNORE": [".*\.hot-update.js", ".+\.map"]
+            "IGNORE": [".*\.hot-update.js", ".+\.gp"]
         }
 }
 

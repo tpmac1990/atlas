@@ -5,6 +5,7 @@ import { getSiteData } from '../../../redux';
 import DetailTableC1 from './DetailTableC1';
 import SingleColumnTableC1 from './SingleColumnTableC1';
 import Loading from '../../loading/Loading';
+import { TitleComponent } from './TitleComponent';
 
 
 function SubSiteDetail({ match }){
@@ -14,11 +15,13 @@ function SubSiteDetail({ match }){
     const dispatch = useDispatch()
 
     const { site: value } = useSelector(state => state.detailSelection)
+    // console.log(value)
 
     useEffect(() => {
         dispatch(getSiteData(id))    
     }, [id])
 
+    // Setout for a 'DetailTableC1' component. 
     const RelatedTitlesDict = {
         value: value,
         styles: "detail-sub-info-c1",
@@ -32,17 +35,18 @@ function SubSiteDetail({ match }){
         value: value,
         header: "Site Names",
         table_data: [
-            {th: "Names", td: ["name"], multi: "", format: null},
+            {th: "Names", td: ["name"], multi: "name", format: null},
         ]
     }
 
+    // resource size: multi is null meaning there is only one object, all data is in the 'size' key and then we access the value to display with 'name'
     const TypeDict = {
         value: value,
         header: "Site Type",
         table_data: [
             {th: "General Group", td: ["typ"], multi: "simple", format: null},
             {th: "Detailed Group", td: ["typ"], multi: "original", format: null},
-            {th: "Resource Size", td: ["size"], multi: null, format: null},
+            {th: "Resource Size", td: ["size","name"], multi: null, format: null},
         ]
     }
 
@@ -66,6 +70,8 @@ function SubSiteDetail({ match }){
         ]
     }
 
+    // td: the group name
+    // multi: the key name of the value to write when td is an array of data
     const MaterialsDict = {
         value: value,
         header: "Materials",
@@ -79,7 +85,7 @@ function SubSiteDetail({ match }){
         value: value,
         header: "Alternate Source ID's",
         table_data: [
-            {th: "ID's", td: ["oid"], multi: "", format: null},
+            {th: "ID's", td: ["oid"], multi: "code", format: null},
         ]
     }
 
@@ -89,7 +95,7 @@ function SubSiteDetail({ match }){
     } else {
         return (
             <div className="detail-info-c1">
-                <h2>{ value.ind }</h2>
+                <TitleComponent group='site' title={value.ind} index={value.ind} />
                 <SingleColumnTableC1 dict={NameDict} />
                 <SingleColumnTableC1 dict={TypeDict} />
                 <SingleColumnTableC1 dict={StatusDict} />

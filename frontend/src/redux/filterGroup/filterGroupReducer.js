@@ -20,7 +20,7 @@ function createGroups() {
         {group: 'idbuffer', categorya: 'ID', categoryb: [['idtypes', 'ID Types']]},
         {group: 'material', categorya: 'Material', categoryb: [['materialcategory', 'Category'], ['materialname', 'Name']]},
         {group: 'materialrelated', categorya: 'Material', categoryb: [['materialcategoryrelated', 'Category'], ['materialnamerelated', 'Name']]},
-        {group: 'holder', categorya: 'Holder', categoryb: [['holdertype', 'Type'], ['holderposition', 'Position'], ['holdername', 'Name']]},
+        {group: 'holder', categorya: 'Holder', categoryb: [['holderparent','Parent'],['holdertype', 'Type'], ['holdername', 'Name']]},
         {group: 'additionupdate', categorya: 'Addition Update', categoryb: [['additiondate', 'Dates']]},
         {group: 'inactiveupdate', categorya: 'Inactive Update', categoryb: [['inactivedate', 'Dates']]},
         {group: 'changeupdate', categorya: 'Change Update', categoryb: [['changedate', 'Dates'], ['changegroup', 'Change Groups']]},
@@ -47,15 +47,15 @@ const filterGroupReducer = ( state = initialState, action ) => {
     switch(action.type) {
         case PRIMARY_GROUP_OPEN: 
             for (var key in state.groups) {
-                const { category, group, display, open, areaStyle, opened, btnStyle } = state.groups[key]
+                const { category, group } = state.groups[key]
                 if ( key == name ) {
-                    groups[key] = { category : category, group: group, display: display, open: true, areaStyle: 'filterGroupArea showEle', opened: true, btnStyle: btnStyle }
+                    groups[key] = { ...state.groups[key], open: true, areaStyle: 'filterGroupArea showEle', opened: true }
                 } else if ( category == 'a' ) {
-                    groups[key] = { category : category, group: group, display: display, open: open, areaStyle: areaStyle, opened: opened, btnStyle: 'hideEle' }
+                    groups[key] = { ...state.groups[key], btnStyle: 'hideEle' }
                 } else if ( category == 'b' && group == state.groups[name].group ) {
-                    groups[key] = { category : category, group: group, display: display, open: open, areaStyle: areaStyle, opened: opened, btnStyle: 'showEle' }
+                    groups[key] = { ...state.groups[key], btnStyle: 'showEle' }
                 } else {
-                    groups[key] = state.groups[key]
+                    groups[key] = { ...state.groups[key] }
                 }
             }
             return {
@@ -64,15 +64,15 @@ const filterGroupReducer = ( state = initialState, action ) => {
             }
         case PRIMARY_GROUP_CLOSE: 
             for (var key in state.groups) {
-               const { category, group, display, open, areaStyle, opened, btnStyle } = state.groups[key]
+               const { category, group } = state.groups[key]
                 if ( key == name ) {
-                    groups[key] = { category : category, group: group, display: display, open: false, areaStyle: 'hideEle', opened: opened, btnStyle: btnStyle }
+                    groups[key] = { ...state.groups[key], open: false, areaStyle: 'hideEle' }
                 } else if ( category == 'a' ) {
-                    groups[key] = { category : category, group: group, display: display, open: open, areaStyle: areaStyle, opened: opened, btnStyle: 'showEle' }
+                    groups[key] = { ...state.groups[key], btnStyle: 'showEle' }
                 } else if ( category == 'b' && group == state.groups[name].group ) {
-                    groups[key] = { category : category, group: group, display: display, open: false, areaStyle: 'hideEle', opened: opened, btnStyle: 'hideEle' }
+                    groups[key] = { ...state.groups[key], open: false, areaStyle: 'hideEle', btnStyle: 'hideEle' }
                 } else {
-                    groups[key] = state.groups[key]
+                    groups[key] = { ...state.groups[key] }
                 }
             }
             return {
@@ -81,13 +81,13 @@ const filterGroupReducer = ( state = initialState, action ) => {
             }
         case SECONDARY_GROUP_OPEN: 
             for (var key in state.groups) {
-                const { category, group, display, open, areaStyle, opened, btnStyle } = state.groups[key]
+                const { category, group } = state.groups[key]
                 if ( key == name ) {
-                    groups[key] = { category : category, group: group, display: display, open: true, areaStyle: 'filterSubGroupArea showEle', opened: true, btnStyle: btnStyle }
+                    groups[key] = { ...state.groups[key], open: true, areaStyle: 'filterSubGroupArea showEle', opened: true }
                 } else if ( category == 'b' && group == state.groups[name].group ) {
-                    groups[key] = { category : category, group: group, display: display, open: open, areaStyle: areaStyle, opened: opened, btnStyle: 'hideEle' }
+                    groups[key] = { ...state.groups[key], btnStyle: 'hideEle' }
                 } else {
-                    groups[key] = state.groups[key]
+                    groups[key] = { ...state.groups[key] }
                 }
             }
             return {
@@ -96,13 +96,13 @@ const filterGroupReducer = ( state = initialState, action ) => {
             }
         case SECONDARY_GROUP_CLOSE: 
             for (var key in state.groups) {
-               const { category, group, display, open, areaStyle, opened, btnStyle } = state.groups[key]
+               const { category, group } = state.groups[key]
                 if ( key == name ) {
-                    groups[key] = { category : category, group: group, display: display, open: false, areaStyle: 'hideEle', opened: opened, btnStyle: btnStyle }
+                    groups[key] = { ...state.groups[key], open: false, areaStyle: 'hideEle' }
                 } else if ( category == 'b' && group == state.groups[name].group ) {
-                    groups[key] = { category : category, group: group, display: display, open: open, areaStyle: areaStyle, opened: opened, btnStyle: 'showEle' }
+                    groups[key] = { ...state.groups[key], btnStyle: 'showEle' }
                 } else {
-                    groups[key] = state.groups[key]
+                    groups[key] = { ...state.groups[key] }
                 }
             }
             return {
@@ -111,13 +111,13 @@ const filterGroupReducer = ( state = initialState, action ) => {
             }
         case CLOSE_ALL_GROUPS:
             for (var key in state.groups) {
-                const { category, group, display, opened } = state.groups[key]
+                const { category } = state.groups[key]
                 if ( category == 'a' ) {
-                    groups[key] = { category : category, group: group, display: display, open: false, areaStyle: 'hideEle', opened: opened, btnStyle: 'showEle' }
+                    groups[key] = { ...state.groups[key], open: false, areaStyle: 'hideEle', btnStyle: 'showEle' }
                 } else if ( category == 'b' ) {
-                    groups[key] = { category : category, group: group, display: display, open: false, areaStyle: 'hideEle', opened: opened, btnStyle: 'hideEle' }
+                    groups[key] = { ...state.groups[key], open: false, areaStyle: 'hideEle', btnStyle: 'hideEle' }
                 } else {
-                    groups[key] = state.groups[key]
+                    groups[key] = { ...state.groups[key] }
                 }
              }
             return {

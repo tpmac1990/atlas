@@ -1,0 +1,186 @@
+{
+    "Tenement": {
+        "ausstate": {
+            "model": "State",
+            "query": "state_tenement__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "region": {
+            "model": "GovernmentRegion",
+            "query": "govregion_tenement__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "local": {
+            "model": "LocalGovernment",
+            "query": "localgov_tenement__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "province": {
+            "model": "GeologicalProvince",
+            "query": "geoprovince_tenement__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "typesimple": {
+            "model": "TenTypeSimp",
+            "query": "simple_tentype__typ_tenement__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "typedetail": {
+            "model": "TenType",
+            "query": "typ_tenement__in",
+            "values": ["pk", "fname"],
+            "order_by": "fname"
+        },
+        "statussimple": {
+            "model": "TenStatusSimp",
+            "query": "simple_tenstatus__status_tenement__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "statusdetail": {
+            "model": "TenStatus",
+            "query": "status_tenement__in",
+            "values": ["pk", "original"],
+            "order_by": "original"
+        },
+        "givenids": {
+            "model": "TenOriginalID",
+            "query": "oid_tenement__in",
+            "values": ["pk"],
+            "order_by": "pk"
+        },
+        "newids": {
+            "model": "Tenement",
+            "query": "ind__in",
+            "values": ["ind"],
+            "order_by": "ind"
+        },
+        "materialcategory": {
+            "model": "MaterialCategory",
+            "query": "category_material__majmat_tenement__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "materialname": {
+            "model": "Material",
+            "query": "majmat_tenement__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "holderparent": {
+            "model": "Holder",
+            "query": "name_parent__child__holder_tenement__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "holdertype": {
+            "model": "HolderType",
+            "query": "typ_holder__holder_tenement__in",
+            "values": ["pk","original"],
+            "order_by": "original"
+        },
+        "holdername": {
+            "model": "Holder",
+            "query": "holder_tenement__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "changegroup": {
+            "model": "TenementChange",
+            "query": "ind__in",
+            "values": ["field"],
+            "order_by": "field"
+        }
+    },
+    "Occurrence": {
+        "ausstate": {
+            "model": "State",
+            "query": "state_occurrence__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "region": {
+            "model": "GovernmentRegion",
+            "query": "govregion_occurrence__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "local": {
+            "model": "LocalGovernment",
+            "query": "localgov_occurrence__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "province": {
+            "model": "GeologicalProvince",
+            "query": "geoprovince_occurrence__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "typesimple": {
+            "model": "OccTypeSimp",
+            "query": "simple_occtype__typ_occurrence__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "typedetail": {
+            "model": "OccType",
+            "query": "typ_occurrence__in",
+            "values": ["pk", "original"],
+            "order_by": "original"
+        },
+        "statussimple": {
+            "model": "OccStatusSimp",
+            "query": "simple_occstatus__status_occurrence__in",
+            "values": ["pk", "name"],
+            "order_by": "name"
+        },
+        "statusdetail": {
+            "model": "OccStatus",
+            "query": "status_occurrence__in",
+            "values": ["pk", "original"],
+            "order_by": "original"
+        },
+        "givenids": {
+            "model": "OccOriginalID",
+            "query": "oid_occurrence__in",
+            "values": ["pk"],
+            "order_by": "pk"
+        },
+        "newids": {
+            "model": "Occurrence",
+            "query": "ind__in",
+            "values": ["ind"],
+            "order_by": "ind"
+        },
+        "materialcategory": {
+            "model": "MaterialCategory",
+            "query": "category_material__majmat_occurrence__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "materialname": {
+            "model": "Material",
+            "query": "majmat_occurrence__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "occurrencename": {
+            "model": "OccName",
+            "query": "name_occurrence__in",
+            "values": ["pk","name"],
+            "order_by": "name"
+        },
+        "changegroup": {
+            "model": "OccurrenceChange",
+            "query": "ind__in",
+            "values": ["field"],
+            "order_by": "field"
+        }
+    }
+}

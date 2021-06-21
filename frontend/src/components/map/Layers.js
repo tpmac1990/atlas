@@ -1,13 +1,31 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Marker, Popup, TileLayer, Circle, FeatureGroup, LayerGroup, LayersControl, Rectangle, GeoJSON, LeafletConsumer } from 'react-leaflet'
 import PointsLayer from './PointsLayer'
 import PolygonLayer from './PolygonLayer'
+import { useHistory } from "react-router-dom";
+import { Route, Link, useRouteMatch } from "react-router-dom";
 
 
 const { BaseLayer, Overlay } = LayersControl
 
-export default class Layers extends Component {
-  render() {
+const Layers = () => {
+
+    let history = useHistory();
+    let { path, url } = useRouteMatch();
+
+    // DOM clickevent to navigate to the detail page from the popup button
+    useEffect(() => {
+        document.body.addEventListener('click', navigateToDetail );
+
+        return function cleanup() {
+            window.removeEventListener('click', navigateToDetail );
+        } 
+    },[]);
+
+    const navigateToDetail = e => {
+        e.target.id == 'popup-click-event' && history.push(`/detail/${e.target.value}`)
+    }
+
     return (
         <Fragment>
             <LayersControl position="topright">
@@ -17,12 +35,12 @@ export default class Layers extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                 </BaseLayer>
-                <BaseLayer name="World Street Map">
+                {/* <BaseLayer name="World Street Map">
                     <TileLayer
                     attribution='Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
                     url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
                     />
-                </BaseLayer>
+                </BaseLayer> */}
                 <BaseLayer name="World Topo Map">
                     <TileLayer
                     attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
@@ -44,7 +62,8 @@ export default class Layers extends Component {
             </LayersControl>
         </Fragment>
     )
-  }
 }
 
 
+
+export default Layers

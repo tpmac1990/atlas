@@ -5,10 +5,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Header from './layout/header';
 import Loading from './loading/Loading';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from '../redux/store';
 import checkRequests from "./HOC/CheckRequests";
-
 import MapContent from './map/MapContent';
 import { PopupTable } from './popups/PopupTable';
 import { CoverInactive } from './popups/CoverInactive';
@@ -17,11 +16,18 @@ import { CoverInactive } from './popups/CoverInactive';
 const Attribution = lazy(() => import('./attributions/Attribution'));
 const HomeDetail = lazy (() => import('./detail/HomeDetail'))
 const Page404 = lazy (() => import('./errors/Page404'))
+const Page503 = lazy (() => import('./errors/Page503'))
+const Feedback = lazy (() => import('./userinput/Feedback'))
+const EmailDrop = lazy (() => import('./userinput/EmailDrop'))
 
 
 const SubApp = () => {
+
+    const { is_active } = useSelector(state => state.popupTable)
+    const style = is_active ? 'no-overflow' : ''
+
     return (
-        <Fragment>
+        <div className={style}>
             <PopupTable />
             <CoverInactive /> 
             <Header />
@@ -30,10 +36,13 @@ const SubApp = () => {
                     <Route exact path="/" component={MapContent} />
                     <Route exact path="/attribution" component={Attribution} />
                     <Route path="/detail" component={HomeDetail} />
+                    <Route path="/feedback" component={Feedback} />
+                    <Route path="/stayposted" component={EmailDrop} />
                     <Route path="/404" component={Page404} />
+                    <Route path="/503" component={Page503} />
                 </Switch>
             </Suspense>
-        </Fragment>
+        </div>
     )
 }
 

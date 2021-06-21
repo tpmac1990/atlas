@@ -1,17 +1,68 @@
 @import '../variables';
 
 #navbar {
+    user-select: none;
     position: relative;
     height: 60px;
     z-index: 5;
     background-color: $dark-3;
     border-bottom: 1px solid $dark-4;
     box-shadow: 0 1px 5px $dark-4;
+    font-size: 0.8em;
 
-    ul {
+    .burger {
+        position: absolute;
+        margin-left: 15px;
+        top: 11px;
+
+        span {
+            color: $light-2;
+            padding: 3px 6px;
+            font-size: 2.2em;
+            font-weight: 100;
+            border: 1px solid $dark-7;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: $dark-7;
+
+            &:hover {
+                border: 1px solid $dark-6;
+                color: $light-1;
+            }
+        }
+    }
+
+    // ## for phone/tablet
+    .ul-mobile {
+        position: absolute;
+        height: auto;
+        width: 400px;
+        background-color: $dark-3;
+        top: 60px;
+        padding: 15px 0;
+        font-size: 1.1em;
+
+        li {
+            a {
+                display: block;
+                padding: 5px 0 5px 30px;
+                color: $light-2;
+                text-decoration: none;
+                width: 100%;
+
+                &:hover {
+                    color: $light-1;
+                    background-color: $dark-7;
+                }
+            }
+        }
+    }
+
+    // ## for desktop
+    .ul-desktop {
         position: relative;
         display: inline-block;
-        top: 24px;
+        top: 29px;
         padding-left: 20px;
         padding-right: 20px;
 
@@ -36,9 +87,9 @@
             }
         }
 
-        &:last-of-type{
-            float: right;
-        }
+        // &:last-of-type{
+        //     float: right;
+        // }
     }
 
     img {

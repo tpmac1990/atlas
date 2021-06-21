@@ -4,25 +4,27 @@ import { useSelector } from 'react-redux'
 import CheckboxList from '../elements/CheckboxList'
 
 
-function TypeGroup (props) {
+function StatusGroup (props) {
+
+    const { groupList, name } = props
 
     const items = useSelector(state => state.filterGroup.groups)
 
-    const { relatedOpen } = useSelector(state => state.filterSelection)
+    // const { is_open } = useSelector(state => state.filterSelection.related)
 
-    if ( relatedOpen ) {
-        var checkboxGroupList = ['statussimplerelated','statusdetailrelated']
-        // var style = items.statusrelated.areaStyle
-        var name = 'statusrelated'
-    } else {
-        var checkboxGroupList = ['statussimple','statusdetail']
-        // var style = items.status.areaStyle
-        var name = 'status'
-    }
+    // if ( is_open ) {
+    //     var checkboxGroupList = ['statussimplerelated','statusdetailrelated']
+    //     // var style = items.statusrelated.areaStyle
+    //     var name = 'statusrelated'
+    // } else {
+    //     var checkboxGroupList = ['statussimple','statusdetail']
+    //     // var style = items.status.areaStyle
+    //     var name = 'status'
+    // }
 
     const style = items[name].areaStyle
 
-    const checkboxGroups = checkboxGroupList.map(group => {
+    const checkboxGroups = groupList.map(group => {
         return (
             <Fragment key={group}>
                 <GroupButton name={group} />
@@ -41,4 +43,4 @@ function TypeGroup (props) {
     )
 }
 
-export default TypeGroup
+export default StatusGroup

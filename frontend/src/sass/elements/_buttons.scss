@@ -75,6 +75,21 @@
     }
 }
 
+.btn-c6 {
+    border: 2px solid $light-2;
+    background-color: $light-1;
+    color: $dark-3;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px $dark-4;
+
+    &:hover {
+        background-color: $light-5;
+    }
+
+    &:active {
+        border: 2px solid $light-3;
+    }
+}
 
 
 // the 'x' close button at the top right corner of forms
@@ -92,5 +107,58 @@
             color: $light-1;
             text-decoration: none;
         }      
+    }
+}
+
+
+.close-c1,
+.close-c2,
+.close-c3 {
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    float: right;
+    background-color: $dark-7;
+    border: 1px solid $dark-7;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    color: $dark-2;
+
+    &:hover {
+        color: $light-3;
+        border-color: $danger-3;
+    }
+
+    span {
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+}
+
+.close-c2 span {
+    bottom: 0;
+}
+
+.close-c3 {
+    background-color: $light-2;
+    border: 1px solid $light-2;
+    height: 22px;
+    width: 22px;
+    border-radius: 20px;
+    color: $dark-6;
+    font-size: 1.4em;
+    bottom: 6px;
+    left: 10px;
+
+    &:hover {
+        color: $dark-7;
+        border-color: $danger-3;
+    }
+
+    span {
+        bottom: 0;
     }
 }

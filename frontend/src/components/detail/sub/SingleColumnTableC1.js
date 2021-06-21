@@ -16,28 +16,35 @@ const format_values = (value, format) => {
     }
 }
 
-
+// null is necessary incase there are no values for a field such as localgov regions for offshore sites
 const SingleColumnTableC1 = (props) => {
     const { value, header, table_data } = props.dict
+    // console.log(table_data)
+
     return (
         <Fragment>
             <h5>{ header }:</h5>
             <div className="detail-sub-info-c1">
                 <table className="table">
                     <tbody>
-                        {table_data.map((row, index) => {
+                        { table_data.map((row, index) => {
                             var val = value
-                            for (var i=0; i<row['td'].length; i++){
-                                var val = val[row['td'][i]]
+                            for (var i=0; i < row['td'].length; i++){
+                                var val = val ? val[row['td'][i]] : null
                             }
+                            let gg = []
                             return (
                                 <tr key={index} className="row">
                                     <th className="col-5">{ row['th'] }:</th>
                                     {row['multi'] == null
                                     ? <td className="col-7">{ format_values(val, row['format']) }</td>
-                                    : <td className="col-7">{ val.map((line,index) => {
+                                    : <td className="col-7">{ val.map((line,ind) => {
                                         const key = row['multi'] != '' ? line[row['multi']] : line
-                                        return <p key={index}>{ format_values(key, row['format']) }</p>
+                                        // remove duplicates
+                                        if (!gg.includes(key)) {
+                                            gg.push(key)
+                                            return <p key={ind}>{ format_values(key, row['format']) }</p>
+                                        }
                                     })}</td> }
                                 </tr>
                             )

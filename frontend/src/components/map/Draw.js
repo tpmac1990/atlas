@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FeatureGroup } from 'react-leaflet';
+import { FeatureGroup, Rectangle, Circle } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux'
 import { storeEditHandlers, setRectangleLatLngs } from '../../redux'
@@ -47,16 +47,25 @@ const Draw = () => {
             <EditControl 
                 ref={editRef}
                 position="topleft" 
+                className='edit-rectangle'
                 onCreated={onCreated}
                 draw={{
                     polyline: false,
                     circle: false,
                     polygon: false,
                     circlemarker: false,
+                    rectangle: {
+                        shapeOptions: { 
+                            className: 'edit-rectangle'
+                        },
+                    }
                 }} 
-                />
+            />
         </FeatureGroup>
     );
 };
 
 export default Draw;
+
+// how to change edit rectangle color
+// https://stackoverflow.com/questions/56615491/react-leaflet-draw-how-to-create-draw-functions-with-standard-buttons-without-u

@@ -1,0 +1,187 @@
+{
+    "ausstate": {
+        "query": "state__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "region": {
+        "query": "govregion__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "local": {
+        "query": "localgov__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "province": {
+        "query": "geoprovince__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "rectangle": {
+        "query": "geom__intersects",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "buffer": {
+        "query": "geom__intersects",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "typesimple": {
+        "query": "typ__simple__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "typedetail": {
+        "query": "typ__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "statussimple": {
+        "query": "status__simple__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "statusdetail": {
+        "query": "status__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "lodgefromdate": {
+        "query": "lodgedate__gte",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "lodgetodate": {
+        "query": "lodgedate__lte",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "startfromdate": {
+        "query": "startdate__gte",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "starttodate": {
+        "query": "startdate__lte",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "endfromdate": {
+        "query": "enddate__gte",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "endtodate": {
+        "query": "enddate__lte",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "givenids": {
+        "query": "oid__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "newids": {
+        "query": "ind__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "typesimplerelated": {
+        "query": "typ__simple__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "typedetailrelated": {
+        "query": "typ__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "statussimplerelated": {
+        "query": "status__simple__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "statusdetailrelated": {
+        "query": "status__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "materialcategory": {
+        "query": "majmat__category__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "materialname": {
+        "query": "majmat__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "materialcategoryrelated": {
+        "query": "majmat__category__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "materialnamerelated": {
+        "query": "majmat__in",
+        "use": ["related"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "occurrencename": {
+        "query": "name__in",
+        "use": ["primary"],
+        "dataset": ["Occurrence"]
+    },
+    "holdertype": {
+        "query": "holder__typ___id__in",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "holderparent": {
+        "query": "holder__child_parent__name__in",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "holdername": {
+        "query": "holder__in",
+        "use": ["primary","related"],
+        "dataset": ["Tenement"]
+    },
+    "changefromdate": {
+        "query": "ind_change__date_created__gte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "changetodate": {
+        "query": "ind_change__date_created__lte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "additionfromdate": {
+        "query": "ind_addition__date__gte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "additiontodate": {
+        "query": "ind_addition__date__lte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "inactivefromdate": {
+        "query": "ind_inactive__date__gte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "inactivetodate": {
+        "query": "ind_inactive__date__lte",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    },
+    "changegroup": {
+        "query": "ind_change__field__in",
+        "use": ["primary"],
+        "dataset": ["Tenement","Occurrence"]
+    }
+}

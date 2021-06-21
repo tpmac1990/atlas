@@ -44,6 +44,14 @@
     font-size: 0.7em;
     box-shadow: 0 1px 4px $light-3;
 
+    h1 {
+        user-select: none;
+        font-size: 1.6em;
+        color: $light-4;
+        margin: 20px;
+        letter-spacing: 1px;
+    }
+
     a {
         position: absolute;
         top: 0;
@@ -90,12 +98,14 @@
             }
         }
 
+        // height of table when the column selection element is visible
         .table-height-sm {
-            height: calc(100% - 167px);
+            height: calc(100% - 100px);
         }
 
+        // height of table when the column selection element is hidden
         .table-height-lg {
-            height: calc(100% - 72px);
+            height: 100%;
         }
 
         .table-area-c1 {
@@ -105,6 +115,7 @@
             margin-top: 5px;
 
             th {
+                user-select: none;
                 position: sticky;
                 top: 0;
                 padding: 0;

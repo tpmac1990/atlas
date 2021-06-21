@@ -10,7 +10,8 @@ const inactiveCoverReducer = ( state = initialState, action ) => {
         case TOGGLE_FULL_SCREEN_INACTIVE: 
             return {
                 ... state,  
-                is_active: !state.is_active
+                is_active: action.payload
+                // is_active: !state.is_active
             }
         default: return state
     }

@@ -7,9 +7,8 @@ import { useSelector } from 'react-redux'
 function FilterGroups () {
 
     const { filterDataset } = useSelector(state => state.filterDirection)
-    const direction = filterDataset
 
-    switch(direction) {
+    switch(filterDataset) {
         case 'Tenement':
             return <TenementFilter />;
         case 'Occurrence':

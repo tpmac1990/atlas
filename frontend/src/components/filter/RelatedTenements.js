@@ -9,9 +9,9 @@ export default function RelatedTenements() {
     return (
         <Fragment>
             <RelatedFilterHeader header='Related Titles' />
-            <TypeGroup />
-            <StatusGroup />
-            <MaterialGroup />
+            <TypeGroup groupList={['typesimplerelated','typedetailrelated']} name={'typerelated'} />
+            <StatusGroup groupList={['statussimplerelated','statusdetailrelated']} name={'statusrelated'} />
+            <MaterialGroup groupList={['materialcategoryrelated','materialnamerelated']} name={'materialrelated'} />
             <DateGroup />
         </Fragment>
     )

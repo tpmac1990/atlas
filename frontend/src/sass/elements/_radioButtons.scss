@@ -2,10 +2,11 @@
 
 
 // radio bar 1
-.radiobarStyle1 {
+.radiobar-c1 {
     // box-shadow: 0 1px 5px $dark-4;
 
     label {
+        user-select: none;
         color: $light-4;
         font-weight: 400;
         cursor: pointer;
@@ -44,15 +45,16 @@
     }
 }
 
-.radiobarSize1 {
+.radiobar-s1 {
     margin: 15px 0 10px 0px;
     height: 30px;
     position: relative;
     display: flex;
 
     label {
-        font-size: 1em;
+        font-size: 0.9em;
         width: 50%;
+        padding-top: 2px;
 
         &:first-of-type {
             border-top-left-radius: 4px;

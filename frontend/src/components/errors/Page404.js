@@ -1,9 +1,8 @@
 import React from 'react'
+import ErrorPage from './ErrorPage'
 
 export default function Page404() {
     return (
-        <div>
-            <h1>404 - Page Not Found</h1>
-        </div>
+        <ErrorPage error='404' msg='Page Not Found' />
     )
 }

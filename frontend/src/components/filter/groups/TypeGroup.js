@@ -6,21 +6,23 @@ import CheckboxList from '../elements/CheckboxList'
 
 function TypeGroup (props) {
 
+    const { groupList, name } = props
+
     const items = useSelector(state => state.filterGroup.groups)
 
-    const { relatedOpen } = useSelector(state => state.filterSelection)
+    // const { is_open } = useSelector(state => state.filterSelection.related)
 
-    if ( relatedOpen ) {
-        var checkboxGroupList = ['typesimplerelated','typedetailrelated']
-        var name = 'typerelated'
-    } else {
-        var checkboxGroupList = ['typesimple','typedetail']
-        var name = 'type'
-    }
+    // if ( is_open ) {
+    //     var checkboxGroupList = ['typesimplerelated','typedetailrelated']
+    //     var name = 'typerelated'
+    // } else {
+    //     var checkboxGroupList = ['typesimple','typedetail']
+    //     var name = 'type'
+    // }
 
     const style = items[name].areaStyle
 
-    const checkboxGroups = checkboxGroupList.map(group => {
+    const checkboxGroups = groupList.map(group => {
         return (
             <Fragment key={group}>
                 <GroupButton name={group} />

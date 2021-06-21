@@ -1,0 +1,2 @@
+export const SET_MAP_POPUP_DATA = 'SET_MAP_POPUP_DATA'
+export const SET_POPUP_TARGET = 'SET_POPUP_TARGET'

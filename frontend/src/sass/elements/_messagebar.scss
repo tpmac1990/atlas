@@ -1,34 +1,43 @@
 @import '../variables';
 
-.error-c1 {
-    border: 1px solid $dangert;
+// .error-c1 {
+//     border: 1px solid $dangert;
 
-    div:first-of-type span{
-        color: $dangert;
-    }
-}
+//     div:first-of-type span{
+//         color: $dangert;
+//     }
+// }
 
-.error-c2 {
-    background-color: $danger-4;
-    font-size: 0.8em;
-    float: left;
-    margin-top: 6px;
-    padding: 4px 10px;
-    border-radius: 15px;
-}
+// .error-c2 {
+//     background-color: $danger-4;
+//     font-size: 0.8em;
+//     float: left;
+//     margin-top: 6px;
+//     padding: 4px 10px;
+//     border-radius: 15px;
+// }
 
-.success-c1 {
-    border: 1px solid $dangert;
+// .success-c1 {
+//     border: 1px solid $dangert;
 
-    div:first-of-type span{
-        color: $success;
-    }
-}
+//     div:first-of-type span{
+//         color: $success;
+//     }
+// }
 
 
-#messageBar {
+.message-bar-c1,
+.warning-edit,
+.success-edit,
+.warning-map,
+.success-map,
+.error-map,
+.error-edit,
+.error-fixed-edit {
     position: absolute;
+    display: grid;
     background-color: $dark-5;
+    border-radius: 20px;
     z-index: 10;
     width: 400px;
     height: 40px;
@@ -38,6 +47,7 @@
     transform: translate(-50%,0);
     grid-template-columns: 40px 340px 20px;
     cursor: default;
+    user-select: none;
 
     div {
         position: relative;
@@ -49,18 +59,12 @@
             transform: translate(-50%,-50%);
         }
 
-        &:first-of-type span {
-            font-size: 40px;
-        }
-
         &:last-of-type {
-            font-size: 20px;
-            margin-top: -5px;
-            color: $light-4;
-            margin-right: 5px;
+            top: 9px;
+            right: 12px;
 
-            span:hover {
-                color: $light-2;
+            span {
+                top: 3px;
             }
         }
 
@@ -72,7 +76,7 @@
             transform: translate(-50%,-50%);
             padding: 0 5px;
             text-align: center;
-            font-size: 0.8em;
+            font-size: 0.9em;
             color: $light-2;
             font-weight: 300;
             line-height: 1em;
@@ -80,5 +84,49 @@
     }
 }
 
+.error-fixed-edit {
+    position: fixed;
+    margin-top: 0;
+}
 
 
+.warning-edit,
+.success-edit,
+.error-edit {
+    top: 105px;
+}
+
+.warning-map,
+.success-map,
+.error-map {
+    top: 70px;
+}
+
+
+.warning-edit,
+.warning-map {
+    border: 1px solid $warning;
+
+    div:first-of-type span{
+        color: $warning;
+    }
+}
+
+.success-edit,
+.success-map {
+    border: 1px solid $success;
+
+    div:first-of-type span{
+        color: $success;
+    }
+}
+
+.error-edit,
+.error-map,
+.error-fixed-edit {
+    border: 1px solid $dangert;
+
+    div:first-of-type span{
+        color: $dangert;
+    }
+}

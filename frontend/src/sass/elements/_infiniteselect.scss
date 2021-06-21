@@ -1,0 +1,126 @@
+@import '../variables';
+
+
+// the infinity select input takes on the size of the parent div
+.infinite-select-c1,
+.infinite-select-c2 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .grey {
+        border: 1px solid $light-3;
+    }
+
+    .blue {
+        border: 1px solid $blue-11;
+    }
+
+    button {
+        position: absolute;
+        height: 33px;
+        width: 50px;
+        margin-left: 20px;
+    }
+
+    .infinity-select-input {
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        z-index: 1;
+        position: relative;
+        display: inline-block;
+        padding: 5px 0;
+        background-color: $light-1;
+
+        input {
+            padding-left: 20px;
+            height: 100%;
+            width: calc(100% - 37px);
+            float: left;
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+    
+            &:focus {
+                outline: 0;
+            }
+    
+            &::placeholder {
+                color: $dark-4;
+            }
+        }
+
+        .infinity-down-arrow {
+            position: relative;
+            float: left;
+            width: 37px;
+            height: 100%;
+            border-left: 1px solid $light-3;
+            padding-left: 5px;
+            color: $light-4;
+            cursor: pointer;
+
+            div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            
+                &:hover {
+                    color: $light-6;
+                }
+            }
+        }
+    }
+
+    .infinity-select-dropdown {
+        width: 100%;
+        max-height: 300px;
+        min-height: 60px;
+        top: 40px;
+        border: 1px solid $light-4;
+        border-radius: 3px;
+        overflow-y: auto;
+        position: absolute;
+        background-color: $light-1;
+        z-index: 2;
+
+        p {
+            margin: 0;
+            padding: 2px 20px;
+
+            &:hover {
+                background-color: $blue-8;
+                cursor: pointer;
+            }
+
+            &:active {
+                background-color: $blue-13;
+            }
+        }
+    }
+}
+
+
+.infinite-select-c2 {
+
+    button {
+        height: 100%;
+        width: 60px;
+    }
+
+    .infinity-select-input {
+
+        input {
+            width: calc(100% - 38px);
+        }
+
+        .infinity-down-arrow {
+            width: 38px;
+        }
+    }
+
+    .infinity-select-dropdown {
+        top: 44px;
+    }
+}

@@ -57,6 +57,19 @@
     }
 }
 
+.input-c4 {
+    border: 1px solid $light-3;
+    border-radius: 4px;
+
+    &:hover,
+    &:focus {
+        border: 1px solid $blue-11;
+        outline: 0;
+    }
+}
+
+
+
 
 .inputGroupC1,
 .inputGroupC2,
@@ -79,6 +92,7 @@
     }
 
     label {
+        user-select: none;
         color: $light-2;
         font-style: italic;
         margin-bottom: 0px;
@@ -120,6 +134,7 @@
     }
 }
 
+
 .subDetailsC1 {
     background-color: $dark-5;
     color: $light-3;
@@ -129,5 +144,75 @@
 
     p { 
         margin-bottom: 0;
+    }
+}
+
+
+
+
+.input-group-c5 {
+
+    .title {
+        user-select: none;
+        color: $light-2;
+        font-style: italic;
+        margin-bottom: 0px;
+        font-size: 0.85em;
+        margin-left: 10px;
+        margin-bottom: 8px;
+        width: 200px;
+    }
+
+    div {
+        position: relative;
+        display: grid;
+        grid-template-columns: 43% 14% 43%;
+        margin-left: 20px;
+        margin-bottom: 25px;
+
+        span {
+            color: $light-2;
+            font-style: italic;
+            margin-bottom: 0px;
+            font-size: 0.85em;
+            padding-left: 20px;
+        }
+
+        input {
+            background-color: $dark-5;
+            border: 0;
+            border-bottom: 1px solid $blue-4;
+            color: $light-2;
+            font-size: 0.8em;
+            padding-left: 10px;
+            width: 100%;
+        
+            &:focus {
+                outline: 0;
+                border-color: $blue-5;
+                background-color: $dark-4;
+            }
+        }
+    }
+}
+
+.input-group-c5 {
+    margin-top: 10px;
+}
+
+.input-group-c5 {
+    input {
+        width: 50%;
+
+        &:invalid::-webkit-datetime-edit {
+            color: $dark-6;
+        }
+        &::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    }
+
+    label {
+        width: 30%;
     }
 }

@@ -1,0 +1,114 @@
+@import '../variables';
+
+
+
+.edit-page {
+    padding-bottom: 40px;
+    margin-top: 20px;
+
+    span {
+        font-style: italic;
+        font-size: 0.5em;
+        font-weight: 400;
+        padding-left: 10px;
+    }
+
+    h5 {
+        font-style: italic;
+        margin: 20px 40px;
+    }
+
+    .edit-title {
+        height: 50px;
+
+        h2 {
+            float: left;
+        }
+
+        div {
+            float: right;
+        }
+    }
+
+    .edit-submit-btn {
+        margin: 20px 40px;
+        height: 40px;
+        width: 100px;
+    }
+
+    .edit-table-c1 {
+        background-color: #f5f5f5;
+        box-shadow: 0 1px 4px $light-4;
+        padding: 20px 50px;
+        margin: 0 60px;
+        margin-bottom: 50px;
+        border-radius: 5px;
+    
+    
+        table {
+            margin-bottom: 0;
+            border-bottom: 1px solid $light-2;
+
+            th {
+                border-bottom: none;
+            }
+    
+            .remove {
+        
+                td {
+                    &:first-child {
+                        text-decoration: line-through;
+                    }
+                }
+            }
+
+            .cell-edit-input {
+                border: none;
+                background-color: #ffffff00;
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+                border-bottom: 1px solid #ffffff00;
+
+                &:hover {
+                    background-color: $light-1;
+                    border-bottom: 1px solid $blue-9;
+                }
+
+                &:focus {
+                    outline: none;
+                    background-color: $light-1;
+                    border-bottom: 1px solid $blue-11;
+                }
+            }
+        }
+    
+        .edit-add {
+            margin-left: 15px;
+            margin-top: 10px;
+            width: 70px;
+        }
+    
+        // houses the infinity select
+        .add-select {
+            margin-top: 10px;
+            margin-left: 10px;
+            height: 35px;
+            width: 400px;
+        }
+    
+        span {
+            cursor: pointer;
+            color: $dark-6;
+            font-size: 0.8em;
+    
+            &:hover {
+                color: $blue-12;
+            }
+    
+            &:active {
+                color: $blue-14;
+            }
+        }
+    
+    }
+}

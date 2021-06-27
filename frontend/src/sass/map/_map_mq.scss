@@ -1,0 +1,21 @@
+@import '../variables';
+
+@media only screen and (max-width: 850px) {
+
+    #map-wrapper {
+        .mapWithFilter {
+            width: 0;
+        }
+    }
+
+    #coorindate-control {
+        width: 150px !important;
+        height: 40px;
+        text-align: left;
+        padding-left: 5px !important;
+    }
+
+    .leaflet-control-attribution {
+        max-width: 200px;
+    }
+}

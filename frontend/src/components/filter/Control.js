@@ -31,7 +31,7 @@ function Control() {
     })
 
     return (
-        <div id='ctrlBar'>
+        <div id='ctrl-bar'>
             <div className='radiobar-c1 radiobar-s1'>
                 { datasets }
             </div>
@@ -39,6 +39,5 @@ function Control() {
     )
 
 }
-
 
 export default Control

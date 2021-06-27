@@ -40,13 +40,13 @@ class SiteTableSerializer(serializers.ModelSerializer):
         return obj.state.name
 
     def get_govregion(self,obj):
-        return obj.govregion.name
+        return obj.govregion.name if obj.govregion else ''
 
     def get_localgov(self,obj):
-        return obj.localgov.name
+        return obj.localgov.name if obj.localgov else ''
 
     def get_geoprovince(self,obj):
-        return '; '.join([x.name for x in obj.geoprovince.all()])
+        return '; '.join([x.name for x in obj.geoprovince.all()]) if obj.geoprovince else ''
 
     def get_majmat(self,obj):
         return '; '.join([x.name for x in obj.majmat.all()])
@@ -62,4 +62,5 @@ class SiteTableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Occurrence
+        # fields = ["ind","state","typdetail","majmat","minmat","typsimple","status","name","size","oid","govregion","localgov"]
         fields = ["ind","typdetail","typsimple","status","name","size","state","localgov","govregion","geoprovince","oid","majmat","minmat"]

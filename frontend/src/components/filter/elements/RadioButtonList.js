@@ -19,7 +19,7 @@ export default function UpdateTypeGroup(props) {
         return (
             <Fragment key={group}>
                 <input checked={updatetype == group} id={group + 'ctrl'} type="radio" name={group} onChange={Handler} />
-                <label htmlFor={group + 'ctrl'} className="labelC1">{group}</label><br/>
+                <label htmlFor={group + 'ctrl'} className="label-c1">{group}</label><br/>
             </Fragment>
         )
     }))

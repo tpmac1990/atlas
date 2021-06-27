@@ -28,21 +28,21 @@ function DrawSubArea (props) {
         dispatch(setBufferDistance(val))
     }
 
-    const idBorderStyle = validbufferid ? 'successBorder' : 'failBorder'
+    const idBorderStyle = validbufferid ? 'success-border' : 'fail-border'
 
     return (
-        <div id="bufferSubArea" className={areaStyle}>
-            <div className='inputGroupC2'>
+        <div id="buffer-sub-area" className={areaStyle}>
+            <div className='input-group-c2'>
                 <label>Gplore ID</label>
                 <input type='text' className={idBorderStyle} value={bufferid} onChange={changeHandler} /><br/>
             </div>
-            <div className='subDetailsC1'>
+            <div className='sub-details-c1'>
                 <p>{`Lng: ${bufferLng}`}</p>
                 <p>{`Lat: ${bufferLat}`}</p>
             </div>
-            <div className='inputGroupC2'>
+            <div className='input-group-c2'>
                 <label>Radius (km)</label>
-                <input className='noNumberBtns' type='number' value={bufferdistance} onChange={bufferChangeHandler} />
+                <input className='no-number-btns' type='number' value={bufferdistance} onChange={bufferChangeHandler} />
             </div>
         </div>
     )
@@ -94,18 +94,18 @@ export default DrawSubArea
     //     dispatch(setBufferDistance(e.target.value))
     // }
 
-//     const idBorderStyle = idexists ? 'successBorder' : 'failBorder'
+//     const idBorderStyle = idexists ? 'success-border' : 'failBorder'
 
 //     return (
 //         <Fragment>
 //             <div className={areaStyle} >
-//                 <div className='inputGroupC2'>
+//                 <div className='input-group-c2'>
 //                     <label>Gplore ID</label>
 //                     <input type='text' className={idBorderStyle} value={bufferid} onChange={changeHandler} /><br/>
 //                 </div>
-//                 <div className='inputGroupC2'>
+//                 <div className='input-group-c2'>
 //                     <label>Buffer Radius(km)</label>
-//                     <input className='noNumberBtns' type='number' value={bufferdistance} onChange={bufferChangeHandler} />
+//                     <input className='no-number-btns' type='number' value={bufferdistance} onChange={bufferChangeHandler} />
 //                 </div>
 //             </div>
 //         </Fragment>

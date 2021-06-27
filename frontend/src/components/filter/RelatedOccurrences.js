@@ -8,9 +8,11 @@ export default function RelatedOccurrences() {
     return (
         <Fragment>
             <RelatedFilterHeader header='Related Sites' />
-            <TypeGroup groupList={['typesimplerelated','typedetailrelated']} name={'typerelated'} />
-            <StatusGroup groupList={['statussimplerelated','statusdetailrelated']} name={'statusrelated'} />
-            <MaterialGroup groupList={['materialcategoryrelated','materialnamerelated']} name={'materialrelated'} />
+            <div className='related-filter-area'>
+                <TypeGroup groupList={['typesimplerelated','typedetailrelated']} name={'typerelated'} />
+                <StatusGroup groupList={['statussimplerelated','statusdetailrelated']} name={'statusrelated'} />
+                <MaterialGroup groupList={['materialcategoryrelated','materialnamerelated']} name={'materialrelated'} />
+            </div>
         </Fragment>
     )
 }

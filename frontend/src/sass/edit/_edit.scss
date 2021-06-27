@@ -52,15 +52,21 @@
             th {
                 border-bottom: none;
             }
-    
-            .remove {
-        
-                td {
-                    &:first-child {
-                        text-decoration: line-through;
-                    }
+
+            tbody tr td {
+                select,
+                input {
+                    max-width: 100%;
                 }
             }
+    
+            // .remove {
+            //     td {
+            //         &:first-child {
+            //             text-decoration: line-through;
+            //         }
+            //     }
+            // }
 
             .cell-edit-input {
                 border: none;

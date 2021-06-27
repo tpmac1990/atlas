@@ -19,7 +19,7 @@ function FilterCheckbox(props) {
     }
 
     return (
-        <label key={pk} className='filterCheckbox'>
+        <label key={pk} className='filter-checkbox'>
             <input checked={checked} value={pk} type="checkbox" onChange={changeHandler}/>{name}
         </label>
     )

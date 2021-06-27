@@ -10,7 +10,7 @@ import { closeAllGroups, storeSpatialData,
     updateActiveFilters } from '../../redux'
 
 import { updateFilterList } from './filterLists'
-
+import useViewportStyle from '../reusable/hooks/useViewportStyle'
 // import { formatForCheckboxList } from './functions/formatFilterSelection'
 import Control from './Control'
 import RelatedData from './RelatedData'
@@ -31,6 +31,9 @@ const IconBtn = props => {
 
     const { clickHandler, iconStyle, tooltip } = props
 
+    const { viewportStyle } = useViewportStyle();
+    const is_large = ['tv','desktop','laptop'].includes(viewportStyle)
+
     const [ show, setShow ] = useState(false)
     const [ delayHandler, setDelayHandler ] = useState(null)
 
@@ -45,10 +48,11 @@ const IconBtn = props => {
         setShow(false)
     }
 
+    // only show the tooltip if on a large screen
     return (
         <div>
             <span className="material-icons" onClick={clickHandler} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >{iconStyle}</span>
-            { show
+            {( show && is_large )
             ? <TooltipC1 msg={tooltip} />
             : null }
         </div>
@@ -91,6 +95,9 @@ function Panel () {
     const relBtnStyle = include ? 'btn-c1 showEle' : 'btn-c1 hideEle'
     const panelStyle = filteropen ? 'showPanel' : 'hidePanel'
 
+    const { viewportStyle } = useViewportStyle();
+    const is_small = ['tablet','mobile'].includes(viewportStyle)
+
     const [tableSelect, setTableSelect] = useState(false)
 
     const dispatch = useDispatch()
@@ -124,6 +131,7 @@ function Panel () {
         }
     },[input])
 
+
     function submitHandler() {
         // only submit if not loading and a Dataset has been selected (titles or sites)
         if ( !loading ){
@@ -132,13 +140,14 @@ function Panel () {
                 dispatch(resetMapDataOffset())
                 // set loading which will trigger the useEffect below that will fetch the geospatial data
                 dispatch(setMapIsLoading())
+                // if the screen is small then hide the filter to reveal the map
+                is_small && dispatch(toggleFilterPanel())
             } else {
                 // dispatch(controlSelectionError())
-                dispatch(setPopupMessage({message: "Select 'Titles' Or 'Sites' To Begin Filtering", type: 'warning', style: 'warning-map'}))
+                dispatch(setPopupMessage({message: "Select 'Titles' or 'Sites' to begin filtering", type: 'warning', style: 'warning-map'}))
             }
         }
     }
-    // dispatch(setPopupMessage({message: `Site ${msg} Updated Successfully`, type: 'success', style: 'success-edit'}))
 
     useEffect(() => {
         // when offset is 0 and loading is true then fetch the geospatial data. This will replace all existing data.
@@ -187,7 +196,7 @@ function Panel () {
             is_open && dispatch(toggleRelatedFilter())
         } else {
             // dispatch(controlSelectionError())
-            dispatch(setPopupMessage({message: "Select 'Titles' Or 'Sites' To Begin Filtering", type: 'warning', style: 'warning-map'}))
+            dispatch(setPopupMessage({message: "Select 'Titles' or 'Sites' to begin filtering", type: 'warning', style: 'warning-map'}))
         }
     }
 
@@ -221,7 +230,6 @@ function Panel () {
         const bsites = dict.sites
         if ( !btitle && !bsites ){
             // popup error message when no data has been selected
-            // dispatch(callNoDataSelectedError())
             dispatch(setPopupMessage({message: "Your search has return no data to display", type: 'warning', style: 'warning-map'}))
         } else if ( btitle && bsites ){
             // makes page inactive before activating the table select popup
@@ -239,46 +247,44 @@ function Panel () {
     const list_msg = 'Display the map data in table form'
     const clear_msg = 'Clear the filter'
 
-    const tableSelectStyles = tableSelect ? 'list-dropdown showEle' : 'hideEle'
-
     return (
         <div id='panel' className={panelStyle}>
-            <div id='panel-header'>
-                <FilterToggle />
-                <div className='panel-title'>
-                    <h1>Data Control</h1>
+            <div id='panel-subarea'>
+                <div id='panel-header'>
+                    <FilterToggle />
+                    <div className='panel-title'>
+                        <h1>Data Control</h1>
+                    </div>
+                    <div className='header-icons'>
+                        <IconBtn clickHandler={listHandler} iconStyle='list' tooltip={list_msg} />
+                        <IconBtn clickHandler={clearHandler} iconStyle='delete_sweep' tooltip={clear_msg} />
+                    </div>
                 </div>
-                {/* <div className='header-icons'> */}
-                <div className='header-icons'>
-                    <IconBtn clickHandler={listHandler} iconStyle='list' tooltip={list_msg} />
-                    <IconBtn clickHandler={clearHandler} iconStyle='delete_sweep' tooltip={clear_msg} />
-                    {/* <span className="material-icons" onClick={listHandler}>list</span>
-                    <span className="material-icons" onClick={clearHandler}>delete_sweep</span> */}
-                    {/* <button className='btn-c1' onClick={listHandler}>List</button>
-                    <button className='btn-c1' onClick={clearHandler}>Clear</button> */}
+                { tableSelect
+                ? <div className='list-dropdown'>
+                        <button className='close-c4' onClick={() => {setTableSelect(false);dispatch(toggleFullScreenInactive(false))}}><span>x</span></button>
+                        <button className='btn-c5 lst-dd-btn-1' onClick={() => dispatch(triggerElement('sites'))}>Sites Table</button>
+                        <button className='btn-c5 lst-dd-btn-2' onClick={() => dispatch(triggerElement('titles'))}>Titles Table</button>
                 </div>
-            </div>
-            <div className={ tableSelectStyles }>
-                {/* link to toggle the inactive page cover and close the datagroup table select popup when both datasets are on the map  */}
-                <Link to='#' onClick={() => {setTableSelect(false);dispatch(toggleFullScreenInactive(false))}}>x</Link>
-                <button className='btn-c2' onClick={() => dispatch(triggerElement('sites'))}>Sites Table</button>
-                <button className='btn-c2' onClick={() => dispatch(triggerElement('titles'))}>Titles Table</button>
-            </div>
-            <hr/>
-            <div id="filterArea">
-                <RelatedData />
-                <Control />
-                <div id='filter-groups' className='scrollbar-c1'>
-                    <FilterGroups />
+                : null}
+                <hr/>
+                <div id="filter-area">
+                    <RelatedData />
+                    <Control />
+                    <div id='filter-groups' className='scrollbar-c1'>
+                        <FilterGroups />
+                    </div>
                 </div>
-            </div>
-            <div id='panel-footer'>
-                <div className='checkbox-c4'>
-                    <input checked={include} type='checkbox' id='selectRelatedData' onChange={AddRelatedHandler} />
-                    <label htmlFor='selectRelatedData'>Combine Related Data</label><br/>
+                <div id='panel-footer'>
+                    <div id='related-data-toggle' className='checkbox-c4'>
+                        <input checked={include} type='checkbox' id='selectRelatedData' onChange={AddRelatedHandler} />
+                        <label htmlFor='selectRelatedData'>Combine Related Data</label><br/>
+                    </div>
+                    <div id='footer-btns'>
+                        <button className={relBtnStyle} onClick={RelationHandler}>Relations</button>
+                        <button id='filter-submit-btn' className='btn-c1' onClick={submitHandler}>Submit</button>
+                    </div>
                 </div>
-                <button className={relBtnStyle} onClick={RelationHandler}>Relations</button>
-                <button id='filterSubmitBtn' className='btn-c1' onClick={submitHandler}>Submit</button>
             </div>
         </div>
     )

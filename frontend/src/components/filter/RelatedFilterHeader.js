@@ -12,9 +12,9 @@ export default function RelatedFilterHeader(props) {
     }
 
     return (
-        <div>
+        <div className='related-filter-header'>
             <div className='close-c2' onClick={RelationHandler}><span>x</span></div>
-            <h2 className='headerC1'>{props.header}</h2><hr className='hrC1'/>
+            <h2>{props.header}</h2><hr/>
         </div>
     )
 }

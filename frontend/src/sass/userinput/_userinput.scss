@@ -1,77 +1,102 @@
 @import '../variables';
 
 
-.email-drop,
-.feedback {
-    width: 430px;
+#contact-groups {
+    height: calc(100vh - 145px);
 
-    h1 {
-        font-size: 2.4em;
-    }
-
-    h2 {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-
-    form {
-        label {
-            width: 100%;
-            margin: 10px 0 0 0;
+    .basic-form-area {
+        position: relative;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    
+        .email-drop-area,
+        .feedback-area,
+        .contact-info-area {
+            position: relative;
+            left: 50%;
+            transform: translate(-50%,0);
+            background-color: $light-7;
+            width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px $light-3;
+            padding: 30px 40px;
+    
+            h1 {
+                font-size: 2.4em;
+            }
+    
+            h2 {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+    
+            form {
+                label {
+                    width: 100%;
+                    margin: 10px 0 0 0;
+                }
+    
+                input {
+                    width: 100%;
+                    padding-left: 10px;
+                    height: 35px;
+                }
+    
+                button {
+                    margin: 30px 20px 0 0;
+                    width: 100px;
+                    height: 35px;
+                }
+    
+                div {
+                    display: inline-block;
+                    padding: 3px 10px;
+                    border-radius: 20px;
+                    font-size: 0.8em;
+                }
+    
+                .error {
+                    background-color: $danger-4;
+                }
+    
+                .success {
+                    background-color: $success-2;
+                }
+            }
         }
-
-        input {
-            width: 100%;
-            padding-left: 10px;
-            height: 35px;
+    
+        .contact-info-area {
+            table tbody tr {
+                th, td {
+                    border: none;
+                }
+            }
         }
-
-        button {
-            margin: 30px 20px 0 0;
-            width: 100px;
-            height: 35px;
-        }
-
-        div {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-        }
-
-        .error {
-            background-color: $danger-4;
-        }
-
-        .success {
-            background-color: $success-2;
+    
+    
+        .feedback-area {
+            width: 500px;
+    
+            form {
+    
+                label:first-child {
+                    margin-top: 0;
+                }
+    
+                textarea {
+                    width: 100%;
+                    font-size: 0.8em;
+                    padding: 5px 10px;
+                }
+    
+                span {
+                    cursor: pointer;
+                }
+    
+                button {
+                    margin: 10px 20px 0 0;
+                }
+            }
         }
     }
 }
-
-
-.feedback {
-    width: 500px;
-
-    form {
-
-        label:first-child {
-            margin-top: 0;
-        }
-
-        textarea {
-            width: 100%;
-            font-size: 0.8em;
-            padding: 5px 10px;
-        }
-
-        span {
-            cursor: pointer;
-        }
-
-        button {
-            margin: 10px 20px 0 0;
-        }
-    }
-}
-

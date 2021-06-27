@@ -18,8 +18,9 @@ const format_values = (value, format) => {
 
 // null is necessary incase there are no values for a field such as localgov regions for offshore sites
 const SingleColumnTableC1 = (props) => {
-    const { value, header, table_data } = props.dict
-    // console.log(table_data)
+
+    const { dict, value } = props
+    const { header, table_data } = dict
 
     return (
         <Fragment>

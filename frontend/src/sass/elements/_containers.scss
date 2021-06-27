@@ -2,16 +2,31 @@
 
 
 
-// used in emaildrop
-.container-c1 {
-    position: relative;
-    background-color: $light-7;
-    height: auto;
-    width: auto;
-    left: 50%;
-    transform: translate(-50%,0);
-    margin-top: 30px;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px $light-3;
-    padding: 30px 40px;
-}
+// .centre-internal-c1 {
+//     position: relative;
+//     height: calc(100vh - 60px);
+//     background-color: red;
+// }
+
+// // used in emaildrop
+// .container-c1 {
+//     position: relative;
+//     background-color: $light-7;
+//     height: auto;
+//     width: auto;
+//     left: 50%;
+//     transform: translate(-50%,0);
+//     margin-top: 30px;
+//     border-radius: 5px;
+//     box-shadow: 0 1px 3px $light-3;
+//     padding: 30px 40px;
+// }
+
+
+// @media only screen and (max-width: 850px) {
+
+//     .container-c1 {
+//         height: calc(100% - 20px);
+//     }
+
+// }

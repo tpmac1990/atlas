@@ -27,7 +27,7 @@ const ValidItemsManyDropdownAddMulti = props => {
 
     const dispatch = useDispatch()
 
-    const { data, values, dropdown_dict, header, datagroup, has_input, columns } = props
+    const { data, values, dropdown_dict, header, datagroup, has_input, columns, is_large } = props
 
     const [ addVisible, setAddVisible ] = useState(false)
 
@@ -129,6 +129,8 @@ const ValidItemsManyDropdownAddMulti = props => {
     //     setAddVisible(prevState => !prevState)
     // }
 
+    // {`${is_large ? lg_style : sm_style} ${edit_type === 'select' ? 'wide-td' : ''}`}
+
     return (
         <>
             <h5>{header}</h5>
@@ -138,10 +140,10 @@ const ValidItemsManyDropdownAddMulti = props => {
                         <tr className='row'>
                             {columns.map(col => {
                                 return (
-                                    <th key={col.header} className={col.style}>{col.header}</th>
+                                    <th key={col.header} className={is_large ? col.lg_style : col.sm_style}>{col.header}</th>
                                 )
                             })}
-                            <th className='col-2'></th>
+                            <th className={is_large ? 'col-2' : 'col-1'}></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,17 +153,17 @@ const ValidItemsManyDropdownAddMulti = props => {
                             ? null
                             : ( <tr key={key} className='row'>
                                     {columns.map(col => {
-                                        const { header, style, label, edit_type, model, input_type, default: default_val } = col
+                                        const { header, lg_style, sm_style, label, edit_type, model, input_type, default: default_val } = col
                                         return (!edit_type
-                                        ? <td key={header} className={style}>{ data[row][label] }</td>
-                                        : <td key={header} className={style}>{
+                                        ? <td key={header} className={is_large ? lg_style : sm_style}>{ data[row][label] }</td>
+                                        : <td key={header} className={is_large ? lg_style : sm_style}>{
                                             edit_type === 'select'
                                             ? <EditTableDropDownEditCell defualtValue={data[row][label]} id={key} datagroup={datagroup} name={name} model={model} field={label} />
                                             : <EditTableManualEditCell defualtValue={data[row][label]} id={key} datagroup={datagroup} name={name} input_type={input_type} />
                                         }</td>
                                         )
                                     })}
-                                    <td className='col-2'><span id={key} onClick={ removeHandler }>Remove</span></td>
+                                    <td className={is_large ? 'col-2' : 'col-1'}><span id={key} onClick={ removeHandler }>{is_large ? 'Remove' : 'x'}</span></td>
                                 </tr>
                                 )
                             )

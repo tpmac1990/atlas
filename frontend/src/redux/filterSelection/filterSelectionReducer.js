@@ -93,7 +93,12 @@ const filterSelectionReducer = ( state = initialState, action ) => {
                 input: { ...state.input,
                     [value]: [ ...state.input[value], pk ]
                 },
-                map_infinity: initialState.map_infinity,
+                map_infinity: { ...state.map_infinity,
+                    offset: 0,
+                    hasMore: true,
+                    total_count: null
+                }
+                // map_infinity: initialState.map_infinity,
                 // related_count: value.includes('related') ? state.related_count + 1 : state.related_count
             }
         case ITEM_UNSELECTED:
@@ -105,7 +110,12 @@ const filterSelectionReducer = ( state = initialState, action ) => {
                 input: { ...state.input,
                     [value]: state.input[value].filter(val => val != pk )
                 },
-                map_infinity: initialState.map_infinity,
+                map_infinity: { ...state.map_infinity,
+                    offset: 0,
+                    hasMore: true,
+                    total_count: null
+                }
+                // map_infinity: initialState.map_infinity,
                 // related_count: value.includes('related') ? state.related_count - 1 : state.related_count
             }
         case SET_RECTANGLE_LATLNGS: 

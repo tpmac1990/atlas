@@ -131,11 +131,11 @@ export const ServerSideTable = (props) => {
 
     return (
         <div className='greater-table-area-c1'>
-            <div className='checkbox-c3'>
+            <div className='checkbox-c3 hide-portrait'>
                 <input type='checkbox' id='column-ctrl-checkbox' onChange={() => setContentVisible(!contentVisible)} />
-                <label htmlFor='column-ctrl-checkbox' >{ contentVisible ? 'Hide Column Filters' : 'Show Column Filters' }</label>
+                <label htmlFor='column-ctrl-checkbox' >{ contentVisible ? 'Hide Column Control' : 'Show Column Control' }</label>
             </div>
-            <div className={contentGroupStyles}>
+            <div className={`${contentGroupStyles} hide-portrait`}>
                 <Checkbox {...getToggleHideAllColumnsProps()} />
                 {allColumns.map(column => (
                 <div className='checkbox-c1' key={column.id}>

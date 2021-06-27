@@ -36,7 +36,7 @@
     .ul-mobile {
         position: absolute;
         height: auto;
-        width: 400px;
+        width: 100%;
         background-color: $dark-3;
         top: 60px;
         padding: 15px 0;
@@ -62,7 +62,7 @@
     .ul-desktop {
         position: relative;
         display: inline-block;
-        top: 29px;
+        top: 30px;
         padding-left: 20px;
         padding-right: 20px;
 
@@ -70,7 +70,7 @@
             display: inline;
             border: 0;
             border-bottom: 2px solid $dark-3;
-            padding-bottom: 10px;
+            padding-bottom: 9px;
 
             &:hover {
                 border-color: $light-2;
@@ -78,7 +78,7 @@
 
             a {
                 color: $light-3;
-                padding: 0 10px;
+                padding: 0 12px;
 
                 &:hover {
                     color: $light-1;
@@ -86,10 +86,6 @@
                 }
             }
         }
-
-        // &:last-of-type{
-        //     float: right;
-        // }
     }
 
     img {
@@ -99,4 +95,39 @@
         left: 50%;
         transform: translate(-50%, 0);
     }
+}
+
+
+// used in 'detail' and 'contact' pages
+.sub-header-c1 {
+    user-select: none;
+    height: 50px;
+    background-color: $light-1;
+    box-shadow: 0 1px 4px $dark-6;
+    padding: 17px 100px;
+    margin: 0;
+
+    li {
+        display: inline;
+
+        a {
+            padding: 5px 20px 7px 20px;
+            width: 200px;
+            border-bottom: 3px solid $light-1;
+            color: $dark-4;
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover {
+                border-bottom: 3px solid $blue-12;
+            }
+        }
+    }
+}
+
+
+.sub-header-tip {
+    margin-left: 20px;
+    margin-top: 30px;
+    color: $dark-4;
 }

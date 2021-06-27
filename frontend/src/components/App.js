@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime' // required for using react-table wwith global filter from the map component.
-import React, { Component, Fragment, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 // import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -17,8 +17,7 @@ const Attribution = lazy(() => import('./attributions/Attribution'));
 const HomeDetail = lazy (() => import('./detail/HomeDetail'))
 const Page404 = lazy (() => import('./errors/Page404'))
 const Page503 = lazy (() => import('./errors/Page503'))
-const Feedback = lazy (() => import('./userinput/Feedback'))
-const EmailDrop = lazy (() => import('./userinput/EmailDrop'))
+const ContactHome = lazy (() => import('./contact/ContactHome'))
 
 
 const SubApp = () => {
@@ -36,8 +35,7 @@ const SubApp = () => {
                     <Route exact path="/" component={MapContent} />
                     <Route exact path="/attribution" component={Attribution} />
                     <Route path="/detail" component={HomeDetail} />
-                    <Route path="/feedback" component={Feedback} />
-                    <Route path="/stayposted" component={EmailDrop} />
+                    <Route path="/contact" component={ContactHome} />
                     <Route path="/404" component={Page404} />
                     <Route path="/503" component={Page503} />
                 </Switch>
@@ -54,21 +52,10 @@ const App = () => {
         <Provider store={store}>
             <Router>
                 <SubAppWithCheckRequests />
-                {/* <Fragment>
-                    <Header />
-                    <Suspense fallback={<SuspenseFallback />}>
-                        <Switch>
-                            <Route exact path="/" component={MapContent} />
-                            <Route exact path="/attribution" component={Attribution} />
-                            <Route path="/detail" component={HomeDetail} />
-                        </Switch>
-                    </Suspense>
-                </Fragment> */}
             </Router>
         </Provider>
     )
 }
 
-// const AppWithCheckRequests = checkRequests(App)
 
 ReactDOM.render(<App />,document.getElementById('app'));

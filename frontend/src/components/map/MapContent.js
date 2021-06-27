@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useRef, useLayoutEffect } from 'react'
 import { Map } from 'react-leaflet'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMap, toggleFilterPanel } from './../../redux'
@@ -6,8 +6,8 @@ import { CoordinatesControl } from 'react-leaflet-coordinates'
 import Layers from './Layers'
 import Panel from '../filter/Panel'
 import Draw from './Draw'
-// import MessageBar from '../message/MessageBar'
 import MapDataAdd from './MapDataAdd'
+import useViewportStyle from '../reusable/hooks/useViewportStyle'
 
 
 
@@ -15,11 +15,11 @@ function MapContent() {
 
   const dispatch = useDispatch()
 
+  const { viewportStyle } = useViewportStyle();
+  const is_large = ['tv','desktop','laptop'].includes(viewportStyle)
+
   // latlng
-  const maxBounds = [
-    [-50, 90],
-    [5, 180]
-  ]
+  const maxBounds = is_large ? [[-50, 90],[5, 180]] : [[-50, 90],[5, 180]]
   const center = [-27, 132]
 
   const { map, filteropen, extent } = useSelector(state => state.filterSelection.map_data)  
@@ -35,7 +35,6 @@ function MapContent() {
   }
   
   const mapWidthStyle = filteropen ? 'mapWithFilter' : 'fullMap'
-  // const toggleIcon = filteropen ? <span className="material-icons">radio_button_checked</span> : <span className="material-icons">radio_button_unchecked</span>
 
   function filterToggleHandler() {
     dispatch(toggleFilterPanel())
@@ -60,25 +59,13 @@ function MapContent() {
     map.invalidateSize();
   });
 
-  // function FilterToggle() {
-  //   return (
-  //     !filteropen
-  //     ? (
-  //       <div id="filter-toggle" onClick={filterToggleHandler}>
-  //         {toggleIcon}
-  //       </div>)
-  //     : null
-  //   )
-  // }
-
 
   return (
     <div id="map-wrapper">
-      {/* <MessageBar /> */}
       <Panel />
       <div id="map-area" className={mapWidthStyle}>
         <div id="map-layers">
-          <Map center={center} maxBounds={maxBounds} zoom={4} minZoom={4} ref={mapRef}>
+          <Map center={center} maxBounds={maxBounds} zoom={3} minZoom={3} ref={mapRef}>
             <Layers center={center}/>
             <Draw />
             <CoordinatesControl position="bottomleft" />
@@ -91,9 +78,6 @@ function MapContent() {
           <div className="open-filter-toggle" onClick={filterToggleHandler}>
             <span className="material-icons">double_arrow</span>
           </div>)}
-        {/* <div id="filter-toggle" onClick={filterToggleHandler}>
-          {toggleIcon}
-        </div> */}
       </div>
     </div>
   )

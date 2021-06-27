@@ -49,7 +49,7 @@ const filterGroupReducer = ( state = initialState, action ) => {
             for (var key in state.groups) {
                 const { category, group } = state.groups[key]
                 if ( key == name ) {
-                    groups[key] = { ...state.groups[key], open: true, areaStyle: 'filterGroupArea showEle', opened: true }
+                    groups[key] = { ...state.groups[key], open: true, areaStyle: 'filter-group-area showEle', opened: true }
                 } else if ( category == 'a' ) {
                     groups[key] = { ...state.groups[key], btnStyle: 'hideEle' }
                 } else if ( category == 'b' && group == state.groups[name].group ) {
@@ -83,7 +83,7 @@ const filterGroupReducer = ( state = initialState, action ) => {
             for (var key in state.groups) {
                 const { category, group } = state.groups[key]
                 if ( key == name ) {
-                    groups[key] = { ...state.groups[key], open: true, areaStyle: 'filterSubGroupArea showEle', opened: true }
+                    groups[key] = { ...state.groups[key], open: true, areaStyle: 'filter-sub-group-area showEle', opened: true }
                 } else if ( category == 'b' && group == state.groups[name].group ) {
                     groups[key] = { ...state.groups[key], btnStyle: 'hideEle' }
                 } else {

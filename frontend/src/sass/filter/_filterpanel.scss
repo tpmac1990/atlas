@@ -1,0 +1,298 @@
+@import '../variables';
+
+
+#panel {
+    position: relative;
+    background-color: $dark-5;
+    padding: 5px 15px;
+    height: 100%;
+    // min-height: 400px; // 555px; this height matches the map height
+    width: 400px;
+    float: left;
+    cursor: pointer;
+
+    #panel-subarea {
+        position: relative;
+        height: 100%;
+        width: 100%;
+
+        #panel-header {
+            user-select: none;
+            position: relative;
+            height: 40px;
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+                
+            .panel-title {
+                margin: 8px 0 0 0;
+                color: $light-2;
+                border-radius: 3px;
+                height: 30px;
+                padding: 3px 15px;
+                margin-top: 6px;
+    
+                h1 {
+                    font-size: 1em;
+                    font-weight: 400;
+                    position: absolute;
+                    top: 11px;
+                    left: 50%;
+                    transform: translate(-50%,0);
+                }
+            }
+    
+    
+            .filter-toggle {
+                transform: scale(-1, 1);
+                width: 60px;
+                background-color: $dark-7;
+                margin: 6px 0;
+                border-radius: 3px;
+                color: $light-4;
+                padding: 0px 18px;
+                font-weight: bold;
+                font-size: 1.2em;
+                position: relative;
+                border: 1px solid $dark-7;
+    
+                span {
+                    position: absolute;
+                    top: 2px;
+                }
+    
+                &:hover {
+                    color: $light-2;
+                    border: 1px solid $dark-6;
+                }
+            }
+    
+            .header-icons {
+                position: absolute;
+                right: 0;
+    
+                div {
+                    position: relative;
+                    display: inline-block;
+    
+                    span {
+                        color: $light-3;
+                        font-size: 1.3em;
+                        margin-left: 12px;
+                        margin-top: 6px;
+                        background-color: $dark-7;
+                        padding: 3px;
+                        border: 1px solid $dark-7;
+                        border-radius: 3px;
+                        
+                        &:hover {
+                            color: $light-2;
+                            border: 1px solid $dark-6;
+                        }
+                    }
+    
+                    div {
+                        position: absolute;
+                        width: 150px;
+                        top: 36px;
+                        left: 5px;
+                        z-index: 10;
+    
+                        div:first-of-type {
+                            height: 0;
+                            width: 0;
+                            margin-left: 5px;
+                            border: 10px solid $light-2;
+                            border-top: none;
+                            border-left-color: transparent;
+                            border-right-color: transparent;
+                            top: 0;
+                        }
+    
+                        div:last-of-type {
+                            top: 10px;
+                            width: auto;
+                            background-color: $light-2;
+                            border-radius: 3px;
+                            padding: 5px 10px;
+                            font-size: 0.8em;
+                        }
+                    }
+                }
+            }
+        }
+
+        hr {
+            background-color: $light-4;
+            margin: 4px 0 4px 0;
+        }
+
+        #filter-area {
+            position: absolute;
+            height: calc(100% - 140px);
+            width: 100%;
+    
+            #ctrl-bar {
+                margin: 0 0 15px 0;
+                width: 100%;
+                position: relative;
+        
+                div {
+                    margin: 10px 0;
+        
+                    label {
+                        background-color: $dark-3;
+                    }
+                }
+            }
+        
+            #filter-groups {
+                position: relative;
+                height: calc(100% - 55px);
+                width: 100%;
+                overflow-y: auto;
+
+                .filter-group-area {
+                    #draw-sub-area {
+
+                        button {
+                            width: 155px;
+                            margin: 10px 10px 0 0;
+                            padding: 3px 10px;
+                            font-size: 0.8em;
+                    
+                            &:last-of-type {
+                                margin-right: 0;
+                            }
+                        }
+                    
+                        h3 {
+                            user-select: none;
+                            color: $light-2;
+                            font-size: 0.9em;
+                            margin: 10px 0 5px 0;
+                        }
+                    }
+                }
+            }
+        }
+    
+    
+        #panel-footer {
+            user-select: none;
+            position: absolute;
+            height: 80px;
+            width: 100%;
+            bottom: 0;
+
+            #related-data-toggle {
+                margin-bottom: 5px;
+                width: 100%;
+            }
+
+            #footer-btns {
+                height: 50px;
+                width: 100%;
+                padding-top: 7px;
+
+                #filter-submit-btn {
+                    float: right;
+                }
+
+                button {
+                    margin: 0;
+                    height: 30px;
+                    width: 120px;
+                    font-size: 0.9em;
+                    float: left;
+                }
+            }
+        }
+
+        // the list table popup to choose which dataset you want to display the table for.
+        .list-dropdown {
+            height: 80px;
+            width: 300px;
+            background-color: $dark-4;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%,0);
+            top: 45px;
+            border-radius: 4px;
+            border: 1px solid $blue-3;
+            z-index: 10;
+
+            .lst-dd-btn-1,
+            .lst-dd-btn-2 {
+                margin-top: 40px;
+                width: 120px;
+                font-size: 0.9em;
+            }
+
+            .lst-dd-btn-1 {
+                margin: 0 13px;
+            }
+        }
+    }
+}
+
+
+// this is also used in the related filter
+.filter-group-area {
+    position: relative;
+    float: left;
+    width: 95%;
+    height: calc(100% - 42px);
+
+    .filter-sub-group-area {
+        position: relative;
+        width: 100%;
+        margin-top: -3px;
+        padding: 0px 3px 0 10px;
+        height: calc(100% - 33px);
+        overflow-y: auto;
+
+        .checkbox-filter {
+            margin: 5px 0;
+            width: 60%;
+        }
+    } 
+}  
+
+
+
+// group & sub group buttons in the filter
+.filter-grp-btn-pri,
+.filter-grp-btn-sec {
+    user-select: none;
+    height: 32px;
+    width: calc(100% - 2px);
+
+    label {
+        font-size: 0.95em;
+        margin-left: 20px;
+    }
+
+    span {
+        font-size: 1em;
+        font-weight: 600;
+        float: right;
+        margin-right: 10px;
+    }
+
+}
+
+.filter-grp-btn-sec {
+    height: 28px;
+
+    label {
+        font-size: 0.85em;
+        margin-left: 30px;
+        position: absolute;
+    }
+
+    span {
+        font-size: 0.9em;
+    }
+}
+
+

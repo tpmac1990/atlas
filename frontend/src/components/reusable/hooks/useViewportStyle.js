@@ -7,12 +7,17 @@ const getViewportStyle = windowDimensions => {
 
     const { height, width } = windowDimensions
 
-    if ( width >= 1100 ){
+    if ( width >= 2001 ){
+        return {viewportStyle: 'tv'}
+    } else if ( width >= 1501 ){
         return {viewportStyle: 'desktop'}
+    } else if ( width >= 1051 ){
+        return {viewportStyle: 'laptop'}
+    } else if ( width >= 751 ){
+        return {viewportStyle: 'tablet'}
     } else {
         return {viewportStyle: 'mobile'}
     }
-
 }
 
 export default function useViewportStyle() {

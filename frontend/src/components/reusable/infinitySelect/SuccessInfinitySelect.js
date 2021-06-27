@@ -62,11 +62,9 @@ const SuccessInfinitySelect = props => {
     return (
         <div ref={ref} className={styles} onClick={ClickHandler}>
             <div className={`infinity-select-input ${visible ? 'blue' : 'grey'}`} onClick={initialSearch}>
-            {/* <div className={`infinity-select-input ${visible ? 'blue' : 'grey'}`}> */}
                 <input 
                     autoComplete="off"
                     type='text' 
-                    // ref={inputRef}
                     value={search} 
                     placeholder={selected.label}
                     onChange={e => dispatch(setSearch({value: e.target.value, name: name}))}

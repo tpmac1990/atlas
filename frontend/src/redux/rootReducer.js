@@ -12,6 +12,7 @@ import dropdownReducer from './dropdown/dropdownReducer'
 import dataEditReducer from './dataEdit/dataEditReducer'
 import checkBoxListReducer from './checkBoxList/checkBoxListReducer'
 import mapPopupReducer from './mapPopup/mapPopupReducer'
+import userDataReducer from './userData/userDataReducer'
 
 const rootReducer = combineReducers({
     filterGroup: filterGroupReducer,
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     dropdown: dropdownReducer,
     dataEdit: dataEditReducer,
     checkBoxList: checkBoxListReducer,
-    mapPopup: mapPopupReducer
+    mapPopup: mapPopupReducer,
+    userData: userDataReducer
 })
 
 export default rootReducer

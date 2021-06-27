@@ -95,13 +95,13 @@ const ValidItemSingleDropdownChange = props => {
                         { Object.keys(data).map(row => {
                             var key = data[row].id
                             {/* var styles = data[row].remove ? 'remove' : '' */}
-                            var action_string = data[row].remove ? 'Re-select' : ''
+                            {/* var action_string = data[row].remove ? 'Re-select' : '' */}
                             return (data[row].remove
                                 ? null
                                 : (
                                     <tr key={key} className='row'>
-                                        <td className='col-8'>{ data[row].label }</td>
-                                        <td className='col-4'><span id={key} onClick={ removeHandler }>{ action_string }</span></td>
+                                        <td className='col-12'>{ data[row].label }</td>
+                                        {/* <td className='col-4'><span id={key} onClick={ removeHandler }>{ action_string }</span></td> */}
                                     </tr>
                                 )
                             )

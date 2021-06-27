@@ -75,6 +75,7 @@
     }
 }
 
+
 .btn-c6 {
     border: 2px solid $light-2;
     background-color: $light-1;
@@ -113,7 +114,8 @@
 
 .close-c1,
 .close-c2,
-.close-c3 {
+.close-c3,
+.close-c4 {
     user-select: none;
     cursor: pointer;
     position: relative;
@@ -138,8 +140,10 @@
     }
 }
 
-.close-c2 span {
-    bottom: 0;
+.close-c2 {
+    span {
+        bottom: 0;
+    }
 }
 
 .close-c3 {
@@ -160,5 +164,20 @@
 
     span {
         bottom: 0;
+    }
+}
+
+.close-c4 {
+    color: $light-3;
+    margin: 2px 2px 0 0;
+
+    &:hover {
+        color: $light-1;
+        border-color: $dark-6;
+        background-color: $dark-6;
+    }
+
+    span {
+        bottom: -1px;
     }
 }

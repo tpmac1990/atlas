@@ -6,11 +6,9 @@ const TitleDetail = lazy(() => import('./TitleDetail'));
 const SiteDetail = lazy(() => import('./SiteDetail'));
 const HolderDetail = lazy(() => import('./HolderDetail'));
 
-// const SiteEdit = lazy(() => import('./sub/SiteEdit'));
-
 const SubHomeDetail = () => {
     return (
-        <h6>Select one of the above groups to begin a detailed search ...</h6>
+        <h6 className='sub-header-tip'>Select one of the above groups to begin a detailed search ...</h6>
     )
 }
 
@@ -20,7 +18,7 @@ function HomeDetail() {
     
     return (
         <Fragment>
-            <ul id="detail-header">
+            <ul className="sub-header-c1">
                 <li><Link to={`${url}/title`} name="title" >Title</Link></li>
                 <li><Link to={`${url}/site`} name="site" >Site</Link></li>
                 <li><Link to={`${url}/holder`} name="holder" >Holder</Link></li>

@@ -242,15 +242,17 @@ export const holder_objs = {
                 header: 'Name',
                 label: 'label', // the core field is always labelled 'label'
                 edit_type: null,
-                style: 'col-6'
+                lg_style: 'col-7',
+                sm_style: 'col-7'
             },
             {
-                header: '% Owned',
+                header: '% Held',
                 label: 'percown',
                 edit_type: 'input',
                 input_type: 'Number',
                 default: 0,
-                style: 'col-4'
+                lg_style: 'col-3',
+                sm_style: 'col-3'
             },
         ],
         listedMulti: [
@@ -258,7 +260,8 @@ export const holder_objs = {
                 header: 'Ticker',
                 label: 'label',
                 edit_type: null,
-                style: 'col-4'
+                lg_style: 'col-3',
+                sm_style: 'col-3'
             },
             {
                 header: 'Exchange',
@@ -268,7 +271,8 @@ export const holder_objs = {
                 model: 'Exchange',
                 select_key: 'code',
                 select_label: 'name',
-                style: 'col-6'
+                lg_style: 'col-7',
+                sm_style: 'col-7'
             }
         ]
     }
@@ -362,15 +366,17 @@ export const title_objs = {
                 header: 'Name',
                 label: 'label', // the core field is always labelled 'label'
                 edit_type: null,
-                style: 'col-5'
+                lg_style: 'col-6',
+                sm_style: 'col-7'
             },
             {
-                header: 'Percentage Held',
+                header: '% Held',
                 label: 'percown',
                 edit_type: 'input',
                 input_type: 'Number', // formates the input to accept numbers only
                 default: 0,
-                style: 'col-5'
+                lg_style: 'col-3',
+                sm_style: 'col-3'
             }
         ],
     }

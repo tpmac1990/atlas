@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setLoading, setSearch, setDropdownVisibility, setSelection, incrementCreatedId, hideAllDropdowns } from '../../../redux';
+import { setLoading, setSearch, setDropdownVisibility, setSelection, incrementCreatedId, 
+        hideAllDropdowns, setPopupMessage } from '../../../redux';
 
 import ClientSideInfinityInput from './ClientSideInfinityInput'
 import ServerSideInfinityInput from './ServerSideInfinityInput'
@@ -29,8 +30,8 @@ const SuccessInfinityInput = props => {
         // inputRef.current.focus()
     }
 
-    const ClickHandler = () => {
-        dispatch(setDropdownVisibility({name: name, visible: true}))
+    const ClickHandler = e => {
+        !e.target.tagName === 'BUTTON' && !visible && dispatch(setDropdownVisibility({name: name, visible: true}))
     }
 
     const handleClickOutside = (event) => {
@@ -57,7 +58,9 @@ const SuccessInfinityInput = props => {
 
     const AddHandler = e => {
         e.preventDefault()
-        if ( search !== '' ){
+        if ( search === '' ){
+            dispatch(setPopupMessage({message: "Cannot add a blank value", type: 'warning', style: 'warning-fixed-user'}))
+        } else {
             let i;
             var success = false
             for (i = 0; i < data.length; i++) {
@@ -74,13 +77,11 @@ const SuccessInfinityInput = props => {
 
 
     return (
-        <div ref={ref} className={styles} onClick={ClickHandler}>
+        <div ref={ref} className={`${styles} infinity-with-add`} onClick={ClickHandler}>
             <div className={`infinity-select-input ${visible ? 'blue' : 'grey'}`} onClick={initialSearch}>
-            {/* <div className={`infinity-select-input ${visible ? 'blue' : 'grey'}`}> */}
                 <input 
                     type='text' 
                     autoComplete="off"
-                    // ref={inputRef}
                     value={search} 
                     placeholder={selected.label} 
                     onChange={e => dispatch(setSearch({value: e.target.value, name: name}))}

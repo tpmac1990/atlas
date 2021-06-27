@@ -1,7 +1,7 @@
 @import '../variables';
 
 
-.noNumberBtns {
+.no-number-btns {
     -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
@@ -11,15 +11,15 @@
     }
 }
 
-.successBorder {
+.success-border {
     border-color: $success !important;
 }
 
-.failBorder {
+.fail-border {
     border-color: $danger !important;
 }
 
-.inputC1 {
+.input-c1 {
     background-color: $dark-5;
     border: 0;
     border-bottom: 1px solid $blue-4;
@@ -72,8 +72,8 @@
 
 
 .inputGroupC1,
-.inputGroupC2,
-.inputGroupC3,
+.input-group-c2,
+.input-group-c3,
 .inputGroupC4 {
     input {
         background-color: $dark-5;
@@ -102,12 +102,12 @@
     }
 }
 
-.inputGroupC2,
+.input-group-c2,
 .inputGroupC4 {
     margin-top: 10px;
 }
 
-.inputGroupC3 {
+.input-group-c3 {
     input {
         width: 50%;
     }
@@ -135,7 +135,7 @@
 }
 
 
-.subDetailsC1 {
+.sub-details-c1 {
     background-color: $dark-5;
     color: $light-3;
     font-size: 0.6em;

@@ -1,0 +1,85 @@
+@import '../variables';
+
+@media only screen and (max-width: 850px) {
+
+    .popup-table-c1 {
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+
+        .greater-table-area-c1 {
+            height: calc(100% - 20px);
+            
+            .table-content-area-c1 {
+                height: 90px;
+            }
+
+            // height of table when the column selection element is visible
+            .table-height-sm {
+                height: calc(100% - 120px);
+            }
+
+            .table-area-c1 {
+                td {
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                }
+            }
+        }        
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .popup-table-c1 {
+        .greater-table-area-c1 {
+            .hide-portrait {
+                display: none;
+            }
+        }        
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+
+    .popup-table-c1 {
+        padding-top: 25px;
+
+        .greater-table-area-c1 {
+            height: calc(100% - 40px);
+
+            .checkbox-c2 {
+                margin-right: 10px;
+            }
+
+            .table-area-c1 {
+                margin-top: 15px;
+
+                td {
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                }
+            }
+        }        
+    }
+}
+
+
+// increase the height of rows so there is still a scroll to enable infinity scroll cababilities
+@media only screen and (min-height: 740px) and (max-height: 850px) and (max-width: 450px) {
+
+    .popup-table-c1 {
+        .greater-table-area-c1 {
+            .table-area-c1 {
+                td {
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    font-size: 1.2em;
+                }
+            }
+        }        
+    }
+}

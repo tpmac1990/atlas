@@ -25,7 +25,7 @@ const ValidItemsManyDropdownAdd = props => {
 
     const dispatch = useDispatch()
 
-    const { data, values, dropdown_dict, header, datagroup, has_input } = props
+    const { data, values, dropdown_dict, header, datagroup, has_input, is_large } = props
 
     const [ addVisible, setAddVisible ] = useState(false)
 
@@ -99,8 +99,8 @@ const ValidItemsManyDropdownAdd = props => {
                             ? null
                             :   (
                                     <tr key={key} className='row'>
-                                        <td className='col-8'>{ data[row].label }</td>
-                                        <td className='col-4'><span id={key} onClick={ removeHandler }>Remove</span></td>
+                                        <td className='col-10'>{ data[row].label }</td>
+                                        <td className='col-2'><span id={key} onClick={ removeHandler }>{is_large ? 'Remove' : 'x'}</span></td>
                                     </tr>
                                 )
                             )

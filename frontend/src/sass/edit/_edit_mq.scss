@@ -1,0 +1,74 @@
+
+
+@media only screen and (max-width: 850px) {
+
+    .edit-page {   
+        padding-bottom: 0;
+        
+        h5 {
+            margin: 40px 0 20px 0;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+
+        .edit-title {
+    
+            // push the title down a bit so it doesn't over lap the edit button
+            h2 {
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+            // moves the edit link above title
+            div {
+                position: absolute;
+                float: none;
+                right: 20px;
+                margin-top: -10px;
+
+            }
+        }
+    
+        .edit-submit-btn {
+            margin: 40px 0;
+            float: right;
+        }
+    
+        .edit-table-c1 {
+            padding: 20px 20px;
+            margin: 0 0;    
+            overflow-x: auto; 
+
+            table tbody tr td {
+                &:last-of-type {
+                    padding-left: 12px !important;
+                }
+                &:last-of-type {
+                    padding-left: 3px;
+                }
+            }
+        
+            .edit-add {
+                margin-left: 0;
+            }
+        
+            // houses the infinity select
+            .add-select {
+                margin-left: -5px;
+                width: 100%;     
+                
+                .infinity-with-add {
+                    width: calc(100% - 45px);
+
+                    button {
+                        margin-left: 5px;
+                    }
+                }
+            }   
+            
+        }
+    }
+}

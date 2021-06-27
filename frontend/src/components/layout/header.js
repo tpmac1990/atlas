@@ -6,19 +6,21 @@ import MessageBar from '../message/MessageBar'
 
 function header() {
 
+    // 'tv','desktop','laptop','tablet','mobile'
     const { viewportStyle } = useViewportStyle();
-    const navLinksStyle = viewportStyle === 'mobile' ? 'ul-mobile' : 'ul-desktop'
+    const is_large = ['tv','desktop','laptop'].includes(viewportStyle)
+    const navLinksStyle = is_large ? 'ul-desktop' : 'ul-mobile'
 
-    const [ showNavList, setShowNavList ] = useState(viewportStyle === 'mobile' ? false : true)
+    const [ showNavList, setShowNavList ] = useState(is_large ? true : false)
 
     // change nav menu display depending on viewpoint size
     useEffect(() => {
-        setShowNavList(viewportStyle === 'mobile' ? false : true)
+        setShowNavList(is_large ? true : false)
     },[viewportStyle])
 
     // If in mobile view and an option is clicked, then collapse the burger
     const MenuDropdownHandler = () => {
-        viewportStyle === 'mobile' && setShowNavList(false)
+        !is_large && setShowNavList(false)
     }
 
     const ToYoutubeHandler = e => {
@@ -29,7 +31,7 @@ function header() {
     return (
         <nav id="navbar">
             { 
-                viewportStyle === 'mobile'
+                !is_large
                 ? (
                     <div className='burger' onClick={() => setShowNavList(prev => !prev)}>
                         <span className="material-icons">menu</span>
@@ -45,17 +47,12 @@ function header() {
                         <li><a href="https://www.youtube.com/channel/UCmOTkRrMXq0hH-uUwmv5Tqw/playlists" onClick={ToYoutubeHandler} style={{'cursor': 'pointer'}}>Demos</a></li>
                         <li><Link to="/">Map</Link></li>
                         <li><Link to="/detail/home">Detail</Link></li>
-                        <li><Link to="/feedback">Feedback</Link></li>
-                        <li><Link to="/stayposted">Keep me posted!</Link></li>
+                        <li><Link to="/contact/home">Contact</Link></li>
                     </ul>
                 )
                 : null
             }
             <img src={logo} />
-            {/* <ul>
-                <li><Link to="/feedback">Feedback</Link></li>
-                <li><Link to="/stayposted">Keep me posted!</Link></li>
-            </ul> */}
             <MessageBar />
         </nav>
     )

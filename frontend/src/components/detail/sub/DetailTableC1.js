@@ -2,7 +2,8 @@ import React, { Fragment } from 'react'
 
 
 const DetailTableC1 = (props) => {
-    const { value, lookup, header, table_headers, table_data, styles } = props.dict
+    const { value, dict } = props
+    const { lookup, header, table_headers, table_data, styles } = dict
     if (value == null){
         return null
     } else if (value[lookup].length === 0) {

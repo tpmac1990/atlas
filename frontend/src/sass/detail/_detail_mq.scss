@@ -1,0 +1,81 @@
+
+
+
+@media only screen and (max-width: 850px) {
+    
+    #detail-groups {
+        margin: 0 15px;
+        
+        .lookup-c1 {    
+
+            // moves the 'add a holder' link below the holder infinity dropdown
+            .link-add-value {
+                position: relative;
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .selectbox-c1,
+            .selectbox-c2 {
+                width: 400px;
+                margin-right: 20px;
+            }
+    
+            // controls the height and width of the child infinity box
+            .holder-infinity,
+            .ind-infinity {
+                width: 100%;
+            }
+        }
+    
+        .detail-info-c1 {
+
+            h5 {
+                margin-left: 0;
+            }
+
+            .detail-title {
+                height: 50px;
+
+                // push the title down a bit so it doesn't over lap the edit button
+                h2 {
+                    margin-top: 10px;
+                }
+    
+                // moves the edit link above title
+                div {
+                    position: absolute;
+                    float: none;
+                    right: 20px;
+                    margin-top: -10px;
+
+                }
+            }
+
+            .list-table-btn-lng {
+                margin-left: -20px;
+            }
+
+            .list-table-btn-group {
+                margin-left: 0;
+            }
+    
+            .detail-sub-info-c1 {
+                padding: 20px 20px;
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 850px) and (max-height: 450px) {
+
+    .ind-infinity {
+        width: 50% !important;
+    }
+
+    .holder-infinity {
+        width: 70% !important;
+    }
+}

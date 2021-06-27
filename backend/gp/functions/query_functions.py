@@ -79,6 +79,8 @@ def getDataList(p,datasets):
 
 
 def getTableData(request):
+    ''' get the data for the table. This manages the global filter, column filters, sorting and the infinity scroll '''
+
     ind_lst = request.GET.get('ind_lst').split(',')
     datagroup = request.GET.get('datagroup')
     offset = request.GET.get('offset')
@@ -89,11 +91,12 @@ def getTableData(request):
     sortfield = request.GET.get('field')
     asc = True if request.GET.get('asc') == 'true' else False
 
+    # query strings used for the global filter
     searchable_fields = {
-        'Tenement': ['ind','lodgedate','startdate','enddate','state__name','govregion__name','geoprovince__name','shore__name',
+        'Tenement': ['ind','oid__code','lodgedate','startdate','enddate','state__name','govregion__name','geoprovince__name','shore__name',
                     'majmat__name','minmat__name','typ__fname','typ__simple__name','status__original','status__simple__name',
                     'holder__name','holder__child_parent__name__name'],
-        'Occurrence': ['ind','status__original','size__name','state__name','govregion__name','geoprovince__name','name__name',
+        'Occurrence': ['ind','oid__code','status__original','size__name','state__name','govregion__name','geoprovince__name','name__name',
                     'typ__original','typ__simple__name','status__original','status__simple__name','majmat__name','minmat__name']
     }
 
@@ -108,7 +111,6 @@ def getTableData(request):
 
     # global filter
     if globalfilter != '':
-        # if datagroup == 'Tenement':
         query_q = Q()
         for field in searchable_fields[datagroup]:
             query_q |= Q(**{"%s__icontains"%(field): globalfilter})
@@ -124,14 +126,6 @@ def getTableData(request):
 
     return (objs, has_more)
 
-    # if datagroup == 'Tenement':
-    #     serializer = TitleBriefSerializer(objs,many=True)
-    # else:
-    #     serializer = SiteBriefSerializer(objs,many=True)
-
-    # data = {'data': serializer.data, 'has_more': has_more}
-
-    # return data
 
 
 def infinite_filter(objs,limit,offset):

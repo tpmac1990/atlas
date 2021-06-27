@@ -57,7 +57,7 @@ const CheckboxList = props => {
     const handleScroll = (e) => {
         if ( has_more && !loading ) {
             const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
-            if (scrollHeight - scrollTop === clientHeight) dispatch(setCheckBoxListIsLoading(name))
+            if (scrollHeight - scrollTop - 1 <= clientHeight) dispatch(setCheckBoxListIsLoading(name))
         }
     }
 
@@ -92,7 +92,7 @@ const CheckboxList = props => {
     return (
         dataRows
         ? (<div className={`${areaStyle} scrollbar-c1`} onScroll={handleScroll}>
-            <input className='inputC1 checkboxFilter' type='text' onChange={SearchHandler} value={search} placeholder='Filter' />
+            <input className='input-c1 checkbox-filter' type='text' onChange={SearchHandler} value={search} placeholder='Filter' />
             {loaded 
             ? dataRows.map(row => {
                     return <FilterCheckbox key={row[0]} groupName={name} row={row}/>

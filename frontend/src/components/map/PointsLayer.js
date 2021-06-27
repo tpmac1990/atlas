@@ -3,12 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import {Marker, LayerGroup, Tooltip} from 'react-leaflet';
 import { divIcon } from 'leaflet'
 import { getPopupData, setPopupTarget } from '../../redux'
-import { slicePopupInfo } from '../formatting/formatting'
+
+import useViewportStyle from '../reusable/hooks/useViewportStyle'
 
 
 function PointsLayer() {
 
     const dispatch = useDispatch()
+
+    const { viewportStyle } = useViewportStyle();
+    const is_large = ['tv','desktop','laptop'].includes(viewportStyle);
 
     const { filterSelection, mapPopup } = useSelector(state => state)
     const { occs } = filterSelection.map_data
@@ -93,7 +97,9 @@ function PointsLayer() {
                         icon={siteIcon} 
                         onclick={popUpFunction} 
                     >
-                    <Tooltip className='id-tooltip'>{occ.properties.pk}</Tooltip>
+                    { is_large
+                    ? <Tooltip className='id-tooltip'>{occ.properties.pk}</Tooltip>
+                    : null }
                 </Marker> )
             )}
         </LayerGroup>

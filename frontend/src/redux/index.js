@@ -18,3 +18,4 @@ export { setEditData, addEditData, removeEditData, addEditDictKey, postSiteUpdat
         createNewHolder, resetApiOutcome, resetEditData } from './dataEdit/dataEditActions'
 export { getFilterCheckboxData, setCheckBoxListIsLoading, setCheckboxSearch, filterCheckBoxListClientSide, resetCheckBoxListOffset } from './checkBoxList/checkBoxListActions'
 export { getPopupData, setPopupTarget } from './mapPopup/mapPopupActions'
+export { saveUserEmail, saveUserFeedback } from './userData/userDataActions'

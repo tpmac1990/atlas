@@ -1,17 +1,27 @@
 
 // ssSort: for the serverside sorting method
 
+// if the year is 2999 then mke it blank
 const fmt_date = date => {
     const s_date = date.split('-')
     return s_date[0] === '2999' ? '' : `${s_date[2]}-${s_date[1]}-${s_date[0]}`
 }
 
+// configs to manage table data
+//      Header: column header
+//      accessor: the key to access the value from the recieved object
+//      ssSort: the query to sort the column for individual column filtering. ??? this should be move to the backend and coupled with the global filter queries
 export const COLUMNS = {
     titles: [
         {
             Header: 'Index',
             accessor: 'ind',
             ssSort: 'ind'
+        },
+        {
+            Header: "Related ID's",
+            accessor: 'oid',
+            ssSort: 'oid__code'
         },
         {
             Header: 'Holders',

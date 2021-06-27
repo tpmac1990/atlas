@@ -17,7 +17,7 @@ export default function LatLngTextbox(props) {
     }
 
     return (
-        <div className='inputGroupC3'>
+        <div className='input-group-c3'>
             <label>{title}</label>
             <input type="number" name={name} value={coord} onChange={coordChangeHandler}/>
         </div>        

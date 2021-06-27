@@ -2,27 +2,24 @@ import React, { useRef, useEffect, useState } from 'react';
 import { storeSpatialRefs, getPopupData, setPopupTarget } from '../../redux'
 import { GeoJSON, Marker } from 'react-leaflet';
 import { useSelector, useDispatch } from 'react-redux'
-import { slicePopupInfo, formatDate } from '../formatting/formatting'
+import { formatDate } from '../formatting/formatting'
 
-// import useClickEventListener from '../reusable/hooks/useClickEventListener'
-// import { useHistory } from "react-router-dom";
-// import { Route, Link, useRouteMatch } from "react-router-dom";
-
+import useViewportStyle from '../reusable/hooks/useViewportStyle'
 
 function PolygonLayer () {
 
     const dispatch = useDispatch()
 
-    // const viewportWidth = useClickEventListener();
-    // console.log(viewportWidth)
+    const { viewportStyle } = useViewportStyle();
+    const is_large = ['tv','desktop','laptop'].includes(viewportStyle);
 
     const { filterSelection, mapPopup } = useSelector(state => state)
     const { data, target, dataset } = mapPopup
     const { tens } = filterSelection.map_data
 
-    // ref to the tenements layer. 
+    // ref to the tenements layer
     const tenRef = useRef(); 
-
+    
     const [ firstRender, setFirstRender ] = useState(true)
 
     // store the tenements layer ref to state. I was using this to set the bounds, but moved that job to django
@@ -48,15 +45,6 @@ function PolygonLayer () {
     useEffect(() => {
         if ( !firstRender && dataset === 'Tenement' ){
             const { typ, status, lodgedate, startdate, enddate, oid, holder, majmat, ind } = data
-            // const polygonCenter = target.getBounds().getCenter();
-            // const label = new L.marker(polygonCenter).bindLabel(ind, { noHide: true })
-            // target.bindLabel('MultiPolygon dynamic label').addTo(tenRef.current.leafletElement);
-            // console.log(label)
-            // .bindLabel(feature.properties['NAME'], { noHide: true })
-            // .addTo(map);
-            // console.log(polygonCenter)
-            // target.getBounds().getCenter().bindLabel(ind, { noHide: true })
-            // target.bindLabel(ind, { noHide: true })
             target.bindPopup(
                 `<div class='polyPopup'>
                     <div class='popup-header'>
@@ -85,7 +73,7 @@ function PolygonLayer () {
     function onEachFeature (feature, layer) {
         if (feature.properties && feature.properties.pk){
             layer.on("click",popUpFunctionT);
-            layer.bindTooltip(feature.properties.pk, {className: 'id-tooltip'});
+            is_large && layer.bindTooltip(feature.properties.pk, {className: 'id-tooltip'});
         }
             // direction: 'centre'
             // permanent: true,

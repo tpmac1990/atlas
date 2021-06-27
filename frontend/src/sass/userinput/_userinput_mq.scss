@@ -1,0 +1,43 @@
+
+
+@media only screen and (max-width: 850px) {
+
+    #contact-groups {
+        margin: 0 15px;
+
+        .basic-form-area {
+            .email-drop-area,
+            .feedback-area,
+            .contact-info-area {
+                width: calc(100% - 20px);
+            }
+        }
+    }
+
+}
+
+
+@media only screen and (max-height: 650px) {
+
+    .basic-form-area {
+        .email-drop-area,
+        .feedback-area,
+        .contact-info-area {
+            transform: translate(-50%,0);
+        }
+    }
+
+}
+
+
+// @media only screen and (max-width: 850px) and (max-height: 450px) {
+
+//     .basic-form-area {
+//         .email-drop-area,
+//         .feedback-area,
+//         .contact-info-area {
+//             width: calc(100% - 20%);
+//         }
+//     }
+
+// }

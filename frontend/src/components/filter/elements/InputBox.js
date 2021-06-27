@@ -8,7 +8,8 @@ function InputBox(props) {
     const value = useSelector(state => state.filterSelection.input[name])
 
     return (
-        <div className='filterTextbox'>
+        // <div className='filter-textbox'>
+        <div>
             <label>{display}</label><br/>
             <input type={type} name={name} value={value} onChange={changeHandler} />
         </div>     

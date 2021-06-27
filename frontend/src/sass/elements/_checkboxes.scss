@@ -1,6 +1,6 @@
 @import '../variables';
 
-.filterCheckbox {
+.filter-checkbox {
     user-select: none;
     color: $light-3;
     width: 100%;
@@ -68,8 +68,8 @@
     float: none;
 
     label {
-        margin-right: 10px !important;
-        margin-bottom: 8px;
+        margin-right: 0 !important;
+        margin-bottom: 0;
         padding: 4px 20px;
         border-radius: 20px;
         background-color: $dark-7;
